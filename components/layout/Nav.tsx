@@ -60,9 +60,9 @@ export function Nav() {
               ) : (
                 <Link
                   href={item.href}
-                  className={`relative text-[11px] font-normal tracking-[2.5px] uppercase text-blue transition-opacity hover:opacity-100 ${
-                    pathname === item.href ? "opacity-100" : "opacity-55"
-                  } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:bg-blue-light after:transition-all after:duration-300 ${
+                  className={`relative text-[11px] font-semibold tracking-[2.5px] uppercase text-blue transition-colors hover:text-blue-mid ${
+                    pathname === item.href ? "opacity-100" : "opacity-90"
+                  } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:bg-blue after:transition-all after:duration-300 ${
                     pathname === item.href ? "after:w-full" : "after:w-0 hover:after:w-full"
                   }`}
                 >
