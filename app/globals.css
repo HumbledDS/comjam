@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — Tailwind v4 @theme
+   Mirrors the original CSS vars from the mockup so utilities like
+   bg-blue, text-beige, font-display work everywhere.
+============================================================ */
+@theme {
+  --color-blue: #1B3A5C;
+  --color-blue-mid: #2C5282;
+  --color-blue-light: #4A7BA7;
+  --color-blue-pale: #C8DCEA;
+  --color-blue-deep: #0d2035;
+  --color-beige: #F5EFE4;
+  --color-beige-dark: #EAE0D2;
+  --color-beige-mid: #D4C5B0;
+  --color-paper: #FDFAF6;
+  --color-text-light: #6B89A5;
+
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', serif;
+  --font-sans: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+/* ============================================================
+   BASE
+   Tailwind v4 Preflight already handles the universal reset, so
+   we don't add another one (which would override utility padding).
+============================================================ */
+:root {
+  --gap: clamp(40px, 6vw, 100px);
+  --pad: clamp(20px, 5vw, 64px);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-paper);
+  color: var(--color-blue);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+main, section { max-width: 100vw; }
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; padding-left: 0; }
+
+/* ============================================================
+   TYPOGRAPHY HELPERS
+============================================================ */
+@utility label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--color-blue-light);
+}
+@utility label-light {
+  color: var(--color-blue-pale);
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--color-blue);
+}
+@utility display-light {
+  color: var(--color-beige);
+}
+
+.label::before,
+.label-light::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.display em,
+.display-light em {
+  font-style: italic;
+  color: var(--color-blue-light);
+}
+.display-light em {
+  color: var(--color-blue-pale);
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+@utility btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  transition: background 0.25s, color 0.25s, transform 0.2s, letter-spacing 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-blue);
+  color: var(--color-beige);
+}
+.btn-primary:hover {
+  background: var(--color-blue-mid);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+}
+.btn-outline:hover {
+  background: var(--color-blue);
+  color: var(--color-beige);
+}
+
+.btn-light {
+  background: var(--color-beige);
+  color: var(--color-blue);
+}
+.btn-light:hover {
+  background: var(--color-paper);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  opacity: 0.6;
+  transition: opacity 0.2s, gap 0.25s;
+}
+.btn-ghost:hover { opacity: 1; gap: 18px; }
+
+/* ============================================================
+   TICKER / MARQUEE
+============================================================ */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.65); }
+}
+
+/* ============================================================
+   FORM
+============================================================ */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(200,220,234,0.12);
+  padding: 13px 15px;
+  color: var(--color-beige);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: rgba(200,220,234,0.35);
+  background: rgba(255,255,255,0.09);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(200,220,234,0.25);
+}
+.form-select option {
+  background: var(--color-blue);
+  color: var(--color-beige);
+}
+.form-textarea {
+  resize: none;
+  height: 110px;
+}
