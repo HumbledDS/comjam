@@ -11,9 +11,9 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // Pages whose hero is dark (blue) need the frosted nav backdrop immediately
-  // so blue-on-blue text doesn't become invisible.
-  const darkHeroRoutes = ["/services"];
+  // Pages whose hero is dark / image / video need the frosted nav backdrop
+  // immediately, otherwise blue-on-bright text becomes invisible.
+  const darkHeroRoutes = ["/", "/services"];
   const needsBackdrop = darkHeroRoutes.includes(pathname);
   const showBackdrop = scrolled || needsBackdrop;
 

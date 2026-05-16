@@ -1,9 +1,11 @@
-import { HeroCinematic } from "@/components/sections/HeroCinematic";
-import { Bento } from "@/components/sections/Bento";
+import { HeroReel } from "@/components/sections/HeroReel";
+import { EditorialIntro } from "@/components/sections/EditorialIntro";
+import { PortraitGallery } from "@/components/sections/PortraitGallery";
+import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
+import { BootcampPanel } from "@/components/sections/BootcampPanel";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ornament } from "@/components/brand/Ornament";
-import { Pattern } from "@/components/brand/Pattern";
 import { CTA } from "@/components/sections/CTA";
 import { home, testimonials } from "@/lib/copy";
 
@@ -12,13 +14,16 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroCinematic />
+      <HeroReel />
       <Marquee items={home.ticker} />
-      <Bento />
+      <EditorialIntro />
+      <PortraitGallery />
+      <ServicesShowcase />
+      <BootcampPanel />
 
-      {/* Single big testimonial as a typographic break */}
+      {/* Single editorial testimonial */}
       <section
-        className="relative overflow-hidden bg-beige"
+        className="bg-beige"
         style={{
           paddingLeft: "var(--pad)",
           paddingRight: "var(--pad)",
@@ -26,35 +31,33 @@ export default function HomePage() {
           paddingBottom: "var(--gap)",
         }}
       >
-        <div aria-hidden className="absolute inset-0 pointer-events-none">
-          <Pattern variant="blue" opacity={0.04} />
-        </div>
         <Reveal>
-          <div className="max-w-4xl mx-auto text-center relative">
+          <div className="max-w-4xl mx-auto text-center">
             <Ornament
               kind="apostrophe"
               variant="blue"
-              width={48}
+              width={40}
               opacity={0.7}
               className="mx-auto mb-6"
             />
             <blockquote
               className="font-display font-light italic text-blue leading-[1.3]"
-              style={{ fontSize: "clamp(28px, 3.5vw, 48px)" }}
+              style={{ fontSize: "clamp(26px, 3.5vw, 44px)" }}
             >
               {featured.quote}
             </blockquote>
             <div className="mt-8 text-[11px] font-medium tracking-[2.5px] uppercase text-blue-light">
-              {featured.name} · <span className="text-text-light font-normal">{featured.role}</span>
+              {featured.name} ·{" "}
+              <span className="text-text-light font-normal">{featured.role}</span>
             </div>
           </div>
         </Reveal>
       </section>
 
       <CTA
-        eyebrow="Et après ?"
+        eyebrow="Travaillons ensemble"
         title="Parlons de votre projet."
-        desc="Shooting, stratégie, formation ou consulting — un message suffit. Réponse sous 48h."
+        desc="Réponse sous 48h."
         primary={{ href: "/contact", label: "Nous contacter" }}
         secondary={{ href: "/reservation", label: "Réserver un shooting" }}
       />

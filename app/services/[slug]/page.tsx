@@ -7,7 +7,7 @@ import { Reveal, RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
 import { CTA } from "@/components/sections/CTA";
-import { unsplash } from "@/lib/unsplash";
+import { media } from "@/lib/media";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -28,10 +28,10 @@ export async function generateMetadata({
 }
 
 const heroImageBySlug: Record<string, string> = {
-  "creation-de-contenu": unsplash.shootingPhoto,
-  "strategie-digitale": unsplash.strategy,
-  "production-de-contenu": unsplash.production,
-  consulting: unsplash.consulting,
+  "creation-de-contenu": media.services["creation-de-contenu"].src,
+  "strategie-digitale": media.services["strategie-digitale"].src,
+  "production-de-contenu": media.services["production-de-contenu"].src,
+  consulting: media.services["consulting"].src,
 };
 
 export default async function ServiceDetailPage({
@@ -43,7 +43,7 @@ export default async function ServiceDetailPage({
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
 
-  const heroImg = heroImageBySlug[slug] ?? unsplash.shootingPhoto;
+  const heroImg = heroImageBySlug[slug] ?? media.services["creation-de-contenu"].src;
   const showPacks = slug === "creation-de-contenu";
 
   return (

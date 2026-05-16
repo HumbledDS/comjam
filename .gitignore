@@ -52,6 +52,13 @@ Thumbs.db
 .claude/settings.local.json
 
 # ============================================================
+# Source media (heavy HEIC/MOV originals).
+# Only the processed/optimized versions in public/media/ ship to the deployment.
+# Originals are kept locally so they can be re-processed when needed.
+# ============================================================
+public/img_jamila/
+
+# ============================================================
 # Python (kept from initial scaffold, may remove later)
 # ============================================================
 __pycache__/

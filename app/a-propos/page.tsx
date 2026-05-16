@@ -9,7 +9,7 @@ import { CTA } from "@/components/sections/CTA";
 import { Monogram } from "@/components/brand/Monogram";
 import { Ornament } from "@/components/brand/Ornament";
 import { Pattern } from "@/components/brand/Pattern";
-import { unsplash } from "@/lib/unsplash";
+import { media } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "À propos — Com'Jam Agency",
@@ -91,10 +91,10 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="relative aspect-[4/3] mb-8 overflow-hidden">
+          <div className="relative aspect-[4/5] mb-8 overflow-hidden">
             <Image
-              src={unsplash.studioWide}
-              alt="Studio Com'Jam"
+              src={media.about.src}
+              alt="Portrait Jamila — fondatrice Com'Jam"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
