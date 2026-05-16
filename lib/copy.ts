@@ -115,17 +115,16 @@ export const services: Service[] = [
     slug: "creation-de-contenu",
     num: "01",
     name: "Création de contenu",
-    short: "Photos & vidéos lifestyle, trendy et spontanées.",
+    short: "Photo & vidéo lifestyle, pensées pour vos réseaux.",
     desc:
-      "Pensées pour les réseaux sociaux et les usages actuels du digital ou du quotidien. Accompagnement, direction artistique, poses, rendu esthétique.",
+      "Direction artistique, poses, rendu esthétique. Pour créateurs, marques et entrepreneurs.",
     bullets: [
       "Direction artistique sur-mesure",
-      "Shooting photo & vidéo combinés possibles",
+      "Photo & vidéo combinés possibles",
       "Retouche et montage inclus",
-      "Disponible à l'heure ou en pack",
     ],
-    for: ["Grand public", "Créateurs de contenu", "Entrepreneurs", "Indépendants", "Marques"],
-    pricing: "À partir de 95€",
+    for: ["Créateurs", "Entrepreneurs", "Marques", "Indépendants"],
+    pricing: "Dès 95€",
     ctaHref: "/reservation",
     ctaLabel: "Réserver une séance",
   },
@@ -133,14 +132,13 @@ export const services: Service[] = [
     slug: "strategie-digitale",
     num: "02",
     name: "Stratégie digitale",
-    short: "Construire une image forte, claire et cohérente.",
+    short: "Une image forte, claire et cohérente.",
     desc:
-      "Stratégie de communication complète : audit, positionnement, storytelling, ligne éditoriale et plan d'action sur mesure. Marketing d'influence : mise en relation entre marques et créateurs, gestion et accompagnement de campagnes.",
+      "Audit, positionnement, ligne éditoriale, marketing d'influence — un plan d'action sur mesure.",
     bullets: [
-      "Audit complet de compte + recommandations",
+      "Audit + recommandations",
       "Stratégie éditoriale sur-mesure",
-      "Sélection des profils & suivi des collaborations",
-      "Analyse des performances",
+      "Suivi des collaborations",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
@@ -150,14 +148,13 @@ export const services: Service[] = [
     slug: "production-de-contenu",
     num: "03",
     name: "Production de contenu",
-    short: "Contenu social media pour entreprises.",
+    short: "Du contenu prêt à publier, en continu.",
     desc:
-      "Du contenu photo et vidéo pensé pour alimenter vos réseaux sociaux et site internet. L'objectif : alimenter vos réseaux régulièrement, renforcer votre image de marque, créer une cohérence visuelle, capter l'attention de votre audience.",
+      "Photo et vidéo pour vos réseaux et site web. Cohérence visuelle, rythme régulier.",
     bullets: [
-      "Production récurrente photo & vidéo",
-      "Cohérence visuelle sur tous canaux",
+      "Production récurrente",
+      "Cohérence visuelle",
       "Contenu prêt à publier",
-      "Adapté à votre ligne éditoriale",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
@@ -167,18 +164,17 @@ export const services: Service[] = [
     slug: "consulting",
     num: "04",
     name: "Consulting 1-2-1",
-    short: "Accompagnement individuel pour structurer votre contenu et votre stratégie.",
+    short: "Une session pour structurer votre stratégie.",
     desc:
-      "Positionnement, image, organisation, création de contenu et conseils adaptés à vos objectifs. Une session individuelle pour passer un cap et clarifier votre stratégie.",
+      "Positionnement, image, organisation. Adapté à vos objectifs.",
     bullets: [
       "Positionnement & image",
       "Organisation & workflow",
-      "Création de contenu",
-      "Conseils sur-mesure selon vos objectifs",
+      "Conseils sur-mesure",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
-    ctaLabel: "Prendre un rendez-vous",
+    ctaLabel: "Prendre rendez-vous",
   },
 ];
 
@@ -265,7 +261,7 @@ export const bootcamp = {
   schedule: "En ligne · 10h–18h",
   eyebrow: "Formation en ligne",
   desc:
-    "Le bootcamp qui transforme votre façon de créer. En 2 jours de formation live, vous passez de créateur invisible à créateur qui attire, engage et convertit — avec votre téléphone, votre personnalité, et une stratégie qui vous ressemble.",
+    "2 jours en ligne pour passer de créateur invisible à créateur qui attire, engage et convertit. Avec votre téléphone, votre personnalité, une stratégie qui vous ressemble.",
   days: [
     {
       num: "01",
