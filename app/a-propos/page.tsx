@@ -6,6 +6,9 @@ import { Label } from "@/components/ui/Label";
 import { DisplayLines } from "@/components/ui/Display";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTA } from "@/components/sections/CTA";
+import { Monogram } from "@/components/brand/Monogram";
+import { Ornament } from "@/components/brand/Ornament";
+import { Pattern } from "@/components/brand/Pattern";
 import { unsplash } from "@/lib/unsplash";
 
 export const metadata: Metadata = {
@@ -76,9 +79,7 @@ export default function AboutPage() {
               {about.quote}
             </p>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-blue text-beige flex items-center justify-center font-display text-xl shrink-0">
-                {about.author.name.charAt(0)}
-              </div>
+              <Monogram on="beige" size={56} />
               <div>
                 <div className="text-[13px] font-medium text-blue mb-1">
                   {about.author.name}
@@ -121,7 +122,7 @@ export default function AboutPage() {
       </section>
 
       <section
-        className="bg-blue text-center"
+        className="relative overflow-hidden bg-blue text-center"
         style={{
           paddingLeft: "var(--pad)",
           paddingRight: "var(--pad)",
@@ -129,10 +130,14 @@ export default function AboutPage() {
           paddingBottom: "var(--gap)",
         }}
       >
+        <Pattern on="blue" opacity={0.08} />
         <Reveal>
+          <div className="flex justify-center mb-8">
+            <Ornament kind="swoosh" on="blue" width={140} drift />
+          </div>
           <Label light>Notre mission</Label>
           <p
-            className="display display-light max-w-4xl mx-auto mt-7 italic"
+            className="display display-light max-w-4xl mx-auto mt-7 italic relative"
             style={{ fontSize: "clamp(28px, 3vw, 44px)" }}
           >
             « {about.mission} »

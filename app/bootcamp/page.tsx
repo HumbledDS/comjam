@@ -4,6 +4,8 @@ import { Reveal, RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
 import { CTA } from "@/components/sections/CTA";
+import { Pattern } from "@/components/brand/Pattern";
+import { Ornament } from "@/components/brand/Ornament";
 
 export const metadata: Metadata = {
   title: "Content Shift Bootcamp — Com'Jam Agency",
@@ -21,13 +23,21 @@ export default function BootcampPage() {
           paddingBottom: "var(--gap)",
         }}
       >
+        <Pattern on="beige" opacity={0.06} />
         <div
           aria-hidden
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-light text-[rgba(27,58,92,0.025)] whitespace-nowrap pointer-events-none select-none tracking-[8px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-light text-[rgba(27,58,92,0.04)] whitespace-nowrap pointer-events-none select-none tracking-[8px]"
           style={{ fontSize: "clamp(60px, 14vw, 200px)" }}
         >
           CONTENT SHIFT
         </div>
+        <Ornament
+          kind="flourish"
+          on="beige"
+          width={70}
+          className="absolute top-[180px] right-[10%] hidden md:block"
+          drift
+        />
 
         <div className="relative grid lg:grid-cols-2 gap-12 items-end mb-14">
           <Reveal>

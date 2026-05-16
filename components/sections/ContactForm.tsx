@@ -2,6 +2,32 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
+import { motion, AnimatePresence } from "motion/react";
+
+function Field({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="group">
+      <label
+        htmlFor={id}
+        className="block text-[11px] font-medium tracking-[1.5px] uppercase text-text-light mb-2 transition-colors group-focus-within:text-blue"
+      >
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+const inputBase =
+  "w-full bg-transparent border-0 border-b border-beige-mid px-0 py-3 text-[15px] font-light text-blue placeholder:text-text-light/50 focus:outline-none focus:border-blue transition-colors";
 
 function FormInner({ subjects }: { subjects: readonly string[] }) {
   const params = useSearchParams();
@@ -18,7 +44,7 @@ function FormInner({ subjects }: { subjects: readonly string[] }) {
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
@@ -34,109 +60,140 @@ function FormInner({ subjects }: { subjects: readonly string[] }) {
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="bg-[rgba(255,255,255,0.04)] border border-[rgba(200,220,234,0.1)] p-12"
-    >
-      <div className="font-display text-2xl font-light italic text-beige mb-8">
-        Envoyez-nous un message
-      </div>
+    <div className="bg-paper border-t-[3px] border-blue p-8 sm:p-12 relative">
+      <AnimatePresence mode="wait">
+        {state === "ok" ? (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-center py-16"
+          >
+            <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-blue text-beige flex items-center justify-center text-2xl font-display">
+              ✓
+            </div>
+            <h3 className="font-display text-[28px] font-light text-blue mb-3 italic">
+              Message bien reçu.
+            </h3>
+            <p className="text-[14px] font-light text-text-light leading-[1.7] max-w-sm mx-auto">
+              Nous revenons vers vous sous 48h, du lundi au vendredi. À très vite.
+            </p>
+            <button
+              type="button"
+              onClick={() => setState("idle")}
+              className="mt-8 text-[11px] font-medium tracking-[2px] uppercase text-blue-light hover:text-blue transition-colors"
+            >
+              Envoyer un autre message →
+            </button>
+          </motion.div>
+        ) : (
+          <motion.form
+            key="form"
+            onSubmit={onSubmit}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col gap-6"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Field id="firstName" label="Prénom">
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  placeholder="Marie"
+                  required
+                  autoComplete="given-name"
+                  className={inputBase}
+                />
+              </Field>
+              <Field id="lastName" label="Nom">
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  placeholder="Dupont"
+                  required
+                  autoComplete="family-name"
+                  className={inputBase}
+                />
+              </Field>
+            </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
-        <div className="mb-4">
-          <label htmlFor="firstName" className="block text-[9px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-            Prénom
-          </label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            placeholder="Marie"
-            required
-            className="form-input"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="lastName" className="block text-[9px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-            Nom
-          </label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            placeholder="Dupont"
-            required
-            className="form-input"
-          />
-        </div>
-      </div>
+            <Field id="email" label="Email">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="marie@email.fr"
+                required
+                autoComplete="email"
+                className={inputBase}
+              />
+            </Field>
 
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-[9px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="marie@email.fr"
-          required
-          className="form-input"
-        />
-      </div>
+            <Field id="subject" label="Je suis intéressé·e par">
+              <select
+                id="subject"
+                name="subject"
+                defaultValue={initialSubject}
+                className={`${inputBase} appearance-none cursor-pointer pr-6 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22><path d=%22M1 1l4 4 4-4%22 stroke=%22%231B3A5C%22 stroke-width=%221.2%22 fill=%22none%22/></svg>')] bg-no-repeat bg-[right_4px_center]`}
+              >
+                <option value="">— Choisir un service —</option>
+                {subjects.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </Field>
 
-      <div className="mb-4">
-        <label htmlFor="subject" className="block text-[9px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-          Je suis intéressé(e) par
-        </label>
-        <select id="subject" name="subject" defaultValue={initialSubject} className="form-select">
-          <option value="">Choisir un service…</option>
-          {subjects.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-      </div>
+            <Field id="message" label="Votre message">
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Dites-nous en quelques mots ce que vous cherchez…"
+                required
+                rows={4}
+                className={`${inputBase} resize-none leading-relaxed`}
+              />
+            </Field>
 
-      <div className="mb-4">
-        <label htmlFor="message" className="block text-[9px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Dites-nous en quelques mots ce que vous cherchez…"
-          required
-          className="form-textarea"
-        />
-      </div>
+            <button
+              type="submit"
+              disabled={state === "loading"}
+              className="self-start mt-2 px-10 py-4 bg-blue text-beige text-[11px] font-medium tracking-[2.5px] uppercase cursor-pointer transition-all hover:bg-blue-mid hover:tracking-[3px] disabled:opacity-60 disabled:cursor-wait"
+            >
+              {state === "loading" ? "Envoi en cours…" : "Envoyer le message"}
+            </button>
 
-      <button
-        type="submit"
-        disabled={state === "loading"}
-        className="w-full bg-beige text-blue border-0 py-[18px] font-sans text-[11px] font-semibold tracking-[2.5px] uppercase cursor-pointer mt-2 transition-all hover:bg-paper hover:tracking-[3px] disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        {state === "loading" ? "Envoi en cours…" : "Envoyer le message"}
-      </button>
+            {state === "error" && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-[12px] text-red-700 font-light"
+              >
+                {errorMsg ||
+                  "Une erreur est survenue. Écrivez-nous directement à contact@comjam.fr."}
+              </motion.p>
+            )}
 
-      {state === "ok" && (
-        <p className="mt-5 text-[12px] text-blue-pale text-center">
-          Merci ! Nous revenons vers vous sous 48h.
-        </p>
-      )}
-      {state === "error" && (
-        <p className="mt-5 text-[12px] text-red-300 text-center">
-          {errorMsg || "Une erreur est survenue, réessayez ou écrivez-nous directement à contact@comjam.fr."}
-        </p>
-      )}
-    </form>
+            <p className="text-[11px] font-light text-text-light leading-relaxed mt-2">
+              En envoyant ce message, vous acceptez d'être recontacté·e par email à propos de votre demande.
+            </p>
+          </motion.form>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
 export function ContactForm({ subjects }: { subjects: readonly string[] }) {
   return (
-    <Suspense fallback={<div className="h-[500px] bg-[rgba(255,255,255,0.04)]" />}>
+    <Suspense fallback={<div className="h-[500px] bg-paper" />}>
       <FormInner subjects={subjects} />
     </Suspense>
   );

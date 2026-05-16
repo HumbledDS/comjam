@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { brand, nav } from "@/lib/copy";
+import { nav } from "@/lib/copy";
+import { Logo } from "@/components/brand/Logo";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -12,7 +13,7 @@ export function Nav() {
 
   // Pages whose hero is dark (blue) need the frosted nav backdrop immediately
   // so blue-on-blue text doesn't become invisible.
-  const darkHeroRoutes = ["/services", "/contact"];
+  const darkHeroRoutes = ["/services"];
   const needsBackdrop = darkHeroRoutes.includes(pathname);
   const showBackdrop = scrolled || needsBackdrop;
 
@@ -44,12 +45,7 @@ export function Nav() {
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        <Link
-          href="/"
-          className="font-display text-[22px] font-semibold tracking-wide text-blue"
-        >
-          {brand.name} <span className="text-blue-light">{brand.suffix}</span>
-        </Link>
+        <Logo on="beige" width={110} priority />
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (

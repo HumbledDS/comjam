@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { brand, footer } from "@/lib/copy";
+import { Logo } from "@/components/brand/Logo";
+import { Ornament } from "@/components/brand/Ornament";
 
 export function Footer() {
   return (
@@ -8,13 +10,14 @@ export function Footer() {
       style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
     >
       <div className="flex justify-between items-start pb-10 border-b border-[rgba(200,220,234,0.07)] gap-10 flex-wrap">
-        <div>
-          <div className="font-display text-2xl font-semibold text-beige mb-[10px]">
-            {brand.name} <span className="text-blue-light">{brand.suffix}</span>
+        <div className="flex flex-col gap-4">
+          <div className="bg-blue p-2 -m-2">
+            <Logo on="blue" width={160} href={null} />
           </div>
           <div className="text-xs font-light text-blue-pale leading-[1.7] max-w-[240px]">
             {brand.tagline}
           </div>
+          <Ornament kind="swoosh" on="blue" width={120} className="-ml-3" drift />
         </div>
 
         <div className="flex gap-[52px] flex-wrap">

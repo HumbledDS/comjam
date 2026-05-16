@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
+import { Ornament } from "@/components/brand/Ornament";
+import { Monogram } from "@/components/brand/Monogram";
 import { unsplash } from "@/lib/unsplash";
 
 export function AboutTeaser() {
@@ -47,6 +49,10 @@ export function AboutTeaser() {
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
+          <div className="absolute bottom-5 right-5">
+            <Monogram on="beige" size={64} spin={false} className="ring-4 ring-beige" />
+          </div>
+          <Ornament kind="swoosh" on="beige" width={130} className="absolute -top-3 -left-3" />
         </div>
       </Reveal>
     </section>

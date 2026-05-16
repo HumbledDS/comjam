@@ -5,6 +5,8 @@ import { motion, useReducedMotion } from "motion/react";
 import { home } from "@/lib/copy";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
+import { Ornament } from "@/components/brand/Ornament";
+import { Pattern } from "@/components/brand/Pattern";
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 28 },
@@ -25,20 +27,29 @@ export function Hero() {
         gap: "var(--gap)",
       }}
     >
-      {/* Subtle grid bg */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(27,58,92,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(27,58,92,0.035) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-          maskImage:
-            "radial-gradient(ellipse 70% 80% at 20% 50%, black 10%, transparent 80%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 80% at 20% 50%, black 10%, transparent 80%)",
-        }}
-      />
+      {/* Decorative bg layer — wrapped so its children don't take grid cells */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none col-span-2">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(27,58,92,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(27,58,92,0.035) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+            maskImage:
+              "radial-gradient(ellipse 70% 80% at 20% 50%, black 10%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 70% 80% at 20% 50%, black 10%, transparent 80%)",
+          }}
+        />
+        <Pattern on="beige" opacity={0.05} />
+        <Ornament
+          kind="flourish"
+          on="beige"
+          width={80}
+          className="hidden lg:block absolute top-[140px] right-[8%] z-0"
+          drift
+        />
+      </div>
 
       <div className="relative z-10">
         <motion.div {...wrap(fadeUp(0.1))} className="mb-9">
@@ -106,8 +117,14 @@ export function Hero() {
         className="relative z-10 lg:max-w-none"
       >
         <div
-          className="bg-paper border-t-[3px] border-blue p-6 sm:p-12 lg:shadow-[20px_20px_0_var(--color-beige-dark)]"
+          className="relative bg-paper border-t-[3px] border-blue p-6 sm:p-12 lg:shadow-[20px_20px_0_var(--color-beige-dark)]"
         >
+          <Ornament
+            kind="apostrophe"
+            on="beige"
+            width={56}
+            className="absolute -top-7 -right-3"
+          />
           <div className="flex items-center gap-3 text-[9px] font-medium tracking-[3px] uppercase text-blue-light mb-7">
             <span>{home.card.label}</span>
             <span className="flex-1 h-px bg-beige-mid" />

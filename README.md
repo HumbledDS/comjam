@@ -36,10 +36,25 @@ npm run dev                  # http://localhost:3000
 
 ## Variables d'env
 
-Voir `.env.example`. Toutes optionnelles pour v1 — le site fonctionne sans :
+Voir `.env.example`.
+
+**Pour activer l'envoi du formulaire contact :**
+1. Créer un compte gratuit sur [resend.com](https://resend.com)
+2. Vérifier le domaine `comjam.fr` (Settings → Domains)
+3. Générer une API key
+4. Renseigner `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`
+
+Sans `RESEND_API_KEY`, l'API `/api/contact` log la soumission dans la console (mode stub) — pratique en dev.
+
+**Booking & paiement** (optionnels, le site fonctionne sans) :
 - `NEXT_PUBLIC_CAL_USERNAME` — sans, le calendrier renvoie un fallback « demander des dates »
 - `NEXT_PUBLIC_PAYPAL_HANDLE` — sans, le lien PayPal n'est pas affiché
-- `RESEND_API_KEY` — sans, le formulaire contact log dans la console (stub)
+
+## Assets de marque
+
+Les logos Com'Jam vivent dans `public/brand/`. Les composants dans `components/brand/` (Logo, Monogram, Ornament, Pattern) les utilisent avec des animations Motion.
+
+Note : ce sont des JPEG avec fond — pour un rendu parfait sur des sections de couleur différente, il faudra passer aux versions transparentes (PNG/SVG) plus tard.
 
 ## Déploiement Vercel
 
