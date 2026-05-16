@@ -79,7 +79,7 @@ export default function AboutPage() {
               {about.quote}
             </p>
             <div className="flex items-center gap-4">
-              <Monogram on="beige" size={56} />
+              <Monogram variant="blue" size={40} />
               <div>
                 <div className="text-[13px] font-medium text-blue mb-1">
                   {about.author.name}
@@ -130,10 +130,10 @@ export default function AboutPage() {
           paddingBottom: "var(--gap)",
         }}
       >
-        <Pattern on="blue" opacity={0.08} />
+        <Pattern variant="cream" opacity={0.06} />
         <Reveal>
           <div className="flex justify-center mb-8">
-            <Ornament kind="swoosh" on="blue" width={140} drift />
+            <Ornament kind="swoosh" variant="cream" width={100} drift opacity={0.8} />
           </div>
           <Label light>Notre mission</Label>
           <p

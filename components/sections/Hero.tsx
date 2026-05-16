@@ -41,11 +41,12 @@ export function Hero() {
               "radial-gradient(ellipse 70% 80% at 20% 50%, black 10%, transparent 80%)",
           }}
         />
-        <Pattern on="beige" opacity={0.05} />
+        <Pattern variant="blue" opacity={0.04} />
         <Ornament
           kind="flourish"
-          on="beige"
-          width={80}
+          variant="blue"
+          width={50}
+          opacity={0.4}
           className="hidden lg:block absolute top-[140px] right-[8%] z-0"
           drift
         />
@@ -121,9 +122,9 @@ export function Hero() {
         >
           <Ornament
             kind="apostrophe"
-            on="beige"
-            width={56}
-            className="absolute -top-7 -right-3"
+            variant="blue"
+            width={36}
+            className="absolute -top-5 -right-1"
           />
           <div className="flex items-center gap-3 text-[9px] font-medium tracking-[3px] uppercase text-blue-light mb-7">
             <span>{home.card.label}</span>

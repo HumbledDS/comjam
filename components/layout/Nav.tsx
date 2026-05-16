@@ -45,7 +45,7 @@ export function Nav() {
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        <Logo on="beige" width={110} priority />
+        <Logo variant="blue" width={108} priority />
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (

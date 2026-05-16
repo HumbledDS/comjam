@@ -26,12 +26,13 @@ export default function ContactPage() {
     >
       {/* Decorative bg layer, wrapped so its children don't take grid cells */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
-        <Pattern on="beige" opacity={0.04} />
+        <Pattern variant="blue" opacity={0.04} />
         <Ornament
           kind="flourish"
-          on="beige"
-          width={64}
-          className="hidden lg:block absolute top-[140px] right-[44%] z-0"
+          variant="blue"
+          width={48}
+          opacity={0.4}
+          className="hidden lg:block absolute top-[160px] right-[44%] z-0"
           drift
         />
       </div>

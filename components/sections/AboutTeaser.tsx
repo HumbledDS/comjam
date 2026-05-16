@@ -49,10 +49,16 @@ export function AboutTeaser() {
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
-          <div className="absolute bottom-5 right-5">
-            <Monogram on="beige" size={64} spin={false} className="ring-4 ring-beige" />
+          <div className="absolute bottom-5 right-5 bg-beige/95 backdrop-blur-sm p-2 rounded-sm">
+            <Monogram variant="blue" size={36} />
           </div>
-          <Ornament kind="swoosh" on="beige" width={130} className="absolute -top-3 -left-3" />
+          <Ornament
+            kind="swoosh"
+            variant="cream"
+            width={90}
+            className="absolute top-3 left-3"
+            opacity={0.9}
+          />
         </div>
       </Reveal>
     </section>

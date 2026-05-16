@@ -11,13 +11,11 @@ export function Footer() {
     >
       <div className="flex justify-between items-start pb-10 border-b border-[rgba(200,220,234,0.07)] gap-10 flex-wrap">
         <div className="flex flex-col gap-4">
-          <div className="bg-blue p-2 -m-2">
-            <Logo on="blue" width={160} href={null} />
-          </div>
+          <Logo variant="cream" width={130} href={null} />
           <div className="text-xs font-light text-blue-pale leading-[1.7] max-w-[240px]">
             {brand.tagline}
           </div>
-          <Ornament kind="swoosh" on="blue" width={120} className="-ml-3" drift />
+          <Ornament kind="swoosh" variant="cream" width={80} className="-ml-1 mt-2" drift opacity={0.7} />
         </div>
 
         <div className="flex gap-[52px] flex-wrap">

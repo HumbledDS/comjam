@@ -23,7 +23,7 @@ export default function BootcampPage() {
           paddingBottom: "var(--gap)",
         }}
       >
-        <Pattern on="beige" opacity={0.06} />
+        <Pattern variant="blue" opacity={0.04} />
         <div
           aria-hidden
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-light text-[rgba(27,58,92,0.04)] whitespace-nowrap pointer-events-none select-none tracking-[8px]"
@@ -33,8 +33,9 @@ export default function BootcampPage() {
         </div>
         <Ornament
           kind="flourish"
-          on="beige"
-          width={70}
+          variant="blue"
+          width={50}
+          opacity={0.5}
           className="absolute top-[180px] right-[10%] hidden md:block"
           drift
         />

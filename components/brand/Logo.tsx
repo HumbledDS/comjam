@@ -1,54 +1,51 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type Theme = "blue" | "beige";
+type Theme = "blue" | "cream";
 
 /**
- * Wordmark logo. The source JPEGs are roughly square with the wordmark
- * centered in a sea of background padding — so we use object-cover with a
- * tight 4:1 aspect to crop to the wordmark itself.
- *
- * Pick the theme matching the surrounding bg so the JPEG background blends.
+ * Wordmark logo. Uses transparent PNGs extracted from the brand JPEGs so it
+ * blends on any background. Pick `blue` for use on light backgrounds, `cream`
+ * for use on dark backgrounds.
  */
 export function Logo({
-  on = "beige",
+  variant = "blue",
   href = "/",
-  width = 140,
+  width = 110,
   priority = false,
   className = "",
 }: {
-  on?: Theme;
+  variant?: Theme;
   href?: string | null;
   width?: number;
   priority?: boolean;
   className?: string;
 }) {
-  const src = on === "blue" ? "/brand/wordmark-on-blue.jpg" : "/brand/wordmark-on-beige.jpg";
-  // 3:1 aspect crops out empty bg above/below the wordmark. Width must fit the
-  // full word — keep at least ~100px or the 'm' will get clipped.
-  const height = Math.round(width * 0.32);
-  const safeWidth = Math.max(width, 100);
+  const src = variant === "cream" ? "/brand/wordmark-cream.png" : "/brand/wordmark-blue.png";
+
+  // Wordmark aspect ratio after trim() is roughly 3.6:1.
+  const height = Math.round(width / 3.6);
 
   const img = (
-    <div
-      className={`relative overflow-hidden ${className}`}
-      style={{ width: safeWidth, height }}
-    >
-      <Image
-        src={src}
-        alt="Com'Jam"
-        fill
-        priority={priority}
-        sizes={`${safeWidth}px`}
-        className="object-cover object-center"
-        style={{ transform: "scale(1.25)" }}
-      />
-    </div>
+    <Image
+      src={src}
+      alt="Com'Jam"
+      width={width * 2}
+      height={Math.round((width * 2) / 3.6)}
+      priority={priority}
+      sizes={`${width}px`}
+      className={`object-contain ${className}`}
+      style={{ width, height: "auto" }}
+    />
   );
 
   if (href === null) return <span className="inline-block leading-none">{img}</span>;
   return (
-    <Link href={href} aria-label="Com'Jam — accueil" className="inline-block leading-none">
+    <Link
+      href={href}
+      aria-label="Com'Jam — accueil"
+      className="inline-block leading-none"
+    >
       {img}
     </Link>
   );

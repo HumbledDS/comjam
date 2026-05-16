@@ -2,24 +2,27 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
-type Theme = "blue" | "beige";
+type Theme = "blue" | "cream";
 
 /**
- * Tiled brand pattern as a subtle background overlay. Drifts very slowly
- * vertically for a living-texture effect. Use absolutely positioned
- * inside a relatively positioned section.
+ * Tiled brand pattern as a transparent overlay. Drifts very slowly vertically.
+ * Use absolutely positioned inside a relatively positioned section.
+ *
+ * `variant` is the COLOR of the pattern strokes (not the bg).
  */
 export function Pattern({
-  on = "beige",
-  opacity = 0.08,
+  variant = "blue",
+  opacity = 0.06,
+  size = 220,
   className = "",
 }: {
-  on?: Theme;
+  variant?: Theme;
   opacity?: number;
+  size?: number;
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  const src = on === "blue" ? "/brand/pattern-on-blue.jpg" : "/brand/pattern-on-beige.jpg";
+  const src = variant === "cream" ? "/brand/pattern-cream.png" : "/brand/pattern-blue.png";
 
   return (
     <motion.div
@@ -27,13 +30,12 @@ export function Pattern({
       className={`absolute inset-0 pointer-events-none ${className}`}
       style={{
         backgroundImage: `url(${src})`,
-        backgroundSize: "240px auto",
+        backgroundSize: `${size}px auto`,
         backgroundRepeat: "repeat",
         opacity,
-        mixBlendMode: on === "blue" ? "overlay" : "multiply",
       }}
-      animate={reduce ? undefined : { backgroundPositionY: ["0px", "-480px"] }}
-      transition={reduce ? undefined : { duration: 60, ease: "linear", repeat: Infinity }}
+      animate={reduce ? undefined : { backgroundPositionY: ["0px", `-${size * 2}px`] }}
+      transition={reduce ? undefined : { duration: 80, ease: "linear", repeat: Infinity }}
     />
   );
 }

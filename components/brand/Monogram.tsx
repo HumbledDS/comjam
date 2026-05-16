@@ -3,42 +3,34 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
-type Theme = "blue" | "beige";
+type Theme = "blue" | "cream";
 
 /**
- * The "C" monogram. Animates with a slow continuous rotation drift,
- * accelerating slightly on hover. Perfect as a decorative seal.
+ * The "C" monogram. Transparent PNG. Pick `blue` for light bgs, `cream` for dark.
  */
 export function Monogram({
-  on = "beige",
-  size = 96,
-  spin = true,
+  variant = "blue",
+  size = 48,
+  spin = false,
   className = "",
 }: {
-  on?: Theme;
+  variant?: Theme;
   size?: number;
   spin?: boolean;
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  const src = on === "blue" ? "/brand/monogram-on-blue.jpg" : "/brand/monogram-on-beige.jpg";
+  const src = variant === "cream" ? "/brand/monogram-cream.png" : "/brand/monogram-blue.png";
 
   return (
     <motion.div
-      className={`relative inline-block overflow-hidden ${className}`}
+      className={`relative inline-block ${className}`}
       style={{ width: size, height: size }}
       animate={spin && !reduce ? { rotate: 360 } : undefined}
       transition={spin && !reduce ? { duration: 40, ease: "linear", repeat: Infinity } : undefined}
-      whileHover={reduce ? undefined : { scale: 1.05 }}
+      whileHover={reduce ? undefined : { scale: 1.08 }}
     >
-      <Image
-        src={src}
-        alt=""
-        aria-hidden
-        fill
-        sizes={`${size}px`}
-        className="object-cover"
-      />
+      <Image src={src} alt="" aria-hidden fill sizes={`${size}px`} className="object-contain" />
     </motion.div>
   );
 }
