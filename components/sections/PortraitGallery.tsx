@@ -7,23 +7,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
 /**
- * Asymmetric portrait gallery — Jamila's actual work as visual proof.
- * 8 photos arranged on a 12-col grid with mixed spans for visual rhythm.
+ * Masonry-style portrait gallery — Jamila's and clients' real shoots as
+ * visual proof. CSS columns let portrait photos of slightly different
+ * aspect ratios pack together naturally without padding/cropping.
+ *
  * Each tile reveals with a stagger on scroll and gently zooms on hover.
  */
-
-// Span pattern (desktop). Tuned for a 12-col / 4-row grid feel.
-const spans = [
-  "lg:col-span-4 lg:row-span-2", // 1 - big
-  "lg:col-span-3 lg:row-span-1", // 2
-  "lg:col-span-5 lg:row-span-1", // 3 - wide
-  "lg:col-span-3 lg:row-span-2", // 4 - tall
-  "lg:col-span-5 lg:row-span-1", // 5 - wide
-  "lg:col-span-4 lg:row-span-2", // 6 - big
-  "lg:col-span-4 lg:row-span-1", // 7
-  "lg:col-span-4 lg:row-span-1", // 8
-];
-
 export function PortraitGallery() {
   const reduce = useReducedMotion();
 
@@ -48,48 +37,43 @@ export function PortraitGallery() {
               Récentes <em>collaborations.</em>
             </h2>
           </div>
-          <p className="max-w-[280px] text-[13px] font-light leading-[1.7] text-text-light md:text-right">
-            Une sélection de contenus photo réalisés à Paris et Bruxelles.
+          <p className="max-w-[300px] text-[13px] font-light leading-[1.7] text-text-light md:text-right">
+            Une sélection de contenus photo réalisés pour créateurs, marques
+            et entrepreneurs — Paris, Bruxelles.
           </p>
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 auto-rows-[200px] sm:auto-rows-[240px] lg:auto-rows-[260px] gap-3">
+      {/* CSS columns masonry: 1 col mobile, 2 tablet, 3 desktop */}
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [&>div]:mb-3 [&>div]:break-inside-avoid">
         {media.gallery.map((p, i) => (
           <motion.div
             key={p.src}
-            initial={reduce ? false : { opacity: 0, y: 24 }}
+            initial={reduce ? false : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{
               duration: 0.8,
               ease: [0.22, 1, 0.36, 1],
-              delay: (i % 4) * 0.08,
+              delay: (i % 3) * 0.08,
             }}
-            className={`relative overflow-hidden group ${
-              spans[i] ?? "lg:col-span-3 lg:row-span-1"
-            } ${
-              // mobile fallback spans
-              i === 0 ? "md:col-span-4 md:row-span-2" :
-              i === 1 ? "md:col-span-2 md:row-span-1" :
-              i === 2 ? "md:col-span-6 md:row-span-1" :
-              "md:col-span-3 md:row-span-1"
-            }`}
+            className="relative overflow-hidden group"
           >
             <motion.div
-              className="absolute inset-0"
-              whileHover={reduce ? undefined : { scale: 1.05 }}
+              className="relative w-full"
+              whileHover={reduce ? undefined : { scale: 1.04 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
                 src={p.src}
                 alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover"
+                width={800}
+                height={1200}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="block w-full h-auto object-cover"
               />
             </motion.div>
-            <div className="absolute inset-0 bg-blue/0 group-hover:bg-blue/15 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-blue/0 group-hover:bg-blue/15 transition-colors duration-500 pointer-events-none" />
           </motion.div>
         ))}
       </div>

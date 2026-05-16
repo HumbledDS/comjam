@@ -1,8 +1,19 @@
 /**
- * Catalog of Jamila's real photo + video assets in public/media/.
- * Pairs each shot with the section/service that best matches the mood/setting.
+ * Catalog of real Com'Jam photo + video assets in public/media/.
+ * Pairs each shot with the section/service that best matches its mood.
  *
- * Run scripts/process-jamila-media.mjs to regenerate after replacing source files.
+ * Re-run scripts/process-jamila-media.mjs / add-new-photos.mjs after
+ * replacing or adding source files.
+ *
+ * Photo index (alphabetical-source order):
+ *   01-16  → Jamila's own shoots (Paris/Brussels — Eiffel, Breguet, etc.)
+ *   17     → Yellow sweater, pavement candid (Paris)
+ *   18     → Black tuxedo blazer, descending staircase (formal)
+ *   19     → Olive trench, vintage record library (lifestyle)
+ *   20     → Mauve silk + hijab, seated (modest editorial)
+ *   21     → Black blazer + pampas grass, restaurant (moody)
+ *   22     → Hijab + tweed bomber, hotel staircase (formal modest)
+ *   23     → Olive leather + caramel, classical columns (high fashion)
  */
 
 export const photoSrc = (n: number, thumb = false) => {
@@ -15,7 +26,6 @@ export const photo = (n: number) => ({
   thumb: photoSrc(n, true),
 });
 
-// Hand-picked assignments based on outfit / setting / mood.
 export const media = {
   video: {
     mp4: "/media/video/reel.mp4",
@@ -25,32 +35,36 @@ export const media = {
 
   // Anchor images per section
   intro: {
-    big: photo(11),    // Beige suit, Eiffel Tower at night — iconic
+    big: photo(11),    // Eiffel Tower at night — iconic
     small: photo(12),  // Navy sweater + plants — matches brand palette
   },
 
-  about: photo(12),    // Same studio shot for About page portrait
+  about: photo(12),    // Studio shot for About page portrait
 
   // Service-paired imagery (mood matches the service tone)
   services: {
-    "creation-de-contenu": photo(3),     // Black trench Brussels — editorial energy
-    "strategie-digitale": photo(2),       // Breguet, polished, "luxury brand" feel
-    "production-de-contenu": photo(8),    // Black power suit, classical — production-grade
+    "creation-de-contenu": photo(17),    // Yellow sweater candid — content creator energy
+    "strategie-digitale": photo(2),       // Breguet — polished luxury brand feel
+    "production-de-contenu": photo(23),   // Olive leather + columns — high-end production
     "consulting": photo(12),              // Studio portrait — personal/professional
   },
 
   // Bootcamp / formation visual
-  bootcamp: photo(10), // Paris café, leather jacket — content creator energy
+  bootcamp: photo(10), // Leather jacket Paris café — creator at work
 
-  // Gallery (curated for variety in pose/setting/color)
+  // Gallery (curated 12 photos showing breadth of clients & moods)
   gallery: [
-    photo(1),   // brown trench Brussels
-    photo(11),  // Eiffel tower
-    photo(8),   // black suit columns
-    photo(14),  // denim + red, classical
+    photo(11),  // Eiffel tower — beige suit
+    photo(23),  // olive leather + Roman columns
+    photo(8),   // black suit + classical stone
+    photo(17),  // yellow sweater candid
+    photo(18),  // black tuxedo staircase
+    photo(14),  // denim + red bag
+    photo(22),  // hijab tweed bomber stairs
     photo(13),  // leather jacket moody
-    photo(5),   // beige suit evening
+    photo(21),  // black blazer + pampas grass
     photo(7),   // brown trench wide
-    photo(9),   // beige suit corner
+    photo(20),  // mauve silk hijab
+    photo(9),   // beige suit Paris corner
   ] as const,
 };
