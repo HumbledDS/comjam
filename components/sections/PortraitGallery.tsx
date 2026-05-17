@@ -7,61 +7,62 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
 /**
- * Portfolio gallery — three continuous marquee rows.
+ * Portfolio gallery — 3D-curtain style vertical scroll.
  *
- * Photos auto-scroll horizontally in a seamless loop (the row content is
- * duplicated so the wrap is invisible). Adjacent rows scroll in opposite
- * directions at different speeds for an editorial rhythm. No scroll-tied
- * motion: the gallery animates on its own regardless of user scroll position.
+ * Each column scrolls vertically forever (infinite seamless loop via
+ * duplicated content). Adjacent columns alternate direction (up / down /
+ * up / down) with varied durations for organic motion. The section has a
+ * fixed viewport height; columns animate inside an overflow-hidden frame.
  *
- * Mobile/tablet: marquees disabled, photos become a single horizontally
- * swipeable carousel.
+ * Mobile: vertical columns are replaced by a horizontal swipe carousel.
  */
 
 type Photo = { src: string; thumb: string };
 
-function MarqueeRow({
+function VerticalColumn({
   photos,
   direction,
   duration,
+  startDelay = 0,
 }: {
   photos: ReadonlyArray<Photo>;
-  direction: "left" | "right";
+  direction: "up" | "down";
   duration: number;
+  startDelay?: number;
 }) {
   const reduce = useReducedMotion();
-  // Duplicate the set so the loop wraps seamlessly.
+  // Duplicate content so the wrap is seamless.
   const looped = [...photos, ...photos];
 
-  // Direction-aware translation. Going "left" means content shifts negative X
-  // (photos appear to move from right side toward left edge).
-  const xFrom = direction === "left" ? "0%" : "-50%";
-  const xTo = direction === "left" ? "-50%" : "0%";
+  // direction "up" → content shifts negative Y (photos appear to rise)
+  const yFrom = direction === "up" ? "0%" : "-50%";
+  const yTo = direction === "up" ? "-50%" : "0%";
 
   return (
-    <div className="overflow-hidden" aria-hidden>
+    <div className="relative h-full overflow-hidden">
       <motion.div
-        className="flex gap-3 sm:gap-4 lg:gap-5"
-        style={{ willChange: "transform" }}
-        animate={reduce ? undefined : { x: [xFrom, xTo] }}
+        className="flex flex-col gap-3 sm:gap-4 absolute inset-x-0 will-change-transform"
+        animate={reduce ? undefined : { y: [yFrom, yTo] }}
         transition={
           reduce
             ? undefined
-            : { duration, repeat: Infinity, ease: "linear" }
+            : {
+                duration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: startDelay,
+              }
         }
       >
         {looped.map((p, i) => (
-          <figure
-            key={p.src + i}
-            className="shrink-0 bg-beige-dark"
-          >
+          <figure key={p.src + i} className="bg-beige-dark">
             <Image
               src={p.thumb}
               alt=""
               width={800}
               height={1200}
-              sizes="(max-width: 1024px) 30vw, 22vw"
-              className="block h-[24vh] sm:h-[26vh] lg:h-[28vh] xl:h-[30vh] w-auto"
+              sizes="(max-width: 1024px) 33vw, 25vw"
+              className="block w-full h-auto"
             />
           </figure>
         ))}
@@ -114,23 +115,29 @@ function MobileCarousel({ photos }: { photos: ReadonlyArray<Photo> }) {
 
 export function PortraitGallery() {
   const all = media.gallery;
-  // Split into 3 rows of 4, alternating order so each row stays varied.
-  const row1 = [all[0], all[3], all[6], all[9]];
-  const row2 = [all[1], all[4], all[7], all[10]];
-  const row3 = [all[2], all[5], all[8], all[11]];
+  // Distribute 12 photos across 4 columns (3 per column). Round-robin
+  // assignment so each column mixes outfits/settings instead of clumping.
+  const col1 = [all[0], all[4], all[8]];
+  const col2 = [all[1], all[5], all[9]];
+  const col3 = [all[2], all[6], all[10]];
+  const col4 = [all[3], all[7], all[11]];
 
   return (
     <section
       className="bg-beige relative overflow-hidden"
-      style={{
-        paddingTop: "var(--gap)",
-        paddingBottom: "var(--gap)",
-      }}
       aria-label="Portfolio"
     >
-      <div style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}>
+      {/* HEADER */}
+      <div
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "calc(var(--gap) * 0.5)",
+        }}
+      >
         <Reveal>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-12 lg:mb-16">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8">
             <div>
               <Label>Portfolio</Label>
               <h2
@@ -148,15 +155,21 @@ export function PortraitGallery() {
         </Reveal>
       </div>
 
-      {/* DESKTOP / TABLET-WIDE: 3 auto-scrolling marquee rows */}
-      <div className="hidden md:flex flex-col gap-4 lg:gap-5">
-        <MarqueeRow photos={row1} direction="left" duration={55} />
-        <MarqueeRow photos={row2} direction="right" duration={70} />
-        <MarqueeRow photos={row3} direction="left" duration={45} />
+      {/* DESKTOP / TABLET-WIDE: 4 vertical-scroll columns, fixed viewport
+          height frame. Each column loops infinitely in alternating
+          direction with subtly different speeds for organic motion. */}
+      <div
+        className="hidden md:grid grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 h-[90vh]"
+        style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)", paddingBottom: "var(--gap)" }}
+      >
+        <VerticalColumn photos={col1} direction="up"   duration={48} />
+        <VerticalColumn photos={col2} direction="down" duration={56} startDelay={-2} />
+        <VerticalColumn photos={col3} direction="up"   duration={44} startDelay={-4} />
+        <VerticalColumn photos={col4} direction="down" duration={60} startDelay={-1} />
       </div>
 
       {/* MOBILE: horizontal swipe carousel */}
-      <div className="md:hidden">
+      <div className="md:hidden" style={{ paddingBottom: "var(--gap)" }}>
         <MobileCarousel photos={all} />
       </div>
     </section>
