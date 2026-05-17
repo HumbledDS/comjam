@@ -11,8 +11,9 @@ export const brand = {
     "Création de contenu, stratégie réseaux sociaux et formation en ligne. Paris & partout en France.",
   city: "Paris",
   email: "contact@comjam.fr",
-  instagram: { handle: "@comjam", url: "https://instagram.com/comjam", followers: "9 700" },
-  tiktok: { handle: "@comjam", url: "https://tiktok.com/@comjam", followers: "38 000" },
+  instagram: { handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", followers: "9 700" },
+  tiktok: { handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", followers: "38 000" },
+  linktree: { handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam" },
 };
 
 export type NavItem = { label: string; href: string; primary?: boolean };
@@ -340,8 +341,9 @@ export const contact = {
   desc:
     "Vous avez un projet, une question, vous souhaitez réserver une séance ou une place au bootcamp ? Envoyez-nous un message — nous répondons sous 48h.",
   channels: [
-    { kind: "ig" as const, name: "Instagram", handle: "@comjam · 9 700 abonnés", url: "https://instagram.com/comjam", icon: "IG" },
-    { kind: "tt" as const, name: "TikTok", handle: "@comjam · 38 000 abonnés", url: "https://tiktok.com/@comjam", icon: "TK" },
+    { kind: "ig" as const, name: "Instagram", handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", icon: "IG" },
+    { kind: "tt" as const, name: "TikTok", handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", icon: "TK" },
+    { kind: "lt" as const, name: "Linktree", handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam", icon: "LT" },
     { kind: "em" as const, name: "Email", handle: "contact@comjam.fr", url: "mailto:contact@comjam.fr", icon: "@" },
   ],
   formSubjects: [
@@ -387,8 +389,8 @@ export const footer = {
     },
   ],
   socials: [
-    { label: "Instagram", url: "https://instagram.com/comjam" },
-    { label: "TikTok", url: "https://tiktok.com/@comjam" },
-    { label: "LinkedIn", url: "#" },
+    { label: "Instagram", url: "https://www.instagram.com/comjamagency" },
+    { label: "TikTok", url: "https://www.tiktok.com/@comjamagency" },
+    { label: "Linktree", url: "https://linktr.ee/comjam" },
   ],
 };
