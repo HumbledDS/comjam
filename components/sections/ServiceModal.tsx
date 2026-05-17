@@ -159,22 +159,13 @@ export function ServiceModal({
                     {service.pricing}
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link
-                    href={`/services/${service.slug}`}
-                    onClick={onClose}
-                    className="text-[11px] font-medium tracking-[2.5px] uppercase text-blue-light hover:text-blue transition-colors"
-                  >
-                    En savoir plus →
-                  </Link>
-                  <Link
-                    href={service.ctaHref}
-                    onClick={onClose}
-                    className="btn btn-primary"
-                  >
-                    {service.ctaLabel}
-                  </Link>
-                </div>
+                <Link
+                  href={service.ctaHref}
+                  onClick={onClose}
+                  className="btn btn-primary"
+                >
+                  {service.ctaLabel}
+                </Link>
               </div>
             </div>
           </motion.article>
