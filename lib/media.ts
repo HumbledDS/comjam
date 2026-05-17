@@ -42,7 +42,7 @@ export const media = {
     small: photo(12),  // Navy sweater + plants — matches brand palette
   },
 
-  about: photo(24),    // Editorial chin-on-hand portrait — navy denim, armchair
+  about: photo(26),    // White shirt + tie + denim, cross-legged in armchair
 
   // Service-paired imagery (mood matches the service tone)
   services: {
