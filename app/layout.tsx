@@ -3,6 +3,7 @@ import { cormorant, outfit } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { LAUNCHED } from "@/lib/launch";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,10 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${cormorant.variable} ${outfit.variable}`}>
       <body>
-        <Nav />
+        {LAUNCHED && <Nav />}
         <PageTransition>
           <main>{children}</main>
-          <Footer />
+          {LAUNCHED && <Footer />}
         </PageTransition>
       </body>
     </html>

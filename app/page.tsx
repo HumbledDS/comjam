@@ -7,9 +7,13 @@ import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ornament } from "@/components/brand/Ornament";
 import { CTA } from "@/components/sections/CTA";
+import { ComingSoon } from "@/components/sections/ComingSoon";
+import { LAUNCHED } from "@/lib/launch";
 import { home, testimonials } from "@/lib/copy";
 
 export default function HomePage() {
+  if (!LAUNCHED) return <ComingSoon />;
+
   const featured = testimonials[0];
 
   return (
