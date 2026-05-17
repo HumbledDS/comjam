@@ -1,131 +1,71 @@
 "use client";
 
 import Image from "next/image";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { media } from "@/lib/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
 /**
- * Portfolio gallery — luxury editorial parallax grid.
+ * Portfolio gallery — three continuous marquee rows.
  *
- * DESKTOP:
- *   - Bounded section (no infinite scroll). Outer height provides the scroll
- *     runway; the inner stage is pinned (position: sticky) so the gallery
- *     stays visually stable while the 3 rows drift vertically inside it.
- *   - 3 rows × 4 photos. Each photo keeps its natural portrait aspect
- *     (rows have a fixed height, image is `h-full w-auto` → no cropping).
- *   - Alternating row directions (up / down / up) with different ranges.
- *   - useSpring smooths the scroll-tied transform → cinematic motion.
+ * Photos auto-scroll horizontally in a seamless loop (the row content is
+ * duplicated so the wrap is invisible). Adjacent rows scroll in opposite
+ * directions at different speeds for an editorial rhythm. No scroll-tied
+ * motion: the gallery animates on its own regardless of user scroll position.
  *
- * MOBILE / TABLET (under md):
- *   - Parallax disabled. The 12 photos become a single horizontally
- *     swipeable carousel with snap points + a "← Faites glisser →" hint.
+ * Mobile/tablet: marquees disabled, photos become a single horizontally
+ * swipeable carousel.
  */
 
 type Photo = { src: string; thumb: string };
 
-// Y translate ranges per row. Positive = downward, negative = upward.
-// Spec values were calibrated for sparser layouts; on a 3-row dense
-// viewport-pinned gallery they cause adjacent rows to collide at peak.
-// Scaled to ~45% of spec so the alternating motion is clearly visible
-// but rows slide past each other without overlapping.
-const ROW_RANGES: Array<[number, number]> = [
-  [18, -42],  // Row 1 — UP, slow
-  [-27, 54],  // Row 2 — DOWN, medium (inverse)
-  [27, -58],  // Row 3 — UP, faster
-];
-
-function splitRows(all: ReadonlyArray<Photo>): [Photo[], Photo[], Photo[]] {
-  // Distribute every 3rd photo across rows so each row mixes outfits/settings.
-  return [
-    [all[0], all[3], all[6], all[9]],
-    [all[1], all[4], all[7], all[10]],
-    [all[2], all[5], all[8], all[11]],
-  ];
-}
-
-function ParallaxRow({
+function MarqueeRow({
   photos,
-  yRange,
-  containerRef,
+  direction,
+  duration,
 }: {
-  photos: Photo[];
-  yRange: [number, number];
-  containerRef: React.RefObject<HTMLDivElement | null>;
+  photos: ReadonlyArray<Photo>;
+  direction: "left" | "right";
+  duration: number;
 }) {
   const reduce = useReducedMotion();
+  // Duplicate the set so the loop wraps seamlessly.
+  const looped = [...photos, ...photos];
 
-  // Tie the row's motion to the OUTER section's scroll progress so all 3
-  // rows animate in sync with the same scroll window (rather than each row
-  // having its own viewport window).
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const yRaw = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduce ? [0, 0] : yRange,
-  );
-
-  // Spring damping smooths jitter and adds subtle inertia.
-  const y = useSpring(yRaw, {
-    damping: 30,
-    stiffness: 110,
-    restDelta: 0.5,
-  });
+  // Direction-aware translation. Going "left" means content shifts negative X
+  // (photos appear to move from right side toward left edge).
+  const xFrom = direction === "left" ? "0%" : "-50%";
+  const xTo = direction === "left" ? "-50%" : "0%";
 
   return (
-    <motion.div
-      style={{ y, willChange: "transform" }}
-      className="flex items-end justify-center gap-3 sm:gap-4 lg:gap-5"
-    >
-      {photos.map((p, i) => (
-        <figure
-          key={p.src + i}
-          className="bg-beige-dark overflow-hidden"
-          // Fixed-height row, image-driven width = preserves portrait ratio
-        >
-          <Image
-            src={p.thumb}
-            alt=""
-            width={800}
-            height={1200}
-            sizes="(max-width: 1024px) 24vw, 18vw"
-            priority={i === 0}
-            className="block h-[22vh] xl:h-[24vh] w-auto max-w-none"
-          />
-        </figure>
-      ))}
-    </motion.div>
-  );
-}
-
-function ParallaxStage({ rows }: { rows: [Photo[], Photo[], Photo[]] }) {
-  const outerRef = useRef<HTMLDivElement>(null);
-
-  return (
-    // Outer wrapper provides the scroll runway. Its height controls how
-    // much scrolling distance the parallax has to play out over.
-    <div ref={outerRef} className="relative" style={{ height: "200vh" }}>
-      {/* Sticky stage — pinned at top of viewport while user scrolls past.
-          justify-between + py spreads the 3 rows across the viewport with
-          enough breathing room that the alternating parallax doesn't
-          collide. */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-between py-10 lg:py-14">
-        <ParallaxRow photos={rows[0]} yRange={ROW_RANGES[0]} containerRef={outerRef} />
-        <ParallaxRow photos={rows[1]} yRange={ROW_RANGES[1]} containerRef={outerRef} />
-        <ParallaxRow photos={rows[2]} yRange={ROW_RANGES[2]} containerRef={outerRef} />
-      </div>
+    <div className="overflow-hidden" aria-hidden>
+      <motion.div
+        className="flex gap-3 sm:gap-4 lg:gap-5"
+        style={{ willChange: "transform" }}
+        animate={reduce ? undefined : { x: [xFrom, xTo] }}
+        transition={
+          reduce
+            ? undefined
+            : { duration, repeat: Infinity, ease: "linear" }
+        }
+      >
+        {looped.map((p, i) => (
+          <figure
+            key={p.src + i}
+            className="shrink-0 bg-beige-dark"
+          >
+            <Image
+              src={p.thumb}
+              alt=""
+              width={800}
+              height={1200}
+              sizes="(max-width: 1024px) 30vw, 22vw"
+              className="block h-[24vh] sm:h-[26vh] lg:h-[28vh] xl:h-[30vh] w-auto"
+            />
+          </figure>
+        ))}
+      </motion.div>
     </div>
   );
 }
@@ -173,12 +113,15 @@ function MobileCarousel({ photos }: { photos: ReadonlyArray<Photo> }) {
 }
 
 export function PortraitGallery() {
-  const rows = splitRows(media.gallery);
-  const allPhotos = media.gallery;
+  const all = media.gallery;
+  // Split into 3 rows of 4, alternating order so each row stays varied.
+  const row1 = [all[0], all[3], all[6], all[9]];
+  const row2 = [all[1], all[4], all[7], all[10]];
+  const row3 = [all[2], all[5], all[8], all[11]];
 
   return (
     <section
-      className="bg-beige relative"
+      className="bg-beige relative overflow-hidden"
       style={{
         paddingTop: "var(--gap)",
         paddingBottom: "var(--gap)",
@@ -198,21 +141,23 @@ export function PortraitGallery() {
               </h2>
             </div>
             <p className="max-w-[300px] text-[13px] font-light leading-[1.7] text-text-light md:text-right">
-              Contenu réalisé pour créateurs, marques et entrepreneurs —
+              Contenu réalisé pour créateurs, marques et entrepreneurs.
               Paris, Bruxelles.
             </p>
           </div>
         </Reveal>
       </div>
 
-      {/* DESKTOP / TABLET-WIDE: pinned 3-row parallax */}
-      <div className="hidden md:block">
-        <ParallaxStage rows={rows} />
+      {/* DESKTOP / TABLET-WIDE: 3 auto-scrolling marquee rows */}
+      <div className="hidden md:flex flex-col gap-4 lg:gap-5">
+        <MarqueeRow photos={row1} direction="left" duration={55} />
+        <MarqueeRow photos={row2} direction="right" duration={70} />
+        <MarqueeRow photos={row3} direction="left" duration={45} />
       </div>
 
       {/* MOBILE: horizontal swipe carousel */}
       <div className="md:hidden">
-        <MobileCarousel photos={allPhotos} />
+        <MobileCarousel photos={all} />
       </div>
     </section>
   );
