@@ -79,7 +79,7 @@ export function BootcampPanel() {
             </div>
             <Link
               href="/bootcamp"
-              className="px-7 py-4 bg-beige text-blue text-[11px] font-medium tracking-[2.5px] uppercase whitespace-nowrap hover:bg-paper transition-colors"
+              className="btn btn-light whitespace-nowrap"
             >
               Découvrir
             </Link>
