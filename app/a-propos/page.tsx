@@ -10,6 +10,12 @@ import { Monogram } from "@/components/brand/Monogram";
 import { Ornament } from "@/components/brand/Ornament";
 import { Pattern } from "@/components/brand/Pattern";
 import { media } from "@/lib/media";
+import {
+  InstagramIcon,
+  TikTokIcon,
+  LinktreeIcon,
+  MailIcon,
+} from "@/components/brand/SocialIcon";
 
 export const metadata: Metadata = {
   title: "À propos — Com'Jam Agency",
@@ -106,22 +112,22 @@ export default function AboutPage() {
             </div>
 
             {/* Right-edge icon rail — vertical stack of social channels */}
-            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex flex-col gap-2 bg-paper/95 backdrop-blur-sm rounded-l-xl py-3 px-2 shadow-md">
+            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex flex-col gap-1.5 bg-paper/95 backdrop-blur-sm rounded-l-xl py-3 px-2 shadow-md">
               {[
-                { label: "Instagram", short: "IG", href: brand.instagram.url },
-                { label: "TikTok", short: "TK", href: brand.tiktok.url },
-                { label: "Linktree", short: "LT", href: brand.linktree.url },
-                { label: "Email", short: "@", href: `mailto:${brand.email}` },
-              ].map((c) => (
+                { label: "Instagram", Icon: InstagramIcon, href: brand.instagram.url, external: true },
+                { label: "TikTok", Icon: TikTokIcon, href: brand.tiktok.url, external: true },
+                { label: "Linktree", Icon: LinktreeIcon, href: brand.linktree.url, external: true },
+                { label: "Email", Icon: MailIcon, href: `mailto:${brand.email}`, external: false },
+              ].map(({ label, Icon, href, external }) => (
                 <a
-                  key={c.label}
-                  href={c.href}
-                  target={c.short === "@" ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  aria-label={c.label}
-                  className="w-9 h-9 flex items-center justify-center text-[11px] font-display font-medium text-blue hover:bg-blue hover:text-beige transition-colors rounded-md"
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  aria-label={label}
+                  className="w-9 h-9 flex items-center justify-center text-blue hover:bg-blue hover:text-beige transition-colors rounded-md"
                 >
-                  {c.short}
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
