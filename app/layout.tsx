@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { cormorant, outfit } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { LAUNCHED } from "@/lib/launch";
+import { isLaunched } from "@/lib/launch";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,14 +21,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const host = (await headers()).get("host");
+  const launched = isLaunched(host);
+
   return (
     <html lang="fr" className={`${cormorant.variable} ${outfit.variable}`}>
       <body>
-        {LAUNCHED && <Nav />}
+        {launched && <Nav />}
         <PageTransition>
           <main>{children}</main>
-          {LAUNCHED && <Footer />}
+          {launched && <Footer />}
         </PageTransition>
       </body>
     </html>

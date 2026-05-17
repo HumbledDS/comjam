@@ -1,17 +1,20 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isLaunched } from "@/lib/launch";
 
 /**
- * While the site is in pre-launch mode (NEXT_PUBLIC_LAUNCHED !== "true"),
- * redirect every page request back to "/" so visitors only ever see the
- * ComingSoon page — even if they have direct links to /services, /a-propos
- * etc.
+ * While the site is in pre-launch mode AND the request is coming from a
+ * non-staging host (i.e. comjam.fr in production), redirect every page
+ * request back to "/" so visitors only ever see the ComingSoon page.
  *
- * The matcher excludes /api, /_next, /icon.png, and other static assets so
- * the contact form, image optimisation, and the favicon all keep working.
+ * Localhost + *.vercel.app are treated as staging — they always see the
+ * full site, even when the launch flag is off. This lets us preview
+ * work-in-progress on comjam.vercel.app without exposing comjam.fr.
+ *
+ * The matcher excludes /api, /_next, /icon.png, and other static assets
+ * so the contact form, image optimisation, and the favicon keep working.
  */
 export function proxy(req: NextRequest) {
-  const launched = process.env.NEXT_PUBLIC_LAUNCHED === "true";
-  if (launched) return NextResponse.next();
+  if (isLaunched(req.headers.get("host"))) return NextResponse.next();
 
   const { pathname } = req.nextUrl;
   if (pathname === "/") return NextResponse.next();
@@ -22,6 +25,5 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Run on every pathname EXCEPT api routes, Next internals, and static files
   matcher: ["/((?!api|_next/static|_next/image|icon.png|brand|media|favicon).*)"],
 };

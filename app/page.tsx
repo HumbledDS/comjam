@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { HeroReel } from "@/components/sections/HeroReel";
 import { EditorialIntro } from "@/components/sections/EditorialIntro";
 import { PortraitGallery } from "@/components/sections/PortraitGallery";
@@ -8,11 +9,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Ornament } from "@/components/brand/Ornament";
 import { CTA } from "@/components/sections/CTA";
 import { ComingSoon } from "@/components/sections/ComingSoon";
-import { LAUNCHED } from "@/lib/launch";
+import { isLaunched } from "@/lib/launch";
 import { home, testimonials } from "@/lib/copy";
 
-export default function HomePage() {
-  if (!LAUNCHED) return <ComingSoon />;
+export default async function HomePage() {
+  const host = (await headers()).get("host");
+  if (!isLaunched(host)) return <ComingSoon />;
 
   const featured = testimonials[0];
 
