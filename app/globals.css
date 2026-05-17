@@ -170,45 +170,19 @@ ul { list-style: none; padding-left: 0; }
     long-running marquees: GPU-accelerated, no jank from
     requestAnimationFrame throttling)
 ============================================================ */
-/* Bluescale tint applied to gallery photos when not hovered. Image is
-   muted (low saturation, slight contrast lift) and overlaid with a hue
-   blend tinted with the brand blue. On hover the filter clears and the
-   tint fades out, revealing the full-color photo. */
+/* Portfolio gallery photo — natural colours, gentle hover scale. */
 .gallery-photo {
   position: relative;
   overflow: hidden;
-  isolation: isolate;
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.gallery-photo img {
-  filter: saturate(0.45) brightness(0.97) contrast(1.04);
-  transition: filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.gallery-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgb(27, 58, 92); /* brand blue */
-  mix-blend-mode: hue;
-  opacity: 0.55;
-  pointer-events: none;
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .gallery-photo:hover {
   transform: scale(1.035);
   z-index: 10;
 }
-.gallery-photo:hover img {
-  filter: none;
-}
-.gallery-photo:hover::after {
-  opacity: 0;
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .gallery-photo,
-  .gallery-photo img,
-  .gallery-photo::after {
+  .gallery-photo {
     transition: none;
   }
 }
