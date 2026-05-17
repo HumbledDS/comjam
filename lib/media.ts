@@ -14,6 +14,9 @@
  *   21     → Black blazer + pampas grass, restaurant (moody)
  *   22     → Hijab + tweed bomber, hotel staircase (formal modest)
  *   23     → Olive leather + caramel, classical columns (high fashion)
+ *   24     → Jamila editorial — navy denim suit + tie, leather armchair, chin on hand
+ *   25     → Jamila laughing — navy denim suit, armchair
+ *   26     → Jamila side profile — white shirt + tie + denim, cross-legged
  */
 
 export const photoSrc = (n: number, thumb = false) => {
@@ -39,7 +42,7 @@ export const media = {
     small: photo(12),  // Navy sweater + plants — matches brand palette
   },
 
-  about: photo(12),    // Studio shot for About page portrait
+  about: photo(24),    // Editorial chin-on-hand portrait — navy denim, armchair
 
   // Service-paired imagery (mood matches the service tone)
   services: {

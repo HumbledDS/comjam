@@ -72,7 +72,7 @@ export const about = {
   paragraphs: [
     "Com'Jam est une agence de communication spécialisée dans la **création de contenu**, la **stratégie digitale** et le **marketing d'influence**. L'agence est née d'une passion pour le digital, l'image, l'audiovisuel et les réseaux sociaux.",
     "En observant les défis rencontrés par de nombreuses entreprises et créateurs de contenu, un constat s'est imposé : le manque d'un **accompagnement réellement personnalisé** et adapté aux enjeux actuels.",
-    "Derrière Com'Jam, il y a **Jamila** — fondatrice, photographe, créatrice de contenu et stratège digitale. Titulaire d'un **Bac+5 en Communication et Marketing Digital**, je suis sur le terrain chaque jour et je partage uniquement ce qui fonctionne **vraiment**.",
+    "Derrière Com'Jam, il y a **Jamila** : fondatrice, photographe, créatrice de contenu et stratège digitale. Titulaire d'un **Bac+5 en Communication et Marketing Digital**, je suis sur le terrain chaque jour et je partage uniquement ce qui fonctionne **vraiment**.",
   ],
   mission:
     "Offrir une expérience personnalisée, en proposant des solutions créatives, accessibles et 360°, capables de valoriser vos projets.",
