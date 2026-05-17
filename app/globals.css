@@ -165,6 +165,27 @@ ul { list-style: none; padding-left: 0; }
 }
 
 /* ============================================================
+   PORTFOLIO GALLERY — vertical infinite scroll
+   (CSS animations are more reliable than JS-driven ones for
+    long-running marquees: GPU-accelerated, no jank from
+    requestAnimationFrame throttling)
+============================================================ */
+@keyframes scroll-up {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
+}
+@keyframes scroll-down {
+  from { transform: translate3d(0, -50%, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-marquee] {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
    FORM
 ============================================================ */
 .form-input,
