@@ -1,29 +1,50 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { useRef } from "react";
 import { media } from "@/lib/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
 /**
- * Three-row parallax gallery. As the user scrolls vertically through the
- * section, each row drifts vertically at a different rate and direction:
- *   row 1 → moves UP (slow)
- *   row 2 → moves DOWN (inverse — gives the diss-sequential feel)
- *   row 3 → moves UP (faster)
+ * Portfolio gallery — luxury editorial parallax grid.
  *
- * Photos are shown FULL (no crop) — portrait shots stay portrait.
- * On mobile/tablet the parallax disappears and the rows collapse into a
- * single horizontally swipeable carousel.
+ * DESKTOP:
+ *   - Bounded section (no infinite scroll). Outer height provides the scroll
+ *     runway; the inner stage is pinned (position: sticky) so the gallery
+ *     stays visually stable while the 3 rows drift vertically inside it.
+ *   - 3 rows × 4 photos. Each photo keeps its natural portrait aspect
+ *     (rows have a fixed height, image is `h-full w-auto` → no cropping).
+ *   - Alternating row directions (up / down / up) with different ranges.
+ *   - useSpring smooths the scroll-tied transform → cinematic motion.
+ *
+ * MOBILE / TABLET (under md):
+ *   - Parallax disabled. The 12 photos become a single horizontally
+ *     swipeable carousel with snap points + a "← Faites glisser →" hint.
  */
 
-type Row = ReadonlyArray<{ src: string; thumb: string }>;
+type Photo = { src: string; thumb: string };
 
-// Split the 12 gallery photos into 3 rows of 4. Shuffled lightly so each
-// row mixes outfits/settings instead of clumping similar shots.
-function splitRows(all: typeof media.gallery): [Row, Row, Row] {
+// Y translate ranges per row. Positive = downward, negative = upward.
+// Spec values were calibrated for sparser layouts; on a 3-row dense
+// viewport-pinned gallery they cause adjacent rows to collide at peak.
+// Scaled to ~45% of spec so the alternating motion is clearly visible
+// but rows slide past each other without overlapping.
+const ROW_RANGES: Array<[number, number]> = [
+  [18, -42],  // Row 1 — UP, slow
+  [-27, 54],  // Row 2 — DOWN, medium (inverse)
+  [27, -58],  // Row 3 — UP, faster
+];
+
+function splitRows(all: ReadonlyArray<Photo>): [Photo[], Photo[], Photo[]] {
+  // Distribute every 3rd photo across rows so each row mixes outfits/settings.
   return [
     [all[0], all[3], all[6], all[9]],
     [all[1], all[4], all[7], all[10]],
@@ -34,66 +55,139 @@ function splitRows(all: typeof media.gallery): [Row, Row, Row] {
 function ParallaxRow({
   photos,
   yRange,
-  delay = 0,
+  containerRef,
 }: {
-  photos: Row;
+  photos: Photo[];
   yRange: [number, number];
-  delay?: number;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+
+  // Tie the row's motion to the OUTER section's scroll progress so all 3
+  // rows animate in sync with the same scroll window (rather than each row
+  // having its own viewport window).
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : yRange);
+
+  const yRaw = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [0, 0] : yRange,
+  );
+
+  // Spring damping smooths jitter and adds subtle inertia.
+  const y = useSpring(yRaw, {
+    damping: 30,
+    stiffness: 110,
+    restDelta: 0.5,
+  });
 
   return (
     <motion.div
-      ref={ref}
-      style={{ y }}
-      initial={reduce ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="grid grid-cols-4 gap-3"
+      style={{ y, willChange: "transform" }}
+      className="flex items-end justify-center gap-3 sm:gap-4 lg:gap-5"
     >
       {photos.map((p, i) => (
-        <motion.figure
+        <figure
           key={p.src + i}
-          className="relative overflow-hidden bg-beige-dark"
-          whileHover={reduce ? undefined : { scale: 1.03 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-beige-dark overflow-hidden"
+          // Fixed-height row, image-driven width = preserves portrait ratio
         >
           <Image
             src={p.thumb}
             alt=""
             width={800}
             height={1200}
-            sizes="(max-width: 1024px) 50vw, 24vw"
-            className="block w-full h-auto"
+            sizes="(max-width: 1024px) 24vw, 18vw"
+            priority={i === 0}
+            className="block h-[22vh] xl:h-[24vh] w-auto max-w-none"
           />
-        </motion.figure>
+        </figure>
       ))}
     </motion.div>
   );
 }
 
+function ParallaxStage({ rows }: { rows: [Photo[], Photo[], Photo[]] }) {
+  const outerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    // Outer wrapper provides the scroll runway. Its height controls how
+    // much scrolling distance the parallax has to play out over.
+    <div ref={outerRef} className="relative" style={{ height: "200vh" }}>
+      {/* Sticky stage — pinned at top of viewport while user scrolls past.
+          justify-between + py spreads the 3 rows across the viewport with
+          enough breathing room that the alternating parallax doesn't
+          collide. */}
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-between py-10 lg:py-14">
+        <ParallaxRow photos={rows[0]} yRange={ROW_RANGES[0]} containerRef={outerRef} />
+        <ParallaxRow photos={rows[1]} yRange={ROW_RANGES[1]} containerRef={outerRef} />
+        <ParallaxRow photos={rows[2]} yRange={ROW_RANGES[2]} containerRef={outerRef} />
+      </div>
+    </div>
+  );
+}
+
+function MobileCarousel({ photos }: { photos: ReadonlyArray<Photo> }) {
+  return (
+    <div>
+      <div
+        className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          scrollPaddingLeft: "var(--pad)",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        {photos.map((p) => (
+          <figure
+            key={p.src}
+            className="shrink-0 snap-center bg-beige-dark"
+            style={{ width: "min(72vw, 320px)" }}
+          >
+            <Image
+              src={p.thumb}
+              alt=""
+              width={800}
+              height={1200}
+              sizes="72vw"
+              className="block w-full h-auto"
+            />
+          </figure>
+        ))}
+      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.7 }}
+        transition={{ delay: 0.4, duration: 1 }}
+        className="mt-5 text-center text-[10px] tracking-[3px] uppercase text-text-light"
+        aria-hidden
+      >
+        ← Faites glisser →
+      </motion.div>
+    </div>
+  );
+}
+
 export function PortraitGallery() {
-  const [row1, row2, row3] = splitRows(media.gallery);
+  const rows = splitRows(media.gallery);
   const allPhotos = media.gallery;
 
   return (
     <section
-      className="bg-beige overflow-hidden"
+      className="bg-beige relative"
       style={{
         paddingTop: "var(--gap)",
-        paddingBottom: "calc(var(--gap) * 1.5)",
+        paddingBottom: "var(--gap)",
       }}
+      aria-label="Portfolio"
     >
       <div style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}>
         <Reveal>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-14">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-12 lg:mb-16">
             <div>
               <Label>Portfolio</Label>
               <h2
@@ -111,41 +205,14 @@ export function PortraitGallery() {
         </Reveal>
       </div>
 
-      {/* DESKTOP / TABLET-WIDE: 3 parallax rows */}
-      <div
-        className="hidden md:flex flex-col gap-3 lg:gap-4"
-        style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
-      >
-        <ParallaxRow photos={row1} yRange={[40, -90]} />
-        <ParallaxRow photos={row2} yRange={[-60, 120]} />
-        <ParallaxRow photos={row3} yRange={[60, -130]} delay={0.05} />
+      {/* DESKTOP / TABLET-WIDE: pinned 3-row parallax */}
+      <div className="hidden md:block">
+        <ParallaxStage rows={rows} />
       </div>
 
       {/* MOBILE: horizontal swipe carousel */}
       <div className="md:hidden">
-        <div
-          className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
-        >
-          {allPhotos.map((p) => (
-            <figure
-              key={p.src}
-              className="relative shrink-0 w-[72vw] max-w-[320px] snap-center overflow-hidden bg-beige-dark"
-            >
-              <Image
-                src={p.thumb}
-                alt=""
-                width={800}
-                height={1200}
-                sizes="72vw"
-                className="block w-full h-auto"
-              />
-            </figure>
-          ))}
-        </div>
-        <div className="mt-4 text-center text-[10px] tracking-[2px] uppercase text-text-light">
-          ← Faites glisser →
-        </div>
+        <MobileCarousel photos={allPhotos} />
       </div>
     </section>
   );
