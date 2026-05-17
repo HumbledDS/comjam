@@ -122,43 +122,43 @@ function VerticalColumn({
 }
 
 function MobileCarousel({ photos }: { photos: ReadonlyArray<Photo> }) {
+  // Duplicate so the auto-scroll marquee wraps seamlessly.
+  const looped = [...photos, ...photos];
+
   return (
-    <div>
+    <div className="overflow-hidden" aria-label="Portfolio (carrousel)">
       <div
-        className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        data-marquee
+        className="flex gap-3"
         style={{
-          paddingLeft: "var(--pad)",
-          paddingRight: "var(--pad)",
-          scrollPaddingLeft: "var(--pad)",
-          WebkitOverflowScrolling: "touch",
+          width: "max-content",
+          willChange: "transform",
+          animationName: "scroll-left",
+          animationDuration: "70s",
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
         }}
       >
-        {photos.map((p) => (
+        {looped.map((p, i) => (
           <figure
-            key={p.src}
-            className="shrink-0 snap-center bg-beige-dark"
-            style={{ width: "min(72vw, 320px)" }}
+            key={p.src + i}
+            className="shrink-0 bg-beige-dark overflow-hidden gallery-photo"
+            style={{
+              width: "min(64vw, 280px)",
+              height: "min(80vw, 350px)",
+            }}
           >
             <Image
               src={p.thumb}
               alt=""
               width={800}
               height={1200}
-              sizes="72vw"
-              className="block w-full h-auto"
+              sizes="64vw"
+              className="block w-full h-full object-cover object-center"
             />
           </figure>
         ))}
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        transition={{ delay: 0.4, duration: 1 }}
-        className="mt-5 text-center text-[10px] tracking-[3px] uppercase text-text-light"
-        aria-hidden
-      >
-        ← Faites glisser →
-      </motion.div>
     </div>
   );
 }
