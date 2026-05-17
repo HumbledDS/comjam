@@ -53,7 +53,7 @@ export const media = {
   },
 
   // Bootcamp / formation visual
-  bootcamp: photo(10), // Leather jacket Paris café — creator at work
+  bootcamp: photo(25), // Jamila laughing in armchair — warm, approachable teacher
 
   // Gallery (curated 12 photos showing breadth of clients & moods)
   gallery: [
