@@ -27,7 +27,7 @@ export function BootcampPanel() {
     >
       <div className="grid lg:grid-cols-2 items-stretch border border-beige-mid">
         {/* Portrait */}
-        <Reveal className="relative aspect-[5/6] lg:aspect-auto lg:min-h-[560px] overflow-hidden">
+        <Reveal className="relative aspect-[5/6] lg:aspect-auto lg:min-h-[720px] overflow-hidden">
           <motion.div
             className="absolute inset-0"
             whileHover={reduce ? undefined : { scale: 1.04 }}
