@@ -38,7 +38,7 @@ export function BootcampPanel() {
               alt="Bootcamp by Com'Jam, Jamila"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-top"
+              className="object-cover object-center"
             />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-blue/40 via-transparent to-transparent" />

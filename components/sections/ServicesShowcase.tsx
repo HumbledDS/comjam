@@ -1,18 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { services, type Service } from "@/lib/copy";
-import { media } from "@/lib/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
+import { Pattern } from "@/components/brand/Pattern";
+import { Ornament } from "@/components/brand/Ornament";
 import { ServiceModal } from "@/components/sections/ServiceModal";
 
 /**
- * Services as image-paired panels. Clicking a tile opens ServiceModal
- * with the full detail + a primary CTA that routes to /reservation or
- * /contact per the service's ctaHref.
+ * Services as Com'Jam-coloured cards on a blue section. Alternates dark cards
+ * (blue/blue-deep with cream text) and light cards (beige with blue text) and
+ * sprinkles brand patterns + flourishes for warmth. Clicking opens
+ * ServiceModal for the full detail.
  */
 export function ServicesShowcase() {
   const reduce = useReducedMotion();
@@ -21,7 +22,7 @@ export function ServicesShowcase() {
   return (
     <>
       <section
-        className="bg-blue text-beige"
+        className="bg-blue text-beige relative overflow-hidden"
         style={{
           paddingLeft: "var(--pad)",
           paddingRight: "var(--pad)",
@@ -29,78 +30,178 @@ export function ServicesShowcase() {
           paddingBottom: "var(--gap)",
         }}
       >
+        <Pattern variant="cream" opacity={0.04} />
+
+        <Ornament
+          kind="flourish"
+          variant="cream"
+          width={60}
+          opacity={0.4}
+          drift
+          className="absolute top-[120px] right-[8%] hidden md:block"
+        />
+        <Ornament
+          kind="swoosh"
+          variant="cream"
+          width={140}
+          opacity={0.25}
+          drift
+          className="absolute bottom-[80px] left-[6%] hidden lg:block"
+        />
+
         <Reveal>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-14">
+          <div className="relative flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-14">
             <div>
-              <Label light>Services</Label>
+              <Label light>Nos services</Label>
               <h2
                 className="display display-light mt-5"
-                style={{ fontSize: "clamp(36px, 4vw, 56px)" }}
+                style={{ fontSize: "clamp(40px, 5vw, 72px)" }}
               >
-                Quatre <em>piliers.</em>
+                Quatre <em>piliers,</em>
+                <br />
+                une vision <em>360°</em>
               </h2>
             </div>
-            <p className="max-w-[280px] text-[13px] font-light leading-[1.7] text-blue-pale md:text-right">
-              Photo, stratégie, production, consulting. Cliquez sur un pilier
-              pour en savoir plus.
+            <p className="max-w-sm text-[13.5px] font-light leading-[1.75] text-blue-pale md:text-right">
+              De la production de contenu au consulting. Des solutions
+              créatives, accessibles et adaptées à vos enjeux.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[rgba(200,220,234,0.12)]">
           {services.map((s, i) => {
-            const img = media.services[s.slug as keyof typeof media.services];
+            const light = i % 2 === 1; // alternate beige cards on indices 1, 3
             return (
-              <motion.div
+              <motion.button
                 key={s.slug}
+                type="button"
+                onClick={() => setSelected(s)}
                 initial={reduce ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                aria-label={`Voir le détail du service ${s.name}`}
+                className={`relative overflow-hidden text-left p-9 lg:p-10 min-h-[420px] flex flex-col group cursor-pointer transition-colors ${
+                  light
+                    ? "bg-beige text-blue hover:bg-beige-dark"
+                    : "bg-blue-deep text-beige hover:bg-[rgba(13,32,53,0.85)]"
+                }`}
               >
-                <button
-                  type="button"
-                  onClick={() => setSelected(s)}
-                  className="block relative w-full aspect-[4/5] overflow-hidden group text-left cursor-pointer"
-                  aria-label={`Voir le détail du service ${s.name}`}
+                {/* Decorative background pattern */}
+                <Pattern
+                  variant={light ? "blue" : "cream"}
+                  opacity={light ? 0.05 : 0.05}
+                />
+
+                {/* Big watermark number */}
+                <div
+                  aria-hidden
+                  className={`absolute top-4 right-6 font-display font-light text-[96px] leading-none pointer-events-none select-none ${
+                    light ? "text-[rgba(27,58,92,0.08)]" : "text-[rgba(200,220,234,0.08)]"
+                  }`}
                 >
-                  <motion.div
-                    className="absolute inset-0"
-                    whileHover={reduce ? undefined : { scale: 1.06 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  {s.num}
+                </div>
+
+                {/* Small ornament tucked in corner */}
+                <Ornament
+                  kind="flourish"
+                  variant={light ? "blue" : "cream"}
+                  width={32}
+                  opacity={light ? 0.35 : 0.45}
+                  className="absolute bottom-6 right-6"
+                />
+
+                <div className="relative z-10 flex flex-col h-full">
+                  <div
+                    className={`text-[10px] font-medium tracking-[2.5px] uppercase mb-7 ${
+                      light ? "text-blue-light" : "text-blue-light"
+                    }`}
                   >
-                    <Image
-                      src={img.src}
-                      alt={s.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover"
-                    />
-                  </motion.div>
-                  {/* Dark gradient anchor */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue via-blue/30 to-transparent" />
-                  {/* Number top-left */}
-                  <div className="absolute top-5 left-5 font-display text-[20px] font-light text-beige/80">
                     {s.num}
                   </div>
-                  {/* Pricing top-right */}
-                  <div className="absolute top-5 right-5 text-[10px] font-medium tracking-[2px] uppercase text-beige/70">
-                    {s.pricing}
+
+                  <h3
+                    className={`font-display text-[26px] lg:text-[28px] font-normal leading-tight mb-3 ${
+                      light ? "text-blue" : "text-beige"
+                    }`}
+                  >
+                    {s.num === "04" ? (
+                      <>
+                        Consulting{" "}
+                        <span className="inline-flex items-baseline gap-1 align-middle">
+                          <span
+                            className={`text-[11px] font-sans font-medium tracking-[2px] uppercase px-2 py-[3px] -translate-y-[3px] ${
+                              light
+                                ? "bg-blue text-beige"
+                                : "bg-beige text-blue"
+                            }`}
+                          >
+                            1 to 1
+                          </span>
+                        </span>
+                      </>
+                    ) : (
+                      s.name
+                    )}
+                  </h3>
+
+                  <p
+                    className={`font-display italic text-[15px] leading-snug mb-5 ${
+                      light ? "text-blue-mid" : "text-blue-pale"
+                    }`}
+                  >
+                    {s.short}
+                  </p>
+
+                  <ul className="flex flex-col gap-[7px] mb-7">
+                    {s.bullets.slice(0, 4).map((b) => (
+                      <li
+                        key={b}
+                        className={`text-[12.5px] font-light flex gap-2.5 leading-[1.55] ${
+                          light ? "text-blue-mid" : "text-blue-pale/85"
+                        }`}
+                      >
+                        <span className={`shrink-0 mt-px ${light ? "text-blue-light" : "text-blue-light"}`}>
+                          -
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div
+                    className={`mt-auto pt-5 border-t flex items-end justify-between ${
+                      light
+                        ? "border-beige-mid"
+                        : "border-[rgba(200,220,234,0.18)]"
+                    }`}
+                  >
+                    <div
+                      className={`font-display text-[20px] font-light ${
+                        light ? "text-blue" : "text-beige"
+                      }`}
+                    >
+                      {s.pricing}
+                    </div>
+                    <div
+                      className={`text-[10px] font-medium tracking-[2.5px] uppercase opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all ${
+                        light ? "text-blue" : "text-beige"
+                      }`}
+                    >
+                      Voir →
+                    </div>
                   </div>
-                  {/* Title + short bottom */}
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <div className="font-display text-[26px] lg:text-[30px] font-normal text-beige leading-tight">
-                      {s.name}
-                    </div>
-                    <div className="text-[12px] font-light text-blue-pale mt-2 leading-[1.5] max-w-[240px]">
-                      {s.short}
-                    </div>
-                    <div className="mt-4 inline-flex items-center gap-2 text-[10px] font-medium tracking-[2.5px] uppercase text-beige opacity-70 group-hover:opacity-100 group-hover:gap-4 transition-all">
-                      Voir <span>→</span>
-                    </div>
-                  </div>
-                </button>
-              </motion.div>
+                </div>
+
+                {/* Hover underline */}
+                <div
+                  className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-500 group-hover:w-full pointer-events-none ${
+                    light ? "bg-blue" : "bg-blue-light"
+                  }`}
+                />
+              </motion.button>
             );
           })}
         </div>

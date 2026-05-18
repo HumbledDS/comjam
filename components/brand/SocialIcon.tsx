@@ -36,21 +36,6 @@ export function TikTokIcon({ size = 18, className }: Props) {
   );
 }
 
-export function LinktreeIcon({ size = 18, className }: Props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="currentColor"
-      aria-hidden
-      className={className}
-    >
-      <path d="M13.736 5.853l4.005-4.117 2.325 2.381-4.2 4.005h5.908v3.305h-5.937l4.229 4.108-2.325 2.334-5.74-5.769-5.741 5.769-2.325-2.325 4.229-4.108H2.226V8.122h5.909l-4.2-4.005 2.324-2.381 4.005 4.117V0h3.472zm-3.472 10.306h3.472V24h-3.472z" />
-    </svg>
-  );
-}
-
 export function MailIcon({ size = 18, className }: Props) {
   return (
     <svg

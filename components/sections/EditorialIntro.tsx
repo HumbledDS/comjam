@@ -199,19 +199,22 @@ export function EditorialIntro() {
               className="display mt-6 mb-8"
               style={{ fontSize: "clamp(36px, 4.5vw, 64px)" }}
             >
-              Photo, vidéo,<br />
-              <em>stratégie.</em>
+              Simple, humaine,<br />
+              <em>efficace.</em>
             </h2>,
             <p
               key="body"
               className="text-[16px] lg:text-[17px] font-light leading-[1.75] text-blue-mid max-w-md"
             >
-              Une approche{" "}
+              Une agence qui transforme{" "}
               <strong className="text-blue font-medium">
-                simple, humaine et efficace
+                l&apos;invisibilité en identité
               </strong>
-              , privilégiant des contenus naturels mais esthétiques, à l&apos;image
-              de votre univers.
+              , et{" "}
+              <strong className="text-blue font-medium">
+                l&apos;identité en impact
+              </strong>
+              .
             </p>,
             <div key="cta" className="mt-10">
               <Link

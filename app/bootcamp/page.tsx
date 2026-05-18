@@ -138,7 +138,7 @@ export default function BootcampPage() {
               </div>
               <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
               <a
-                href={bootcamp.stripeUrl}
+                href={bootcamp.calendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-light w-full text-center block"

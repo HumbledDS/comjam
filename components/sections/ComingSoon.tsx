@@ -9,7 +9,6 @@ import { Ornament } from "@/components/brand/Ornament";
 import {
   InstagramIcon,
   TikTokIcon,
-  LinktreeIcon,
   MailIcon,
 } from "@/components/brand/SocialIcon";
 
@@ -27,7 +26,6 @@ export function ComingSoon() {
   const socials = [
     { label: "Instagram", Icon: InstagramIcon, href: brand.instagram.url },
     { label: "TikTok", Icon: TikTokIcon, href: brand.tiktok.url },
-    { label: "Linktree", Icon: LinktreeIcon, href: brand.linktree.url },
     { label: "Email", Icon: MailIcon, href: `mailto:${brand.email}` },
   ];
 

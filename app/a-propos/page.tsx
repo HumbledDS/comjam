@@ -13,7 +13,6 @@ import { media } from "@/lib/media";
 import {
   InstagramIcon,
   TikTokIcon,
-  LinktreeIcon,
   MailIcon,
 } from "@/components/brand/SocialIcon";
 
@@ -116,7 +115,6 @@ export default function AboutPage() {
               {[
                 { label: "Instagram", Icon: InstagramIcon, href: brand.instagram.url, external: true },
                 { label: "TikTok", Icon: TikTokIcon, href: brand.tiktok.url, external: true },
-                { label: "Linktree", Icon: LinktreeIcon, href: brand.linktree.url, external: true },
                 { label: "Email", Icon: MailIcon, href: `mailto:${brand.email}`, external: false },
               ].map(({ label, Icon, href, external }) => (
                 <a
@@ -204,10 +202,9 @@ export default function AboutPage() {
       <Testimonials />
 
       <CTA
-        title="Envie d'écrire la suite ensemble ?"
-        desc="Que ce soit pour un shooting, une stratégie complète ou un coaching personnel, je serai ravie de vous accompagner."
+        title="Envie d'écrire la suite avec nous ?"
+        desc="Que ce soit pour un shooting, une stratégie ou un coaching, nous sommes là pour vous accompagner."
         primary={{ href: "/contact", label: "Prendre contact" }}
-        secondary={{ href: "/services", label: "Voir nos services" }}
       />
     </>
   );

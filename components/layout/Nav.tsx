@@ -4,18 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/copy";
-import { Logo } from "@/components/brand/Logo";
+import { Monogram } from "@/components/brand/Monogram";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // Pages whose hero is dark / image / video need the frosted nav backdrop
-  // immediately, otherwise blue-on-bright text becomes invisible.
+  // Pages whose hero is dark / image / video need a transparent nav at the
+  // top of the page — links/logo flip to cream until the user scrolls past
+  // the hero, after which the frosted beige backdrop takes over.
   const darkHeroRoutes = ["/", "/services"];
-  const needsBackdrop = darkHeroRoutes.includes(pathname);
-  const showBackdrop = scrolled || needsBackdrop;
+  const overDarkHero = darkHeroRoutes.includes(pathname);
+  const showBackdrop = scrolled || !overDarkHero;
+  const onDark = overDarkHero && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -45,7 +47,9 @@ export function Nav() {
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        <Logo variant="blue" width={108} priority />
+        <Link href="/" aria-label="Com'Jam, accueil" className="inline-flex items-center leading-none">
+          <Monogram variant={onDark ? "cream" : "blue"} size={44} />
+        </Link>
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (
@@ -53,16 +57,20 @@ export function Nav() {
               {item.primary ? (
                 <Link
                   href={item.href}
-                  className="btn btn-primary !py-[10px] !px-6"
+                  className={`btn !py-[10px] !px-6 ${onDark ? "btn-light" : "btn-primary"}`}
                 >
                   Nous contacter
                 </Link>
               ) : (
                 <Link
                   href={item.href}
-                  className={`relative text-[11px] font-semibold tracking-[2.5px] uppercase text-blue transition-colors hover:text-blue-mid ${
-                    pathname === item.href ? "opacity-100" : "opacity-90"
-                  } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:bg-blue after:transition-all after:duration-300 ${
+                  className={`relative text-[11px] font-semibold tracking-[2.5px] uppercase transition-colors ${
+                    onDark
+                      ? "text-beige hover:text-blue-pale"
+                      : "text-blue hover:text-blue-mid"
+                  } ${pathname === item.href ? "opacity-100" : "opacity-90"} after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:transition-all after:duration-300 ${
+                    onDark ? "after:bg-beige" : "after:bg-blue"
+                  } ${
                     pathname === item.href ? "after:w-full" : "after:w-0 hover:after:w-full"
                   }`}
                 >
@@ -80,19 +88,19 @@ export function Nav() {
           className="md:hidden flex flex-col gap-[5px] p-1 bg-transparent border-0 cursor-pointer"
         >
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-transform duration-300 ${
-              open ? "translate-y-[6.5px] rotate-45" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-transform duration-300 ${
+              onDark ? "bg-beige" : "bg-blue"
+            } ${open ? "translate-y-[6.5px] rotate-45" : ""}`}
           />
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-opacity duration-300 ${
-              open ? "opacity-0" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-opacity duration-300 ${
+              onDark ? "bg-beige" : "bg-blue"
+            } ${open ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-transform duration-300 ${
-              open ? "-translate-y-[6.5px] -rotate-45" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-transform duration-300 ${
+              onDark ? "bg-beige" : "bg-blue"
+            } ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`}
           />
         </button>
       </nav>

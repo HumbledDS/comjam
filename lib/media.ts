@@ -31,14 +31,19 @@ export const photo = (n: number) => ({
 
 export const media = {
   video: {
-    mp4: "/media/video/reel.mp4",
+    // Horizontal cut for desktop / landscape screens.
+    desktop: "/media/video/videoHero.mp4",
+    // Vertical cut for mobile / portrait screens.
+    mobile: "/media/video/videoHero2.mp4",
+    // Legacy webm fallback (kept for the still poster + any non-Hero use).
     webm: "/media/video/reel.webm",
+    mp4: "/media/video/reel.mp4",
     poster: "/media/video/reel-poster.jpg",
   },
 
   // Anchor images per section
   intro: {
-    big: photo(11),    // Eiffel Tower at night — iconic
+    big: photo(5),     // Approche hero — per Jamila's PDF feedback
     small: photo(12),  // Navy sweater + plants — matches brand palette
   },
 

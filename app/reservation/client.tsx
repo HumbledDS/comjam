@@ -6,13 +6,9 @@ import { Pack } from "@/lib/copy";
 import { PackSelector } from "@/components/booking/PackSelector";
 
 /**
- * Reservation flow:
+ * Reservation flow (two steps — Calendar bundles the deposit payment):
  *   1. Pick a pack
- *   2. Pick a time slot via the pack's Google Calendar booking link (opens in a new tab)
- *   3. Pay the deposit via the pack's Stripe checkout link (also new tab)
- *
- * No embed — Jamila provided direct external links per pack so the experience is
- * fast and reliable. The page itself drives the choice + shows the summary.
+ *   2. Open the pack's Google Calendar booking link to pick a slot + pay deposit
  */
 export function ReservationClient({ packs }: { packs: readonly Pack[] }) {
   const params = useSearchParams();
@@ -86,16 +82,16 @@ export function ReservationClient({ packs }: { packs: readonly Pack[] }) {
           )}
         </div>
 
-        {/* Booking + payment column */}
+        {/* Booking column — Calendar bundles deposit payment */}
         <div className="flex flex-col gap-4">
-          {/* Step 2 — Booking */}
           <div className="bg-blue text-beige p-6">
             <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-pale mb-3">
               2. Sélectionnez votre créneau
             </div>
             <p className="text-[13px] font-light text-blue-pale leading-[1.65] mb-5">
-              Choisissez un créneau qui vous convient dans le calendrier de
-              réservation.
+              Réservation et acompte gérés dans le même calendrier. Une fois
+              le créneau choisi et l&apos;acompte réglé, vous recevez une
+              confirmation par email.
             </p>
             {pack.calendarUrl ? (
               <a
@@ -104,36 +100,16 @@ export function ReservationClient({ packs }: { packs: readonly Pack[] }) {
                 rel="noopener noreferrer"
                 className="btn btn-light w-full text-center block"
               >
-                Ouvrir le calendrier →
+                Réserver et régler l&apos;acompte →
               </a>
             ) : (
               <p className="text-[12px] text-blue-pale italic">
                 Calendrier bientôt disponible pour ce pack. Pour réserver,
-                contactez-nous à hello@comjam.fr.
+                écrivez-nous à hello@comjam.fr.
               </p>
             )}
-          </div>
-
-          {/* Step 3 — Payment */}
-          <div className="bg-paper border border-beige-mid p-6">
-            <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-light mb-3">
-              3. Réglez votre acompte
-            </div>
-            <p className="text-[13px] font-light text-text-light leading-[1.65] mb-5">
-              Confirmez votre réservation en réglant l&apos;acompte via
-              paiement sécurisé.
-            </p>
-            <a
-              href={pack.stripeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary w-full text-center block"
-            >
-              Régler l&apos;acompte →
-            </a>
-            <p className="text-[11px] font-light text-text-light italic mt-4 leading-[1.6]">
-              Paiement sécurisé Stripe. Vous recevez une confirmation par
-              email avec toutes les informations pratiques.
+            <p className="text-[11px] font-light text-blue-pale italic mt-4 leading-[1.6]">
+              Acompte de 50% à la réservation, solde le jour du shooting.
             </p>
           </div>
         </div>

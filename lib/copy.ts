@@ -13,7 +13,6 @@ export const brand = {
   email: "hello@comjam.fr",
   instagram: { handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", followers: "9 700" },
   tiktok: { handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", followers: "38 000" },
-  linktree: { handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam" },
 };
 
 export type NavItem = { label: string; href: string; primary?: boolean };
@@ -180,8 +179,8 @@ export const services: Service[] = [
 
 /* ============================================================
    SHOOTING PACKS — drive PackSelector on /reservation
-   Each pack carries its Stripe checkout link + Google Calendar
-   booking link (provided by Jamila).
+   Google Calendar slot picker bundles the deposit payment, so
+   no separate Stripe step.
 ============================================================ */
 export type Pack = {
   id: "flash" | "signature" | "duo" | "reel-video";
@@ -195,9 +194,7 @@ export type Pack = {
   features: string[];
   options?: string[];
   calEvent: string;
-  /** Direct Stripe payment link — opens the hosted checkout page. */
-  stripeUrl: string;
-  /** Google Calendar appointment slot picker. */
+  /** Google Calendar appointment slot picker (handles payment too). */
   calendarUrl: string;
 };
 
@@ -216,7 +213,6 @@ export const packs: Pack[] = [
       "Matériel professionnel inclus",
     ],
     calEvent: "flash-1h",
-    stripeUrl: "https://book.stripe.com/aFafZg7jS3EGeIR1gX6Ri00",
     calendarUrl: "https://calendar.app.google/mvVdfZLZNzkYFiA46",
   },
   {
@@ -241,7 +237,6 @@ export const packs: Pack[] = [
       "1 vidéo format reel par tenue : +50€ / tenue",
     ],
     calEvent: "signature",
-    stripeUrl: "https://book.stripe.com/8x29ASgUs6QSeIR4t96Ri03",
     calendarUrl:
       "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ02dbatRQkr59ysvmzjsS-V9n60_Lbue5C8FQUlJCImWjj67uW9WuuTuqgoiSMgZoSK3DGo_vH8",
   },
@@ -265,7 +260,6 @@ export const packs: Pack[] = [
       "1 vidéo format reel par tenue : +50€ / tenue",
     ],
     calEvent: "duo",
-    stripeUrl: "https://book.stripe.com/14AfZg9s07UW6cl5xd6Ri04",
     calendarUrl: "", // not provided yet
   },
   {
@@ -284,7 +278,6 @@ export const packs: Pack[] = [
       "3 reels trends / transitions",
     ],
     calEvent: "reel-video",
-    stripeUrl: "https://book.stripe.com/8x24gy9s0cbc9ox1gX6Ri02",
     calendarUrl:
       "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3FP33OMVDYNWYTy4GzH-OvF_QqvL13lV927HONAgYgrfbp9kDfmDO6R0gPHoWI8AhPFGYCIYaF",
   },
@@ -300,8 +293,8 @@ export const bootcamp = {
   eyebrow: "Évènement",
   desc:
     "Deux jours pour apprendre les bonnes pratiques, les mettre en application et prendre du plaisir à créer. Un bootcamp complet sur la création de contenu, les réseaux sociaux, la photo et la vidéo.",
-  /** Stripe checkout link for bootcamp registration. */
-  stripeUrl: "https://book.stripe.com/eVqfZg8nW8Z01W5aRx6Ri01",
+  /** Google Calendar slot for bootcamp registration — bundles deposit payment. */
+  calendarUrl: "https://calendar.app.google/mvVdfZLZNzkYFiA46",
   days: [
     {
       num: "01",
@@ -397,7 +390,6 @@ export const contact = {
   channels: [
     { kind: "ig" as const, name: "Instagram", handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", icon: "IG" },
     { kind: "tt" as const, name: "TikTok", handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", icon: "TK" },
-    { kind: "lt" as const, name: "Linktree", handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam", icon: "LT" },
     { kind: "em" as const, name: "Email", handle: "hello@comjam.fr", url: "mailto:hello@comjam.fr", icon: "@" },
   ],
   formSubjects: [
@@ -448,6 +440,5 @@ export const footer = {
   socials: [
     { label: "Instagram", url: "https://www.instagram.com/comjamagency" },
     { label: "TikTok", url: "https://www.tiktok.com/@comjamagency" },
-    { label: "Linktree", url: "https://linktr.ee/comjam" },
   ],
 };

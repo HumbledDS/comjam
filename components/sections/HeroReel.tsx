@@ -14,9 +14,9 @@ export function HeroReel() {
 
   return (
     <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-blue">
-      {/* The reel */}
+      {/* Vertical cut — mobile portrait */}
       <video
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover md:hidden"
         autoPlay
         muted
         loop
@@ -25,8 +25,20 @@ export function HeroReel() {
         preload="metadata"
         aria-hidden
       >
-        <source src={media.video.webm} type="video/webm" />
-        <source src={media.video.mp4} type="video/mp4" />
+        <source src={media.video.mobile} type="video/mp4" />
+      </video>
+      {/* Horizontal cut — tablet/desktop landscape */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover hidden md:block"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={media.video.poster}
+        preload="metadata"
+        aria-hidden
+      >
+        <source src={media.video.desktop} type="video/mp4" />
       </video>
 
       {/* Blue tint + bottom gradient for text contrast */}
@@ -59,16 +71,16 @@ export function HeroReel() {
 
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <Link
-              href="/reservation"
+              href="/services"
               className="inline-block px-8 py-4 bg-beige text-blue text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-paper hover:tracking-[3px]"
             >
-              Réserver un shooting
+              En savoir plus
             </Link>
             <Link
-              href="/services"
+              href="/reservation"
               className="inline-flex items-center gap-3 text-[11px] font-normal tracking-[2px] uppercase text-beige/85 hover:text-beige hover:gap-5 transition-all"
             >
-              Voir le travail <span>→</span>
+              Réserver un shooting <span>→</span>
             </Link>
           </div>
         </motion.div>
