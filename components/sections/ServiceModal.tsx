@@ -142,7 +142,7 @@ export function ServiceModal({
                       key={b}
                       className="flex gap-3 text-[13.5px] text-blue-mid leading-snug"
                     >
-                      <span className="text-blue-light shrink-0">—</span>
+                      <span className="text-blue-light shrink-0">-</span>
                       <span>{b}</span>
                     </li>
                   ))}

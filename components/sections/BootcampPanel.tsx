@@ -35,7 +35,7 @@ export function BootcampPanel() {
           >
             <Image
               src={media.bootcamp.src}
-              alt="Formation Content Shift — Jamila"
+              alt="Bootcamp by Com'Jam, Jamila"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover object-top"

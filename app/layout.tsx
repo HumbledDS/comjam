@@ -8,12 +8,12 @@ import { isLaunched } from "@/lib/launch";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Com'Jam Agency — Création de Contenu & Stratégie Digitale",
+  title: "Com'Jam · Création de contenu et stratégie digitale",
   description:
     "Agence de communication spécialisée en création de contenu, stratégie digitale et marketing d'influence. Photos, vidéos, accompagnement et formation. Paris.",
   metadataBase: new URL("https://comjam.fr"),
   openGraph: {
-    title: "Com'Jam Agency",
+    title: "Com'Jam",
     description:
       "Création de contenu, stratégie digitale et marketing d'influence. Une approche humaine, créative et 360°.",
     locale: "fr_FR",

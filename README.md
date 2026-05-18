@@ -1,6 +1,6 @@
 # comjam
 
-Site web Com'Jam Agency — agence de communication spécialisée en création de contenu, stratégie digitale et marketing d'influence (Paris).
+Site web Com'Jam, agence de communication spécialisée en création de contenu, stratégie digitale et marketing d'influence (Paris).
 
 ## Stack
 

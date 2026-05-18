@@ -43,7 +43,7 @@ export function Logo({
   return (
     <Link
       href={href}
-      aria-label="Com'Jam — accueil"
+      aria-label="Com'Jam, accueil"
       className="inline-block leading-none"
     >
       {img}

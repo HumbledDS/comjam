@@ -49,7 +49,7 @@ export function PackSelector({
                   key={f}
                   className={`text-[11px] font-light leading-[1.5] flex gap-2 ${active ? "text-blue-pale" : "text-text-light"}`}
                 >
-                  <span className={active ? "text-blue-pale" : "text-blue-light"}>—</span>
+                  <span className={active ? "text-blue-pale" : "text-blue-light"}>-</span>
                   <span>{f}</span>
                 </li>
               ))}

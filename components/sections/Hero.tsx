@@ -141,7 +141,7 @@ export function Hero() {
                 key={item.name}
                 className="flex items-start gap-0 px-4 py-[14px] bg-beige border-l-2 border-transparent hover:border-blue-light hover:bg-beige-dark transition-colors"
               >
-                <div className="w-[18px] text-[11px] text-blue-light shrink-0 mt-px">—</div>
+                <div className="w-[18px] text-[11px] text-blue-light shrink-0 mt-px">-</div>
                 <div>
                   <div className="text-[13px] font-medium text-blue mb-[2px]">{item.name}</div>
                   <div className="text-[11px] font-light text-text-light">{item.sub}</div>

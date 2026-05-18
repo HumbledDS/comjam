@@ -6,9 +6,9 @@ import { Label } from "@/components/ui/Label";
 import { ReservationClient } from "./client";
 
 export const metadata: Metadata = {
-  title: "Réserver un shooting — Com'Jam Agency",
+  title: "Réserver un shooting · Com'Jam",
   description:
-    "Réservez votre shooting photo Com'Jam en ligne — Pack Flash, Signature, Duo ou Réel+ Vidéo. Calendrier en direct, paiement sécurisé.",
+    "Réservez votre shooting photo Com'Jam en ligne. Pack Flash, Signature, Duo ou Réel+ Vidéo. Calendrier en direct, paiement sécurisé.",
 };
 
 export default function ReservationPage() {
@@ -32,8 +32,9 @@ export default function ReservationPage() {
               Réservez votre<br /><em>shooting</em>
             </h1>
             <p className="text-[15px] font-light leading-[1.85] text-blue-mid max-w-2xl">
-              Choisissez votre pack, sélectionnez un créneau, réglez votre acompte — et nous nous occupons du reste.
-              Vous recevez une confirmation immédiate avec toutes les infos pratiques.
+              Choisissez votre pack, sélectionnez un créneau, réglez votre acompte
+              et nous nous occupons du reste. Vous recevez une confirmation avec
+              toutes les informations pratiques et importantes.
             </p>
           </div>
         </Reveal>

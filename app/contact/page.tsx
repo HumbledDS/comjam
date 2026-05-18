@@ -8,9 +8,9 @@ import { Ornament } from "@/components/brand/Ornament";
 import { Pattern } from "@/components/brand/Pattern";
 
 export const metadata: Metadata = {
-  title: "Contact — Com'Jam Agency",
+  title: "Contact · Com'Jam",
   description:
-    "Parlons de votre projet — shooting photo, stratégie réseaux, bootcamp ou consulting. Réponse sous 48h.",
+    "Parlons de votre projet. Shooting photo, stratégie réseaux, bootcamp ou consulting. Réponse sous 48h.",
 };
 
 export default function ContactPage() {

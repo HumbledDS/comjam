@@ -36,11 +36,11 @@ export async function POST(req: Request) {
   try {
     const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
-    const subjectLine = subject ? `Contact Com'Jam — ${subject}` : "Contact Com'Jam";
+    const subjectLine = subject ? `Contact Com'Jam · ${subject}` : "Contact Com'Jam";
     const html = `
       <h2>Nouveau message Com'Jam</h2>
       <p><strong>De :</strong> ${escapeHtml(`${firstName} ${lastName}`)} &lt;${escapeHtml(email)}&gt;</p>
-      <p><strong>Sujet :</strong> ${escapeHtml(String(subject ?? "—"))}</p>
+      <p><strong>Sujet :</strong> ${escapeHtml(String(subject ?? "-"))}</p>
       <p><strong>Message :</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(message)}</p>
     `;

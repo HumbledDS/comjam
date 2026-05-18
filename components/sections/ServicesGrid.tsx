@@ -47,7 +47,7 @@ export function ServicesGrid({ services }: { services: readonly Service[] }) {
                     key={b}
                     className="text-[12px] font-light text-[rgba(200,220,234,0.7)] flex items-start gap-[10px] leading-[1.5]"
                   >
-                    <span className="text-blue-light text-[10px] shrink-0 mt-[2px]">—</span>
+                    <span className="text-blue-light text-[10px] shrink-0 mt-[2px]">-</span>
                     {b}
                   </li>
                 ))}

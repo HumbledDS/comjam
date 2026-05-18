@@ -4,9 +4,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
 export const metadata: Metadata = {
-  title: "Mentions légales — Com'Jam Agency",
+  title: "Mentions légales · Com'Jam",
   description:
-    "Mentions légales du site Com'Jam Agency — éditeur, hébergement, propriété intellectuelle, données personnelles, cookies.",
+    "Mentions légales du site Com'Jam. Éditeur, hébergement, propriété intellectuelle, données personnelles, cookies.",
   robots: { index: false, follow: true },
 };
 
@@ -83,7 +83,7 @@ export default function MentionsLegalesPage() {
               />
               <Pair
                 label="Directrice de la publication"
-                value="Jamila — fondatrice de Com'Jam Agency"
+                value="Jamila, fondatrice de Com'Jam"
               />
             </dl>
             <p className="pt-2 text-[13px] text-text-light italic">

@@ -8,7 +8,7 @@ import { Pattern } from "@/components/brand/Pattern";
 import { Ornament } from "@/components/brand/Ornament";
 
 export const metadata: Metadata = {
-  title: "Content Shift Bootcamp — Com'Jam Agency",
+  title: "Bootcamp by Com'Jam · 4 et 5 Juillet 2026",
   description: `${bootcamp.date} · En ligne. ${bootcamp.desc.slice(0, 140)}`,
 };
 
@@ -110,7 +110,7 @@ export default function BootcampPage() {
                   key={inc.name}
                   className="flex items-start gap-[14px] p-4 bg-beige border-l-2 border-transparent hover:border-blue-light transition-colors"
                 >
-                  <div className="w-[14px] text-blue-light text-[11px] shrink-0 mt-px">—</div>
+                  <div className="w-[14px] text-blue-light text-[11px] shrink-0 mt-px">-</div>
                   <div>
                     <div className="text-[12px] font-medium text-blue mb-px">{inc.name}</div>
                     <div className="text-[11px] font-light text-text-light">{inc.sub}</div>
@@ -137,13 +137,18 @@ export default function BootcampPage() {
                 {bootcamp.date} · {bootcamp.schedule}.
               </div>
               <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
-              <Button href="/contact?subject=bootcamp" variant="light" className="w-full text-center !block">
+              <a
+                href={bootcamp.stripeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-light w-full text-center block"
+              >
                 Réserver ma place
-              </Button>
+              </a>
               <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
               <ul className="text-[11px] font-light text-blue-pale leading-[2]">
                 {bootcamp.reassurance.map((r) => (
-                  <li key={r} className="pl-4 relative before:content-['—'] before:absolute before:left-0 before:text-blue-light">
+                  <li key={r} className="pl-4 relative before:content-['-'] before:absolute before:left-0 before:text-blue-light">
                     {r}
                   </li>
                 ))}

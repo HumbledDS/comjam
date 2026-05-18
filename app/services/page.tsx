@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
-  title: "Services — Com'Jam Agency",
+  title: "Services · Com'Jam",
   description:
     "Création de contenu, stratégie digitale, production et consulting 1-2-1. Quatre services pensés pour faire grandir votre image et votre audience.",
 };
@@ -26,14 +26,14 @@ export default function ServicesPage() {
           eyebrow="Nos services"
           lines={["Quatre piliers,", "une vision 360°"]}
           emphasizedLine={1}
-          aside="De la production de contenu au consulting individuel — des solutions créatives, accessibles et adaptées à vos enjeux."
+          aside="De la production de contenu au consulting individuel. Des solutions créatives, accessibles et adaptées à vos enjeux."
         />
         <ServicesGrid services={services} />
       </section>
 
       <CTA
         title="Pas sûr·e du service qu'il vous faut ?"
-        desc="Réservez un appel gratuit de 20 minutes — on échange sur votre besoin et je vous oriente vers la solution la plus pertinente, même si c'est ailleurs."
+        desc="Réservez un appel gratuit de 15 minutes, on échange sur votre besoin et je vous oriente vers la solution la plus pertinente."
         primary={{ href: "/contact", label: "Réserver un appel" }}
         secondary={{ href: "/reservation", label: "Réserver un shooting" }}
       />

@@ -44,7 +44,7 @@ export function AboutTeaser() {
         >
           <Image
             src={unsplash.jamilaPortrait}
-            alt="Portrait Jamila — fondatrice Com'Jam Agency"
+            alt="Portrait Jamila, fondatrice Com'Jam"
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"

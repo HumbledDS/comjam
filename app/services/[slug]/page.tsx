@@ -20,9 +20,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const s = services.find((x) => x.slug === slug);
-  if (!s) return { title: "Service — Com'Jam Agency" };
+  if (!s) return { title: "Service · Com'Jam" };
   return {
-    title: `${s.name} — Com'Jam Agency`,
+    title: `${s.name} · Com'Jam`,
     description: s.short,
   };
 }
@@ -142,7 +142,7 @@ export default async function ServiceDetailPage({
           {service.bullets.map((b) => (
             <Reveal key={b}>
               <div className="flex gap-4 px-5 py-5 bg-beige border-l-2 border-transparent hover:border-blue-light transition-colors">
-                <div className="w-4 text-blue-light text-[13px] shrink-0 mt-px">—</div>
+                <div className="w-4 text-blue-light text-[13px] shrink-0 mt-px">-</div>
                 <div className="text-[14px] font-normal text-blue leading-relaxed">{b}</div>
               </div>
             </Reveal>

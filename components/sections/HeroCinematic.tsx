@@ -25,7 +25,7 @@ export function HeroCinematic() {
       >
         <Image
           src={unsplash.heroFull}
-          alt="Com'Jam — création de contenu"
+          alt="Com'Jam, création de contenu"
           fill
           priority
           sizes="100vw"

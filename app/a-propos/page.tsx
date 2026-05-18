@@ -18,9 +18,9 @@ import {
 } from "@/components/brand/SocialIcon";
 
 export const metadata: Metadata = {
-  title: "À propos — Com'Jam Agency",
+  title: "À propos · Com'Jam",
   description:
-    "Découvrez Com'Jam : agence de communication spécialisée en création de contenu, stratégie digitale et marketing d'influence. Fondée par Jamila à Paris.",
+    "Découvrez Com'Jam, agence de communication spécialisée en création de contenu, stratégie digitale et marketing d'influence. Fondée par Jamila à Paris.",
 };
 
 // Renders **bold** segments in paragraphs.
@@ -87,7 +87,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_30px_80px_-20px_rgba(13,32,53,0.35)] bg-beige-dark">
               <Image
                 src={media.about.src}
-                alt="Portrait Jamila — fondatrice Com'Jam"
+                alt="Portrait Jamila, fondatrice Com'Jam"
                 fill
                 priority
                 sizes="(max-width: 1024px) 90vw, 540px"

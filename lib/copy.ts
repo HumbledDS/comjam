@@ -6,11 +6,11 @@
 
 export const brand = {
   name: "Com'Jam",
-  suffix: "Agency",
+  suffix: "", // dropped "Agency" per Jamila's feedback
   tagline:
-    "Création de contenu, stratégie réseaux sociaux et formation en ligne. Paris & partout en France.",
+    "Agence de communication spécialisée dans la création de contenu, basée à Paris et opérant à l'international.",
   city: "Paris",
-  email: "contact@comjam.fr",
+  email: "hello@comjam.fr",
   instagram: { handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", followers: "9 700" },
   tiktok: { handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", followers: "38 000" },
   linktree: { handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam" },
@@ -21,7 +21,7 @@ export type NavItem = { label: string; href: string; primary?: boolean };
 export const nav: NavItem[] = [
   { label: "À propos", href: "/a-propos" },
   { label: "Services", href: "/services" },
-  { label: "Bootcamp", href: "/bootcamp" },
+  { label: "Évènements", href: "/bootcamp" },
   { label: "Réservation", href: "/reservation" },
   { label: "Contact", href: "/contact", primary: true },
 ];
@@ -30,35 +30,34 @@ export const nav: NavItem[] = [
    HOME
 ============================================================ */
 export const home = {
-  eyebrow: "Agence de création de contenu · Paris",
-  title: ["Votre contenu,", "votre identité.", "Votre impact."] as const,
-  emphasizedLine: 1, // index of line that uses <em>
+  eyebrow: "Agence de communication",
+  title: ["Une agence qui transforme", "l'invisibilité en identité,", "et l'identité en impact."] as const,
+  emphasizedLine: 1,
   desc:
-    "Chez Com'Jam, nous intégrons pleinement la création de contenu, l'image de marque, les réseaux sociaux et l'influence au sein d'une stratégie globale. Notre approche repose sur une communication simple, humaine et efficace, privilégiant des contenus naturels mais esthétiques.",
+    "Contenu visuel pour créateurs, marques et entrepreneurs. Paris et l'international. Simple, humaine, efficace.",
   stats: [
-    { value: "4 ans", label: "d'expertise" },
-    { value: "48K+", label: "communauté" },
-    { value: "Bac+5", label: "Communication" },
+    { value: "7", label: "années d'expertise" },
+    { value: "50K+", label: "communauté" },
+    { value: "30+", label: "projets" },
   ],
   card: {
     label: "Ce que nous proposons",
-    quote: "Tout ce dont vous avez besoin pour performer sur les réseaux.",
+    quote: "Simple, humaine, efficace.",
     items: [
-      { name: "Création de contenu", sub: "Photos & vidéos lifestyle pour réseaux sociaux — dès 95€" },
-      { name: "Stratégie digitale", sub: "Communication, storytelling, marketing d'influence" },
-      { name: "Production & Consulting", sub: "Contenu social media + accompagnement 1-2-1" },
+      { name: "Création de contenu", sub: "Photo et vidéo, pensées pour vos réseaux." },
+      { name: "Stratégie digitale", sub: "Audit, positionnement, ligne éditoriale." },
+      { name: "Production de contenu", sub: "Du contenu prêt à être publié." },
     ],
   },
   ticker: [
     "Création de contenu",
+    "Communication",
+    "Marketing",
     "Stratégie digitale",
     "Production",
-    "Consulting 1-2-1",
-    "Content Shift Bootcamp",
-    "Marketing d'influence",
-    "Formation en ligne",
-    "Instagram · TikTok · LinkedIn",
-    "Com'Jam Agency · Paris",
+    "Consulting 1-to-1",
+    "Content Trip",
+    "Bootcamp by Com'Jam",
   ],
 };
 
@@ -78,25 +77,25 @@ export const about = {
     "Offrir une expérience personnalisée, en proposant des solutions créatives, accessibles et 360°, capables de valoriser vos projets.",
   values: [
     "Stratégie sur-mesure",
-    "Photo & Vidéo pro",
+    "Photo et vidéo professionnelle",
     "Croissance organique",
-    "Formation & coaching",
+    "Formation et coaching",
     "Accompagnement humain",
-    "Créativité & authenticité",
+    "Créativité et authenticité",
   ],
   quote:
-    "Je veux que chaque client reparte avec du contenu dont il est fier — et une stratégie qu'il comprend et qu'il peut tenir dans le temps.",
-  author: { name: "Jamila", role: "Fondatrice · Com'Jam Agency · Paris" },
+    "Je veux que chaque client reparte avec du contenu dont il est fier et une stratégie qu'il comprend et qu'il peut tenir dans le temps.",
+  author: { name: "Jamila", role: "Fondatrice · Com'Jam · Paris" },
   numbers: [
-    { value: "4 ans", label: "expertise" },
-    { value: "48K+", label: "communauté" },
-    { value: "Bac+5", label: "formation" },
+    { value: "7", label: "années" },
+    { value: "50K+", label: "communauté" },
+    { value: "30+", label: "projets" },
     { value: "100%", label: "terrain" },
   ],
 };
 
 /* ============================================================
-   SERVICES (4 services + bootcamp surfaced separately)
+   SERVICES (4 services)
 ============================================================ */
 export type Service = {
   slug: string;
@@ -116,15 +115,15 @@ export const services: Service[] = [
     slug: "creation-de-contenu",
     num: "01",
     name: "Création de contenu",
-    short: "Photo & vidéo lifestyle, pensées pour vos réseaux.",
+    short: "Photo et vidéo, pensées pour vos réseaux.",
     desc:
       "Direction artistique, poses, rendu esthétique. Pour créateurs, marques et entrepreneurs.",
     bullets: [
       "Direction artistique sur-mesure",
-      "Photo & vidéo combinés possibles",
+      "Photo et vidéo combinées possibles",
       "Retouche et montage inclus",
     ],
-    for: ["Créateurs", "Entrepreneurs", "Marques", "Indépendants"],
+    for: ["Particuliers", "Créateurs", "Entrepreneurs", "Marques", "Indépendants"],
     pricing: "Dès 95€",
     ctaHref: "/reservation",
     ctaLabel: "Réserver une séance",
@@ -135,11 +134,11 @@ export const services: Service[] = [
     name: "Stratégie digitale",
     short: "Une image forte, claire et cohérente.",
     desc:
-      "Audit, positionnement, ligne éditoriale, marketing d'influence — un plan d'action sur mesure.",
+      "Audit, positionnement et ligne éditoriale. Un plan d'action sur mesure pour faire émerger votre marque.",
     bullets: [
-      "Audit + recommandations",
-      "Stratégie éditoriale sur-mesure",
-      "Suivi des collaborations",
+      "Audit",
+      "Positionnement",
+      "Ligne éditoriale",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
@@ -149,13 +148,13 @@ export const services: Service[] = [
     slug: "production-de-contenu",
     num: "03",
     name: "Production de contenu",
-    short: "Du contenu prêt à publier, en continu.",
+    short: "Du contenu prêt à être publié.",
     desc:
-      "Photo et vidéo pour vos réseaux et site web. Cohérence visuelle, rythme régulier.",
+      "Photo et vidéo pour vos plateformes digitales. Cohérence visuelle, rythme régulier, identité de marque alignée.",
     bullets: [
-      "Production récurrente",
+      "Direction créative",
       "Cohérence visuelle",
-      "Contenu prêt à publier",
+      "Identité de marque",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
@@ -164,14 +163,14 @@ export const services: Service[] = [
   {
     slug: "consulting",
     num: "04",
-    name: "Consulting 1-2-1",
-    short: "Une session pour structurer votre stratégie.",
+    name: "Consulting 1-to-1",
+    short: "Des sessions pour structurer votre stratégie.",
     desc:
-      "Positionnement, image, organisation. Adapté à vos objectifs.",
+      "Un positionnement, une image et une organisation alignés à vos objectifs.",
     bullets: [
-      "Positionnement & image",
-      "Organisation & workflow",
-      "Conseils sur-mesure",
+      "Clarification de l'offre",
+      "Organisation des idées",
+      "Stratégie et plan de contenu",
     ],
     pricing: "Sur devis",
     ctaHref: "/contact",
@@ -181,6 +180,8 @@ export const services: Service[] = [
 
 /* ============================================================
    SHOOTING PACKS — drive PackSelector on /reservation
+   Each pack carries its Stripe checkout link + Google Calendar
+   booking link (provided by Jamila).
 ============================================================ */
 export type Pack = {
   id: "flash" | "signature" | "duo" | "reel-video";
@@ -190,8 +191,14 @@ export type Pack = {
   unit?: string;
   featured?: boolean;
   topBadge?: string;
+  description?: string;
   features: string[];
-  calEvent: string; // Cal.com event slug — must exist in your Cal account
+  options?: string[];
+  calEvent: string;
+  /** Direct Stripe payment link — opens the hosted checkout page. */
+  stripeUrl: string;
+  /** Google Calendar appointment slot picker. */
+  calendarUrl: string;
 };
 
 export const packs: Pack[] = [
@@ -201,6 +208,7 @@ export const packs: Pack[] = [
     price: 95,
     priceLabel: "95€",
     unit: "/heure",
+    description: "Pour un shooting rapide et efficace.",
     features: [
       "20 photos retouchées par heure",
       "Livraison sous 5 jours ouvrés",
@@ -208,6 +216,8 @@ export const packs: Pack[] = [
       "Matériel professionnel inclus",
     ],
     calEvent: "flash-1h",
+    stripeUrl: "https://book.stripe.com/aFafZg7jS3EGeIR1gX6Ri00",
+    calendarUrl: "https://calendar.app.google/mvVdfZLZNzkYFiA46",
   },
   {
     id: "signature",
@@ -216,118 +226,162 @@ export const packs: Pack[] = [
     priceLabel: "320€",
     featured: true,
     topBadge: "Le plus complet",
+    description: "Le pack signature pour un shooting éditorial complet.",
     features: [
-      "Recherche visuelle & mood board",
-      "Proposition de tenues (3 looks)",
-      "Sélection des lieux (3 endroits)",
+      "3h de shooting photo",
+      "Jusqu'à 3 tenues",
+      "Recherche de lieux",
+      "Moodboard personnalisé",
+      "Accompagnement poses et direction artistique",
       "60 photos retouchées livrées",
-      "Livraison sous 7 jours ouvrés",
+      "Livraison sous 48/72 heures ouvrés",
+    ],
+    options: [
+      "Tenue supplémentaire : 50€",
+      "1 vidéo format reel par tenue : +50€ / tenue",
     ],
     calEvent: "signature",
+    stripeUrl: "https://book.stripe.com/8x29ASgUs6QSeIR4t96Ri03",
+    calendarUrl:
+      "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ02dbatRQkr59ysvmzjsS-V9n60_Lbue5C8FQUlJCImWjj67uW9WuuTuqgoiSMgZoSK3DGo_vH8",
   },
   {
     id: "duo",
     name: "Duo",
-    price: 280,
-    priceLabel: "280€",
+    price: 290,
+    priceLabel: "290€",
+    description: "Pour deux personnes, même énergie, même résultat éditorial.",
     features: [
-      "Shooting à deux personnes",
-      "Mood board & sélection de lieux",
+      "3h de shooting à deux personnes",
+      "Jusqu'à 3 tenues",
+      "Recherche de lieux",
+      "Moodboard personnalisé",
+      "Accompagnement poses et direction artistique",
       "60 photos retouchées livrées",
-      "Livraison sous 7 jours ouvrés",
+      "Livraison sous 48/72 heures ouvrés",
+    ],
+    options: [
+      "Tenue supplémentaire : 50€",
+      "1 vidéo format reel par tenue : +50€ / tenue",
     ],
     calEvent: "duo",
+    stripeUrl: "https://book.stripe.com/14AfZg9s07UW6cl5xd6Ri04",
+    calendarUrl: "", // not provided yet
   },
   {
     id: "reel-video",
     name: "Réel+ Vidéo",
-    price: 450,
-    priceLabel: "450€",
+    price: 555,
+    priceLabel: "555€",
+    description: "Tournage vidéo professionnel pour vos réseaux.",
     features: [
-      "Tournage professionnel 3h",
-      "Reels & TikTok optimisés",
-      "Montage + post-production inclus",
-      "Sous-titres, effets, musiques tendances",
+      "4h de shooting vidéo",
+      "Jusqu'à 3 tenues",
+      "Recherche de lieux",
+      "Moodboard personnalisé",
+      "Accompagnement créatif",
+      "3 reels mode/design/lifestyle",
+      "3 reels trends / transitions",
     ],
     calEvent: "reel-video",
+    stripeUrl: "https://book.stripe.com/8x24gy9s0cbc9ox1gX6Ri02",
+    calendarUrl:
+      "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3FP33OMVDYNWYTy4GzH-OvF_QqvL13lV927HONAgYgrfbp9kDfmDO6R0gPHoWI8AhPFGYCIYaF",
   },
 ];
 
 /* ============================================================
-   BOOTCAMP — Content Shift
+   BOOTCAMP — Content Shift / Bootcamp by Com'Jam
 ============================================================ */
 export const bootcamp = {
-  name: "Content Shift",
-  date: "14 & 15 Juin 2026",
-  schedule: "En ligne · 10h–18h",
-  eyebrow: "Formation en ligne",
+  name: "Bootcamp by Com'Jam",
+  date: "4 et 5 Juillet 2026",
+  schedule: "En présentiel · 9h–17h",
+  eyebrow: "Évènement",
   desc:
-    "2 jours en ligne pour passer de créateur invisible à créateur qui attire, engage et convertit. Avec votre téléphone, votre personnalité, une stratégie qui vous ressemble.",
+    "Deux jours pour apprendre les bonnes pratiques, les mettre en application et prendre du plaisir à créer. Un bootcamp complet sur la création de contenu, les réseaux sociaux, la photo et la vidéo.",
+  /** Stripe checkout link for bootcamp registration. */
+  stripeUrl: "https://book.stripe.com/eVqfZg8nW8Z01W5aRx6Ri01",
   days: [
     {
       num: "01",
-      label: "Jour 1 — 10h à 18h",
-      title: "Poser les bases & maîtriser la photo",
+      label: "Jour 1 · 9h à 17h",
+      title: "Création de contenu et personal branding",
       modules: [
-        { time: "10h – 11h30", name: "Identité de créateur — niche, univers visuel, positionnement" },
-        { time: "11h30 – 13h", name: "Stratégie éditoriale — piliers, calendrier, formats par plateforme" },
-        { time: "14h – 16h30", name: "Photo qui performe — lumière, cadrage, démonstration live, retouche" },
-        { time: "16h30 – 18h", name: "Cohérence visuelle — Canva avancé, Q&R live, défi overnight" },
+        { time: "9h00", name: "Accueil, tour de table et objectifs" },
+        { time: "9h20", name: "Création de contenu et réseaux sociaux : comprendre Instagram et TikTok en profondeur, décrypter les algorithmes, identifier ce qui performe vraiment en 2026" },
+        { time: "11h45", name: "Personal branding et marketing : construire une identité forte, définir son positionnement, élaborer sa stratégie éditoriale" },
+        { time: "12h45", name: "Pause déjeuner" },
+        { time: "13h45", name: "Intervenante invitée : créatrice de contenu, trouver sa niche et construire l'image que l'on reflète" },
+        { time: "14h30", name: "Photo et identité visuelle : maîtriser la lumière, le cadrage, la retouche, démonstration live" },
+        { time: "16h15", name: "Les outils indispensables : matériel, applications, setup selon votre budget" },
+        { time: "17h00", name: "Récap, défi overnight et groupe privé" },
       ],
     },
     {
       num: "02",
-      label: "Jour 2 — 10h à 18h",
-      title: "Vidéo, montage & monétisation",
+      label: "Jour 2 · 9h à 17h",
+      title: "Vidéo, montage et stratégie",
       modules: [
-        { time: "10h – 12h30", name: "Vidéo dynamique — tournage, son, stabilisation, hooks, démonstration live" },
-        { time: "13h30 – 15h", name: "Montage accessible — CapCut complet, sous-titres, workflow rapide" },
-        { time: "15h – 16h15", name: "Algorithmes — signaux clés, analytics, erreurs à éviter" },
-        { time: "16h15 – 18h", name: "Monétisation, tirage au sort Osmo Pocket 4, Q&R final" },
+        { time: "9h00", name: "Accueil et debrief du défi overnight" },
+        { time: "9h20", name: "Vidéo dynamique : tournage, son, stabilisation, hooks, démonstration live" },
+        { time: "11h45", name: "Montage accessible : CapCut complet, sous-titres, workflow rapide" },
+        { time: "12h45", name: "Pause déjeuner" },
+        { time: "13h45", name: "Stratégie et plan de contenu : transformer la créativité en système" },
+        { time: "14h30", name: "Algorithmes et analytics : signaux clés, erreurs à éviter" },
+        { time: "16h15", name: "Monétisation et opportunités : où trouver les premières collaborations" },
+        { time: "17h00", name: "Récap final, tirage au sort et clôture" },
       ],
     },
   ],
   includes: [
     { name: "Guide pratique PDF", sub: "Les 10 étapes clés pour performer en 2026" },
-    { name: "1 mois de suivi inclus", sub: "Groupe privé + Q&R hebdomadaire" },
+    { name: "1 mois de suivi inclus", sub: "Groupe privé et Q&R hebdomadaire" },
     { name: "1h de shooting offerte", sub: "Valable 1 an, offrable" },
     { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner (~450€)" },
     { name: "Accès aux replays", sub: "Visionnez les modules à votre rythme" },
     { name: "Toutes plateformes 2026", sub: "Instagram, TikTok, YouTube, LinkedIn, Snap" },
   ],
-  price: { current: 197, original: 247, label: "Early Bird — 20 places" },
+  price: { current: 197, original: 247, label: "Early Bird · 20 places" },
   reassurance: [
     "Paiement sécurisé",
-    "Formation 100% en ligne",
+    "Formation en présentiel",
     "Replays inclus",
     "Ouvert à tous niveaux",
   ],
 };
 
 /* ============================================================
-   TESTIMONIALS
+   TESTIMONIALS — updated per PDF
 ============================================================ */
 export const testimonials = [
   {
     quote:
-      "Jamila a complètement transformé ma façon de communiquer sur les réseaux. En 3 semaines, mon engagement a doublé.",
-    name: "Sarah M.",
-    role: "Créatrice de contenu lifestyle · Paris",
-    initial: "S",
+      "En 4 mois d'accompagnement avec Com'Jam, j'ai gagné plus de 10 000 abonnés sur Instagram. Ce qui m'a le plus marqué c'est leur capacité à analyser exactement ce qui ne fonctionnait pas et à proposer des solutions concrètes, immédiatement applicables.",
+    name: "KF",
+    role: "Créateur de contenu",
+    initial: "K",
   },
   {
     quote:
-      "Le shooting Signature, c'est un investissement que je regrette de ne pas avoir fait plus tôt. Les photos sont magnifiques.",
-    name: "Thomas R.",
-    role: "Entrepreneur · Coach bien-être",
-    initial: "T",
+      "Ce qui me frappe chez Com'Jam c'est la pertinence de leurs conseils. Jamais quelque chose de générique, ils prennent le temps de comprendre votre situation, votre univers, et ce qu'ils vous disent après est toujours juste et actionnable.",
+    name: "YS",
+    role: "Entreprise",
+    initial: "Y",
   },
   {
     quote:
-      "Un accompagnement vraiment humain et bienveillant. Jamila prend le temps de comprendre votre univers avant de proposer quoi que ce soit.",
-    name: "Amina K.",
-    role: "Cheffe d'entreprise · Mode & Accessoires",
-    initial: "A",
+      "Com'Jam est une agence vraiment à l'écoute. On sent qu'ils s'investissent autant que vous dans votre projet. C'est rare de trouver une agence qui traite votre image comme si c'était la leur.",
+    name: "OM",
+    role: "Créatrice de contenu",
+    initial: "O",
+  },
+  {
+    quote:
+      "Com'Jam a un regard que peu d'agences ont. Ils voient le beau là où on ne le voit pas encore. Mes photos n'ont plus rien à voir avec ce que je faisais avant de les rencontrer.",
+    name: "GM",
+    role: "Particulier",
+    initial: "G",
   },
 ];
 
@@ -339,21 +393,23 @@ export const contact = {
   title: ["Parlons de", "votre projet"] as const,
   emphasizedLine: 1,
   desc:
-    "Vous avez un projet, une question, vous souhaitez réserver une séance ou une place au bootcamp ? Envoyez-nous un message — nous répondons sous 48h.",
+    "Vous avez un projet, une question, vous souhaitez réserver une séance ou une place au Bootcamp by Com'Jam ? Envoyez-nous un message, nous répondons sous 48h.",
   channels: [
     { kind: "ig" as const, name: "Instagram", handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", icon: "IG" },
     { kind: "tt" as const, name: "TikTok", handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", icon: "TK" },
     { kind: "lt" as const, name: "Linktree", handle: "linktr.ee/comjam", url: "https://linktr.ee/comjam", icon: "LT" },
-    { kind: "em" as const, name: "Email", handle: "contact@comjam.fr", url: "mailto:contact@comjam.fr", icon: "@" },
+    { kind: "em" as const, name: "Email", handle: "hello@comjam.fr", url: "mailto:hello@comjam.fr", icon: "@" },
   ],
   formSubjects: [
-    "Content Shift — Bootcamp (14–15 Juin 2026)",
-    "Shooting photo — Pack Flash",
-    "Shooting photo — Pack Signature",
-    "Shooting photo — Pack Duo",
-    "Pack Réel+ Vidéo",
-    "Accompagnement stratégie réseaux",
-    "Consulting 1-2-1",
+    "Bootcamp by Com'Jam (4 et 5 Juillet 2026)",
+    "Content Trip by Com'Jam",
+    "Shooting Photo · Pack Flash",
+    "Shooting Photo · Pack Signature",
+    "Shooting Photo · Pack Duo",
+    "Tournage Vidéo · Reel+",
+    "Stratégie digitale",
+    "Production de contenu",
+    "Consulting 1-to-1",
     "Autre demande",
   ],
 };
@@ -369,13 +425,14 @@ export const footer = {
         { label: "Création de contenu", href: "/services/creation-de-contenu" },
         { label: "Stratégie digitale", href: "/services/strategie-digitale" },
         { label: "Production de contenu", href: "/services/production-de-contenu" },
-        { label: "Consulting 1-2-1", href: "/services/consulting" },
+        { label: "Consulting 1-to-1", href: "/services/consulting" },
       ],
     },
     {
-      title: "Formation",
+      title: "Évènements",
       links: [
-        { label: "Content Shift Bootcamp", href: "/bootcamp" },
+        { label: "Bootcamp by Com'Jam", href: "/bootcamp" },
+        { label: "Content Trip by Com'Jam", href: "/contact" },
         { label: "Réserver une séance", href: "/reservation" },
       ],
     },

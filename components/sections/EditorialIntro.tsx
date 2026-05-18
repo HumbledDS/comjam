@@ -171,7 +171,7 @@ export function EditorialIntro() {
               >
                 <Image
                   src={media.intro.small.src}
-                  alt="Portrait Jamila — fondatrice Com'Jam"
+                  alt="Portrait Jamila, fondatrice Com'Jam"
                   fill
                   sizes="(max-width: 1024px) 45vw, 28vw"
                   className="object-cover shadow-[0_25px_55px_-15px_rgba(13,32,53,0.4)]"
