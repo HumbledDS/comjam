@@ -68,3 +68,4 @@ venv/
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
+bash.exe.stackdump
