@@ -4,19 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/copy";
-import { Monogram } from "@/components/brand/Monogram";
+import { Logo } from "@/components/brand/Logo";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // Over a dark hero, the nav stays translucent beige (frosted blur, not full
-  // transparent) so links remain readable against the video. Once scrolled
-  // past 40px, it firms up into the full beige backdrop.
+  // Pages whose hero is dark / image / video need the frosted nav backdrop
+  // immediately, otherwise blue-on-bright text becomes invisible.
   const darkHeroRoutes = ["/", "/services"];
-  const overDarkHero = darkHeroRoutes.includes(pathname);
-  const onDarkTranslucent = overDarkHero && !scrolled;
+  const needsBackdrop = darkHeroRoutes.includes(pathname);
+  const showBackdrop = scrolled || needsBackdrop;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -39,16 +38,14 @@ export function Nav() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[999] flex justify-between items-center transition-all duration-300 backdrop-blur-md ${
-          onDarkTranslucent
-            ? "py-5 bg-[rgba(245,239,228,0.55)]"
-            : "py-4 bg-[rgba(245,239,228,0.97)] shadow-[0_1px_0_rgba(212,197,176,0.5)]"
+        className={`fixed top-0 left-0 right-0 z-[999] flex justify-between items-center transition-all duration-300 ${
+          showBackdrop
+            ? "py-4 bg-[rgba(245,239,228,0.97)] backdrop-blur-md shadow-[0_1px_0_rgba(212,197,176,0.5)]"
+            : "py-7"
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        <Link href="/" aria-label="Com'Jam, accueil" className="inline-flex items-center leading-none">
-          <Monogram variant="blue" size={42} />
-        </Link>
+        <Logo variant="blue" width={108} priority />
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (
