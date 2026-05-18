@@ -11,11 +11,14 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // Pages whose hero is dark / image / video need the frosted nav backdrop
-  // immediately, otherwise blue-on-bright text becomes invisible.
+  // On desktop, dark-hero routes always show the frosted-beige backdrop so the
+  // blue nav links stay readable. On mobile only the burger + wordmark are
+  // visible, so we drop the backdrop at the top of dark heroes (cleaner over
+  // the video) and re-enable it once the user scrolls past the hero.
   const darkHeroRoutes = ["/", "/services"];
-  const needsBackdrop = darkHeroRoutes.includes(pathname);
-  const showBackdrop = scrolled || needsBackdrop;
+  const overDarkHero = darkHeroRoutes.includes(pathname);
+  const desktopBackdrop = scrolled || overDarkHero;
+  const mobileTransparent = overDarkHero && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -39,13 +42,24 @@ export function Nav() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-[999] flex justify-between items-center transition-all duration-300 ${
-          showBackdrop
-            ? "py-4 bg-[rgba(245,239,228,0.97)] backdrop-blur-md shadow-[0_1px_0_rgba(212,197,176,0.5)]"
-            : "py-7"
+          mobileTransparent
+            ? "py-5 bg-transparent"
+            : "py-4 bg-[rgba(245,239,228,0.97)] backdrop-blur-md shadow-[0_1px_0_rgba(212,197,176,0.5)]"
+        } ${
+          desktopBackdrop
+            ? "md:py-4 md:bg-[rgba(245,239,228,0.97)] md:backdrop-blur-md md:shadow-[0_1px_0_rgba(212,197,176,0.5)]"
+            : "md:py-7 md:bg-transparent md:backdrop-blur-0 md:shadow-none"
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        <Logo variant="blue" width={108} priority />
+        {/* Mobile: cream wordmark over transparent dark hero, blue otherwise.
+            Desktop: always blue against the beige backdrop. */}
+        <span className="md:hidden">
+          <Logo variant={mobileTransparent ? "cream" : "blue"} width={108} priority />
+        </span>
+        <span className="hidden md:inline-block">
+          <Logo variant="blue" width={108} priority />
+        </span>
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (
@@ -80,19 +94,19 @@ export function Nav() {
           className="md:hidden flex flex-col gap-[5px] p-1 bg-transparent border-0 cursor-pointer"
         >
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-transform duration-300 ${
-              open ? "translate-y-[6.5px] rotate-45" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-all duration-300 ${
+              mobileTransparent && !open ? "bg-beige" : "bg-blue"
+            } ${open ? "translate-y-[6.5px] rotate-45" : ""}`}
           />
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-opacity duration-300 ${
-              open ? "opacity-0" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-all duration-300 ${
+              mobileTransparent && !open ? "bg-beige" : "bg-blue"
+            } ${open ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-6 h-[1.5px] bg-blue transition-transform duration-300 ${
-              open ? "-translate-y-[6.5px] -rotate-45" : ""
-            }`}
+            className={`block w-6 h-[1.5px] transition-all duration-300 ${
+              mobileTransparent && !open ? "bg-beige" : "bg-blue"
+            } ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`}
           />
         </button>
       </nav>
