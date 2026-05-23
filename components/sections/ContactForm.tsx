@@ -52,7 +52,7 @@ function ServiceSelect({
         tabIndex={-1}
         aria-hidden
       >
-        <option value="">— Choisir un service —</option>
+        <option value="">Choisir un service</option>
         {subjects.map((s) => (
           <option key={s} value={s}>
             {s}
@@ -68,7 +68,7 @@ function ServiceSelect({
         className="w-full flex items-center justify-between gap-3 border-b border-beige-mid py-3 text-left text-[15px] font-light text-blue cursor-pointer focus:outline-none focus:border-blue transition-colors"
       >
         <span className={value ? "text-blue" : "text-text-light/70"}>
-          {value || "— Choisir un service —"}
+          {value || "Choisir un service"}
         </span>
         <span
           className={`text-blue text-xs transition-transform duration-300 ${

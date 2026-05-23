@@ -38,10 +38,6 @@ export const media = {
     desktop: "/media/video/videoHero.mp4",
     // Vertical cut for mobile / portrait screens.
     mobile: "/media/video/videoHero2.mp4",
-    // Legacy webm fallback (kept for the still poster + any non-Hero use).
-    webm: "/media/video/reel.webm",
-    mp4: "/media/video/reel.mp4",
-    poster: "/media/video/reel-poster.jpg",
   },
 
   // Anchor images per section

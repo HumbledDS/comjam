@@ -21,8 +21,7 @@ export function HeroReel() {
         muted
         loop
         playsInline
-        poster={media.video.poster}
-        preload="metadata"
+        preload="auto"
         aria-hidden
       >
         <source src={media.video.mobile} type="video/mp4" />
@@ -34,8 +33,7 @@ export function HeroReel() {
         muted
         loop
         playsInline
-        poster={media.video.poster}
-        preload="metadata"
+        preload="auto"
         aria-hidden
       >
         <source src={media.video.desktop} type="video/mp4" />
