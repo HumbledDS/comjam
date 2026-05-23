@@ -104,15 +104,6 @@ export function ServicesShowcase() {
                   {s.num}
                 </div>
 
-                {/* Small ornament tucked in corner */}
-                <Ornament
-                  kind="flourish"
-                  variant={light ? "blue" : "cream"}
-                  width={32}
-                  opacity={light ? 0.35 : 0.45}
-                  className="absolute bottom-6 right-6"
-                />
-
                 <div className="relative z-10 flex flex-col h-full">
                   <div
                     className={`text-[10px] font-medium tracking-[2.5px] uppercase mb-7 ${
@@ -161,7 +152,7 @@ export function ServicesShowcase() {
                   </ul>
 
                   <div
-                    className={`mt-auto pt-5 border-t ${
+                    className={`mt-auto pt-5 border-t flex items-end justify-between gap-3 ${
                       light
                         ? "border-beige-mid"
                         : "border-[rgba(200,220,234,0.18)]"
@@ -174,6 +165,15 @@ export function ServicesShowcase() {
                     >
                       {s.pricing}
                     </div>
+                    <span
+                      className={`inline-flex items-center gap-2 text-[10px] font-medium tracking-[2.5px] uppercase px-4 py-2 transition-all group-hover:translate-x-1 ${
+                        light
+                          ? "bg-blue text-beige group-hover:bg-blue-mid"
+                          : "bg-beige text-blue group-hover:bg-paper"
+                      }`}
+                    >
+                      Voir <span aria-hidden>→</span>
+                    </span>
                   </div>
                 </div>
 

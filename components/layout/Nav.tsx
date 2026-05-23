@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/copy";
-import { Logo } from "@/components/brand/Logo";
+import { Monogram } from "@/components/brand/Monogram";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -52,14 +52,16 @@ export function Nav() {
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
-        {/* Mobile: cream wordmark over transparent dark hero, blue otherwise.
-            Desktop: always blue against the beige backdrop. */}
-        <span className="md:hidden">
-          <Logo variant={mobileTransparent ? "cream" : "blue"} width={108} priority />
-        </span>
-        <span className="hidden md:inline-block">
-          <Logo variant="blue" width={108} priority />
-        </span>
+        {/* Mobile: cream "C" monogram over transparent dark hero, blue otherwise.
+            Desktop: always blue against the frosted backdrop. */}
+        <Link href="/" aria-label="Com'Jam, accueil" className="inline-flex items-center leading-none">
+          <span className="md:hidden">
+            <Monogram variant={mobileTransparent ? "cream" : "blue"} size={42} />
+          </span>
+          <span className="hidden md:inline-block">
+            <Monogram variant="blue" size={44} />
+          </span>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (
