@@ -5,7 +5,6 @@ import { useState } from "react";
 import { type Service } from "@/lib/copy";
 import { RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Pattern } from "@/components/brand/Pattern";
-import { Ornament } from "@/components/brand/Ornament";
 import { ServiceModal } from "@/components/sections/ServiceModal";
 
 /**
@@ -57,17 +56,15 @@ export function ServicesGrid({ services }: { services: readonly Service[] }) {
                   </li>
                 ))}
               </ul>
-              <div className="font-display text-[22px] font-light text-beige pt-5 border-t border-[rgba(200,220,234,0.18)]">
-                {s.pricing}
+              <div className="pt-5 border-t border-[rgba(200,220,234,0.18)] flex items-end justify-between gap-3">
+                <div className="font-display text-[22px] font-light text-beige">
+                  {s.pricing}
+                </div>
+                <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[2.5px] uppercase px-4 py-2 bg-beige text-blue transition-all group-hover:bg-paper group-hover:translate-x-1">
+                  Voir <span aria-hidden>→</span>
+                </span>
               </div>
             </button>
-            <Ornament
-              kind="flourish"
-              variant="cream"
-              width={36}
-              opacity={0.35}
-              className="absolute bottom-5 right-5 pointer-events-none"
-            />
             <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-light transition-all duration-500 group-hover:w-full pointer-events-none" />
           </motion.article>
         ))}
