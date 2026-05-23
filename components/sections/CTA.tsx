@@ -29,8 +29,8 @@ export function CTA({
         <div className="max-w-4xl">
           <Label light>{eyebrow}</Label>
           <h2
-            className="display display-light mt-5 mb-6"
-            style={{ fontSize: "clamp(36px, 4.5vw, 64px)" }}
+            className="display display-light mt-5 mb-6 [text-wrap:balance]"
+            style={{ fontSize: "clamp(28px, 4.5vw, 64px)" }}
           >
             {title}
           </h2>

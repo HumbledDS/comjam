@@ -202,7 +202,7 @@ export default function AboutPage() {
       <Testimonials />
 
       <CTA
-        title="Envie d'écrire la suite avec nous ?"
+        title={"Envie d'écrire la suite avec nous ?"}
         desc="Que ce soit pour un shooting, une stratégie ou un coaching, nous sommes là pour vous accompagner."
         primary={{ href: "/contact", label: "Prendre contact" }}
       />
