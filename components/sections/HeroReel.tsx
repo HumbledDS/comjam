@@ -58,7 +58,7 @@ export function HeroReel() {
         >
           <div className="flex items-center gap-3 text-[10px] font-medium tracking-[3.5px] uppercase text-blue-pale/85 mb-7">
             <span className="block w-7 h-px bg-blue-pale/60" />
-            Création de contenu · Paris
+            Agence de communication · Paris
           </div>
 
           <h1
@@ -78,9 +78,9 @@ export function HeroReel() {
             </Link>
             <Link
               href="/reservation"
-              className="inline-flex items-center gap-3 text-[11px] font-medium tracking-[2.5px] uppercase text-beige hover:text-paper hover:gap-5 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 border border-beige text-beige text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-beige hover:text-blue"
             >
-              Réserver un shooting <span>→</span>
+              Réserver un shooting <span aria-hidden>→</span>
             </Link>
           </div>
         </motion.div>

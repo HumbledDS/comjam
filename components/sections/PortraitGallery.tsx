@@ -322,12 +322,12 @@ export function PortraitGallery() {
                 className="display mt-5"
                 style={{ fontSize: "clamp(36px, 4vw, 56px)" }}
               >
-                Récentes <em>collaborations.</em>
+                Récentes <em>réalisations.</em>
               </h2>
             </div>
-            <p className="max-w-[300px] text-[13px] font-light leading-[1.7] text-text-light md:text-right">
-              Contenu réalisé pour créateurs, marques et entrepreneurs.
-              Paris, Bruxelles. <span className="opacity-60">Faites défiler pour explorer.</span>
+            <p className="max-w-[340px] text-[13px] font-light leading-[1.7] text-text-light md:text-right">
+              Contenu visuel pour créateurs, marques et entrepreneurs.
+              Paris et l&apos;international. <span className="opacity-60">Découvrez notre univers.</span>
             </p>
           </div>
         </Reveal>
