@@ -47,7 +47,7 @@ export function Nav() {
             : "py-4 bg-[rgba(245,239,228,0.97)] backdrop-blur-md shadow-[0_1px_0_rgba(212,197,176,0.5)]"
         } ${
           desktopBackdrop
-            ? "md:py-4 md:bg-[rgba(245,239,228,0.97)] md:backdrop-blur-md md:shadow-[0_1px_0_rgba(212,197,176,0.5)]"
+            ? "md:py-4 md:bg-[rgba(245,239,228,0.55)] md:backdrop-blur-xl md:shadow-[0_1px_0_rgba(212,197,176,0.35)]"
             : "md:py-7 md:bg-transparent md:backdrop-blur-0 md:shadow-none"
         }`}
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
