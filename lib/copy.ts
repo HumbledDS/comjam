@@ -332,8 +332,8 @@ export const bootcamp = {
   ],
   includes: [
     { name: "Guide pratique PDF", sub: "Les 10 étapes clés pour performer en 2026" },
-    { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam » entraide et Q&R hebdomadaire" },
-    { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner (~450€)" },
+    { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam »" },
+    { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner" },
   ],
   price: { current: 200, original: 250, label: "Early Bird · 20 places" },
   reassurance: [
