@@ -86,7 +86,7 @@ export default function BootcampPage() {
               <div className="flex flex-col gap-[14px]">
                 {day.modules.map((m) => (
                   <div key={m.time} className="flex gap-4 items-start">
-                    <div className="text-[10px] font-medium text-blue-light tracking-wide whitespace-nowrap w-[76px] shrink-0 pt-[2px]">
+                    <div className="text-[10px] font-medium text-blue-light tracking-wide whitespace-nowrap w-[108px] shrink-0 pt-[2px]">
                       {m.time}
                     </div>
                     <div className="text-[12.5px] font-normal text-blue leading-[1.55]">
