@@ -47,7 +47,7 @@ export function HeroReel() {
 
       {/* Foreground */}
       <div
-        className="relative h-full flex flex-col justify-end pb-20 lg:pb-28"
+        className="relative h-full flex flex-col justify-end pb-28 sm:pb-32 lg:pb-36"
         style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}
       >
         <motion.div
@@ -78,7 +78,7 @@ export function HeroReel() {
             </Link>
             <Link
               href="/reservation"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-beige text-beige text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-beige hover:text-blue"
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-beige bg-[rgba(245,239,228,0.12)] backdrop-blur-sm text-beige text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-beige hover:text-blue"
             >
               Réserver un shooting <span aria-hidden>→</span>
             </Link>
@@ -86,13 +86,13 @@ export function HeroReel() {
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
+      {/* Scroll cue — hidden on small mobile where vertical space is tight */}
       <motion.div
         aria-hidden
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 0.7 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] tracking-[3px] uppercase text-beige/70 flex flex-col items-center gap-3"
+        className="hidden sm:flex absolute bottom-8 lg:bottom-10 left-1/2 -translate-x-1/2 text-[10px] tracking-[3px] uppercase text-beige/70 flex-col items-center gap-3"
       >
         <span>Scroll</span>
         <motion.span
