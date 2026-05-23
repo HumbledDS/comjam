@@ -78,7 +78,7 @@ export function HeroReel() {
             </Link>
             <Link
               href="/reservation"
-              className="inline-flex items-center gap-3 text-[11px] font-normal tracking-[2px] uppercase text-beige/85 hover:text-beige hover:gap-5 transition-all"
+              className="inline-flex items-center gap-3 text-[11px] font-medium tracking-[2.5px] uppercase text-beige hover:text-paper hover:gap-5 transition-all"
             >
               Réserver un shooting <span>→</span>
             </Link>

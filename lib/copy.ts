@@ -116,13 +116,13 @@ export const services: Service[] = [
     name: "Création de contenu",
     short: "Photo et vidéo, pensées pour vos réseaux.",
     desc:
-      "Direction artistique, poses, rendu esthétique. Pour créateurs, marques et entrepreneurs.",
+      "Direction artistique, poses, rendu esthétique.",
     bullets: [
       "Direction artistique sur-mesure",
       "Photo et vidéo combinées possibles",
       "Retouche et montage inclus",
     ],
-    for: ["Particuliers", "Créateurs", "Entrepreneurs", "Marques", "Indépendants"],
+    for: ["Particuliers", "Créateurs", "Entrepreneurs", "Marques"],
     pricing: "Dès 95€",
     ctaHref: "/reservation",
     ctaLabel: "Réserver une séance",
@@ -133,7 +133,7 @@ export const services: Service[] = [
     name: "Stratégie digitale",
     short: "Une image forte, claire et cohérente.",
     desc:
-      "Audit, positionnement et ligne éditoriale. Un plan d'action sur mesure pour faire émerger votre marque.",
+      "Un plan d'action sur mesure pour faire émerger votre marque.",
     bullets: [
       "Audit",
       "Positionnement",
@@ -149,7 +149,7 @@ export const services: Service[] = [
     name: "Production de contenu",
     short: "Du contenu prêt à être publié.",
     desc:
-      "Photo et vidéo pour vos plateformes digitales. Cohérence visuelle, rythme régulier, identité de marque alignée.",
+      "Photo et vidéo pour vos plateformes digitales.",
     bullets: [
       "Direction créative",
       "Cohérence visuelle",
@@ -264,7 +264,7 @@ export const packs: Pack[] = [
   },
   {
     id: "reel-video",
-    name: "Réel+ Vidéo",
+    name: "Réel+",
     price: 555,
     priceLabel: "555€",
     description: "Tournage vidéo professionnel pour vos réseaux.",
@@ -289,7 +289,7 @@ export const packs: Pack[] = [
 export const bootcamp = {
   name: "Bootcamp by Com'Jam",
   date: "4 et 5 Juillet 2026",
-  schedule: "En présentiel · 9h–17h",
+  schedule: "En ligne · 9h–18h",
   eyebrow: "Évènement",
   desc:
     "Deux jours pour apprendre les bonnes pratiques, les mettre en application et prendre du plaisir à créer. Un bootcamp complet sur la création de contenu, les réseaux sociaux, la photo et la vidéo.",
@@ -298,7 +298,7 @@ export const bootcamp = {
   days: [
     {
       num: "01",
-      label: "Jour 1 · 9h à 17h",
+      label: "Jour 1 · 9h à 18h",
       title: "Création de contenu et personal branding",
       modules: [
         { time: "9h00", name: "Accueil, tour de table et objectifs" },
@@ -313,7 +313,7 @@ export const bootcamp = {
     },
     {
       num: "02",
-      label: "Jour 2 · 9h à 17h",
+      label: "Jour 2 · 9h à 18h",
       title: "Vidéo, montage et stratégie",
       modules: [
         { time: "9h00", name: "Accueil et debrief du défi overnight" },
@@ -329,17 +329,13 @@ export const bootcamp = {
   ],
   includes: [
     { name: "Guide pratique PDF", sub: "Les 10 étapes clés pour performer en 2026" },
-    { name: "1 mois de suivi inclus", sub: "Groupe privé et Q&R hebdomadaire" },
-    { name: "1h de shooting offerte", sub: "Valable 1 an, offrable" },
+    { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam » — entraide et Q&R hebdomadaire" },
     { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner (~450€)" },
-    { name: "Accès aux replays", sub: "Visionnez les modules à votre rythme" },
-    { name: "Toutes plateformes 2026", sub: "Instagram, TikTok, YouTube, LinkedIn, Snap" },
   ],
-  price: { current: 197, original: 247, label: "Early Bird · 20 places" },
+  price: { current: 200, original: 250, label: "Early Bird · 20 places" },
   reassurance: [
     "Paiement sécurisé",
-    "Formation en présentiel",
-    "Replays inclus",
+    "Formation en ligne",
     "Ouvert à tous niveaux",
   ],
 };
@@ -348,13 +344,6 @@ export const bootcamp = {
    TESTIMONIALS — updated per PDF
 ============================================================ */
 export const testimonials = [
-  {
-    quote:
-      "En 4 mois d'accompagnement avec Com'Jam, j'ai gagné plus de 10 000 abonnés sur Instagram. Ce qui m'a le plus marqué c'est leur capacité à analyser exactement ce qui ne fonctionnait pas et à proposer des solutions concrètes, immédiatement applicables.",
-    name: "KF",
-    role: "Créateur de contenu",
-    initial: "K",
-  },
   {
     quote:
       "Ce qui me frappe chez Com'Jam c'est la pertinence de leurs conseils. Jamais quelque chose de générique, ils prennent le temps de comprendre votre situation, votre univers, et ce qu'ils vous disent après est toujours juste et actionnable.",
@@ -425,7 +414,6 @@ export const footer = {
       links: [
         { label: "Bootcamp by Com'Jam", href: "/bootcamp" },
         { label: "Content Trip by Com'Jam", href: "/contact" },
-        { label: "Réserver une séance", href: "/reservation" },
       ],
     },
     {

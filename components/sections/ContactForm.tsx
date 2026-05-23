@@ -1,8 +1,124 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "motion/react";
+
+/**
+ * Brand-styled service picker. Wraps a hidden <select name="subject"> so the
+ * form payload is unchanged, but the visible UI is a custom listbox styled in
+ * Com'Jam beige/blue (the native <option> list is OS-painted and can't be
+ * themed properly).
+ */
+function ServiceSelect({
+  subjects,
+  defaultValue,
+  name,
+  id,
+}: {
+  subjects: readonly string[];
+  defaultValue: string;
+  name: string;
+  id: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(defaultValue);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!wrapperRef.current?.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      {/* Hidden native select keeps the form payload identical and screen-reader friendly */}
+      <select
+        id={id}
+        name={name}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className="sr-only"
+        tabIndex={-1}
+        aria-hidden
+      >
+        <option value="">— Choisir un service —</option>
+        {subjects.map((s) => (
+          <option key={s} value={s}>
+            {s}
+          </option>
+        ))}
+      </select>
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-3 border-b border-beige-mid py-3 text-left text-[15px] font-light text-blue cursor-pointer focus:outline-none focus:border-blue transition-colors"
+      >
+        <span className={value ? "text-blue" : "text-text-light/70"}>
+          {value || "— Choisir un service —"}
+        </span>
+        <span
+          className={`text-blue text-xs transition-transform duration-300 ${
+            open ? "rotate-180" : ""
+          }`}
+          aria-hidden
+        >
+          ▾
+        </span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            role="listbox"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute z-30 mt-2 w-full bg-beige border border-beige-mid shadow-[0_18px_40px_-12px_rgba(13,32,53,0.25)] max-h-[280px] overflow-y-auto"
+          >
+            {subjects.map((s) => {
+              const active = s === value;
+              return (
+                <li key={s}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={active}
+                    onClick={() => {
+                      setValue(s);
+                      setOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-3 text-[13.5px] font-light leading-snug transition-colors cursor-pointer border-l-2 ${
+                      active
+                        ? "bg-paper text-blue border-blue-light"
+                        : "text-blue-mid border-transparent hover:bg-paper hover:border-blue-light hover:text-blue"
+                    }`}
+                  >
+                    {s}
+                  </button>
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 function Field({
   id,
@@ -136,19 +252,12 @@ function FormInner({ subjects }: { subjects: readonly string[] }) {
             </Field>
 
             <Field id="subject" label="Je suis intéressé·e par">
-              <select
+              <ServiceSelect
                 id="subject"
                 name="subject"
                 defaultValue={initialSubject}
-                className={`${inputBase} appearance-none cursor-pointer pr-6 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22><path d=%22M1 1l4 4 4-4%22 stroke=%22%231B3A5C%22 stroke-width=%221.2%22 fill=%22none%22/></svg>')] bg-no-repeat bg-[right_4px_center]`}
-              >
-                <option value="">— Choisir un service —</option>
-                {subjects.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
+                subjects={subjects}
+              />
             </Field>
 
             <Field id="message" label="Votre message">
@@ -181,8 +290,9 @@ function FormInner({ subjects }: { subjects: readonly string[] }) {
               </motion.p>
             )}
 
-            <p className="text-[11px] font-light text-text-light leading-relaxed mt-2">
-              En envoyant ce message, vous acceptez d'être recontacté·e par email à propos de votre demande.
+            <p className="text-[11px] font-light text-text-light leading-relaxed mt-2 max-w-md">
+              En envoyant ce message, vous acceptez d&apos;être recontacté·e
+              par email à propos de votre&nbsp;demande.
             </p>
           </motion.form>
         )}

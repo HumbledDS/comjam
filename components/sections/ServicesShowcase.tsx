@@ -62,7 +62,7 @@ export function ServicesShowcase() {
                 une vision <em>360°</em>
               </h2>
             </div>
-            <p className="max-w-sm text-[13.5px] font-light leading-[1.75] text-blue-pale md:text-right">
+            <p className="max-w-md text-[13.5px] font-light leading-[1.75] text-blue-pale md:text-right">
               De la production de contenu au consulting. Des solutions
               créatives, accessibles et adaptées à vos enjeux.
             </p>
@@ -129,18 +129,7 @@ export function ServicesShowcase() {
                   >
                     {s.num === "04" ? (
                       <>
-                        Consulting{" "}
-                        <span className="inline-flex items-baseline gap-1 align-middle">
-                          <span
-                            className={`text-[11px] font-sans font-medium tracking-[2px] uppercase px-2 py-[3px] -translate-y-[3px] ${
-                              light
-                                ? "bg-blue text-beige"
-                                : "bg-beige text-blue"
-                            }`}
-                          >
-                            1 to 1
-                          </span>
-                        </span>
+                        Consulting <em className="italic font-light">1-to-1</em>
                       </>
                     ) : (
                       s.name
@@ -172,7 +161,7 @@ export function ServicesShowcase() {
                   </ul>
 
                   <div
-                    className={`mt-auto pt-5 border-t flex items-end justify-between ${
+                    className={`mt-auto pt-5 border-t ${
                       light
                         ? "border-beige-mid"
                         : "border-[rgba(200,220,234,0.18)]"
@@ -184,13 +173,6 @@ export function ServicesShowcase() {
                       }`}
                     >
                       {s.pricing}
-                    </div>
-                    <div
-                      className={`text-[10px] font-medium tracking-[2.5px] uppercase opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all ${
-                        light ? "text-blue" : "text-beige"
-                      }`}
-                    >
-                      Voir →
                     </div>
                   </div>
                 </div>

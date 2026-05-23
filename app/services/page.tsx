@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { services } from "@/lib/copy";
+import { services, packs } from "@/lib/copy";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { PacksTeaser } from "@/components/sections/PacksTeaser";
 import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function ServicesPage() {
   return (
     <>
       <section
-        className="bg-blue pt-[160px]"
+        className="bg-blue-mid pt-[160px]"
         style={{
           paddingLeft: "var(--pad)",
           paddingRight: "var(--pad)",
@@ -30,6 +31,8 @@ export default function ServicesPage() {
         />
         <ServicesGrid services={services} />
       </section>
+
+      <PacksTeaser packs={packs} />
 
       <CTA
         title="Pas sûr·e du service qu'il vous faut ?"

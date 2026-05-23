@@ -51,8 +51,11 @@ export function BootcampPanel() {
         <Reveal delay={0.15} className="bg-blue p-10 lg:p-14 flex flex-col justify-between text-beige">
           <div>
             <Label light>{bootcamp.eyebrow}</Label>
+            <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-light mt-5 mb-3">
+              {bootcamp.name}
+            </div>
             <h2
-              className="display display-light mt-5 mb-6"
+              className="display display-light mb-6"
               style={{ fontSize: "clamp(40px, 4.5vw, 72px)" }}
             >
               Content <em>Shift.</em>
