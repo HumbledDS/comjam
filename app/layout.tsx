@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import { cormorant, outfit } from "@/lib/fonts";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -33,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main>{children}</main>
           {launched && <Footer />}
         </PageTransition>
+        <Analytics />
       </body>
     </html>
   );
