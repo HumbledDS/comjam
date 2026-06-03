@@ -20,6 +20,7 @@
  *   27     → Burgundy trench, white shirt, stone column (Louvre vibe)
  *   28     → Burgundy off-shoulder dress, night stairs, plants
  *   29     → Hijab + tweed blazer + denim, marble Hercules statue
+ *   30     → Editorial duo — brown + grey suits, Louvre columns (Stratégie)
  */
 
 export const photoSrc = (n: number, thumb = false) => {
@@ -51,7 +52,7 @@ export const media = {
   // Service-paired imagery (mood matches the service tone)
   services: {
     "creation-de-contenu": photo(17),    // Yellow sweater candid — content creator energy
-    "strategie-digitale": photo(2),       // Breguet — polished luxury brand feel
+    "strategie-digitale": photo(30),      // Editorial duo, Louvre columns — Stratégie polished feel
     "production-de-contenu": photo(28),   // Burgundy off-shoulder dress — per round 3 feedback
     "consulting": photo(12),              // Studio portrait — personal/professional
   },
