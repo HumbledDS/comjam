@@ -10,7 +10,7 @@ import { Pattern } from "@/components/brand/Pattern";
 import { Ornament } from "@/components/brand/Ornament";
 
 export const metadata: Metadata = {
-  title: "Bootcamp by Com'Jam · 4 et 5 Juillet 2026",
+  title: "Bootcamp by Com'Jam · 26 et 27 Septembre 2026",
   description: `${bootcamp.date} · En ligne. ${bootcamp.desc.slice(0, 140)}`,
 };
 

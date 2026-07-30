@@ -288,7 +288,7 @@ export const packs: Pack[] = [
 ============================================================ */
 export const bootcamp = {
   name: "Bootcamp by Com'Jam",
-  date: "4 et 5 Juillet 2026",
+  date: "26 et 27 Septembre 2026",
   schedule: "En ligne · 9h–18h",
   eyebrow: "Évènement",
   desc:
@@ -523,7 +523,7 @@ export const contact = {
     { kind: "em" as const, name: "Email", handle: "hello@comjam.fr", url: "mailto:hello@comjam.fr", icon: "@" },
   ],
   formSubjects: [
-    "Bootcamp by Com'Jam (4 et 5 Juillet 2026)",
+    "Bootcamp by Com'Jam (26 et 27 Septembre 2026)",
     "Content Trip by Com'Jam",
     "Shooting Photo · Pack Flash",
     "Shooting Photo · Pack Signature",
