@@ -57,6 +57,7 @@ Thumbs.db
 # Originals are kept locally so they can be re-processed when needed.
 # ============================================================
 public/img_jamila/
+public/lanzarote/
 
 # ============================================================
 # Python (kept from initial scaffold, may remove later)

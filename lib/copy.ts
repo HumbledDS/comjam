@@ -344,6 +344,144 @@ export const bootcamp = {
 };
 
 /* ============================================================
+   CONTENT TRIP — Édition 02 · Lanzarote
+============================================================ */
+export const contentTrip = {
+  name: "Com'Jam Content Trip",
+  edition: "Édition 02 · Lanzarote",
+  date: "Du 7 au 11 octobre 2026",
+  eyebrow: "Com'Jam Content Trip",
+  /** Candidature Google Form. */
+  formUrl: "https://forms.gle/Q2uGpQfRzihw9Gwh8",
+  /** Clôture des candidatures (fin de journée, heure de Paris). */
+  applicationDeadline: "2026-08-12T23:59:59+02:00",
+  applicationDeadlineLabel: "12 août 2026",
+  ctaLabel: "Je candidate",
+  heroTitle:
+    "Apprenez à créer du contenu, développez votre confiance et vivez une expérience unique avec d'autres créatrices.",
+  heroDesc:
+    "Pendant 5 jours, rejoignez un groupe de 6 participantes dans une villa à Lanzarote pour apprendre à créer du contenu, développer votre identité de marque et repartir avec des centaines de contenus photo et vidéo.",
+  concept: {
+    title: "Plus qu'un voyage, une expérience.",
+    paragraphs: [
+      "Le Com'Jam Content Trip est une expérience immersive pensée pour les créatrices de contenu, les entrepreneures et toutes celles qui souhaitent développer leur image sur les réseaux sociaux.",
+      "Pendant cinq jours, vous apprendrez à créer du contenu de manière plus professionnelle, à raconter votre histoire, à gagner en confiance devant la caméra et à construire une présence en ligne qui vous ressemble.",
+    ],
+    highlight:
+      "L'objectif n'est pas seulement de repartir avec de belles photos. L'objectif est de repartir avec des compétences, une vision claire et une confiance en vous.",
+  },
+  forYou: {
+    title: "Cette expérience est faite pour vous si :",
+    items: [
+      "Vous aimez créer du contenu.",
+      "Vous manquez parfois d'inspiration.",
+      "Vous souhaitez gagner en confiance devant la caméra.",
+      "Vous voulez apprendre à créer du contenu de meilleure qualité.",
+      "Vous souhaitez développer votre image de marque et investir en vous.",
+      "Vous rêvez de vivre une expérience humaine et sortir de votre zone de confort.",
+    ],
+  },
+  learn: {
+    title: "Pendant le séjour, vous serez accompagnée sur :",
+    items: [
+      "Création de contenu photo et vidéo",
+      "Réels Instagram et TikTok",
+      "Storytelling",
+      "Personal branding",
+      "Direction artistique",
+      "Formation montage vidéo et retouche photo",
+      "Développement de votre image sur les réseaux sociaux",
+      "Comprendre et analyser les algorithmes",
+      "Conseils personnalisés selon votre profil",
+    ],
+  },
+  program: {
+    title: "Surprise, on ne peut pas tout vous dévoiler maintenant !",
+    desc: "Inscrivez-vous et vous verrez tout cela en temps voulu.",
+  },
+  includes: [
+    "Vol aller-retour au départ de Paris*",
+    "4 nuits dans une villa privatisée",
+    "Les déplacements sur place",
+    "Toutes les sessions photo et vidéo",
+    "Les formations et ateliers",
+    "Un accompagnement personnalisé",
+    "Des ressources exclusives",
+  ],
+  includesNote:
+    "*Le vol est inclus au départ de Paris. Un départ d'une autre ville peut être étudié selon les disponibilités et un éventuel ajustement tarifaire.",
+  team: [
+    {
+      name: "Jamila",
+      role: "Fondatrice de Com'Jam",
+      desc: "Créatrice de contenu et formatrice, elle vous accompagnera tout au long du séjour afin de vous aider à développer votre image, gagner en confiance et améliorer vos contenus.",
+      photo: "/media/content-trip/jamila.jpg",
+    },
+    {
+      name: "Djeneba",
+      role: "Créatrice de contenu",
+      desc: "Elle partagera son expérience, ses conseils et accompagnera les participantes lors des sessions de création.",
+      photo: "/media/content-trip/djeneba.jpg",
+    },
+    {
+      name: "Sia",
+      role: "Créatrice de contenu",
+      desc: "Elle partagera son quotidien de créatrice, son approche authentique des réseaux sociaux et accompagnera les participantes dans la création de contenus.",
+      photo: "/media/content-trip/sia.jpg",
+    },
+  ],
+  pricing: {
+    label: "Tarif de l'expérience",
+    price: "1 850 €",
+    priceSuffix: "TTC",
+    desc: "Le tarif comprend l'ensemble de l'expérience décrite ci-dessus.",
+    paymentTitle: "Paiement possible :",
+    paymentOptions: [
+      "Paiement intégral en une fois.",
+      "Ou : 850€ d'acompte, puis le solde en une ou deux échéances.",
+    ],
+  },
+  spots: {
+    title: "Seulement 6 participantes",
+    paragraphs: [
+      "Afin de garantir un accompagnement personnalisé, cette édition est volontairement limitée à six participantes.",
+      "Chaque candidature est étudiée afin de constituer un groupe bienveillant et motivé.",
+    ],
+  },
+  faq: [
+    {
+      q: "Puis-je venir si je débute ?",
+      a: "Oui. Cette expérience est ouverte à tous les niveaux.",
+    },
+    {
+      q: "Dois-je avoir beaucoup d'abonnés ?",
+      a: "Non. La motivation est bien plus importante que le nombre d'abonnés.",
+    },
+    {
+      q: "Puis-je payer en plusieurs fois ?",
+      a: "Oui. Un acompte de 850 € est demandé pour confirmer votre place, puis le solde peut être réglé en une ou deux échéances.",
+    },
+  ],
+  finalCta: {
+    title: "Prête à vivre l'expérience Com'Jam ?",
+    desc: "Si vous souhaitez vivre cette aventure, développer votre créativité et repartir avec des souvenirs, des compétences et des contenus uniques, nous serons ravies de découvrir votre candidature.",
+  },
+  gallery: {
+    title: "Retour sur l'Édition 01 · Amsterdam",
+    desc: "L'ambiance réelle de la première édition : sessions photo, ateliers et moments partagés.",
+    photos: Array.from({ length: 8 }, (_, i) => ({
+      src: `/media/content-trip/amsterdam-${i + 1}.jpg`,
+      thumb: `/media/content-trip/amsterdam-${i + 1}-thumb.jpg`,
+    })),
+    videos: [
+      "/media/content-trip/amsterdam-video-1.mp4",
+      "/media/content-trip/amsterdam-video-2.mp4",
+    ],
+  },
+  villaImage: "/media/content-trip/villa.jpg",
+};
+
+/* ============================================================
    TESTIMONIALS — updated per PDF
 ============================================================ */
 export const testimonials = [
@@ -416,7 +554,7 @@ export const footer = {
       title: "Évènements",
       links: [
         { label: "Bootcamp by Com'Jam", href: "/bootcamp" },
-        { label: "Content Trip by Com'Jam", href: "/contact" },
+        { label: "Content Trip by Com'Jam", href: "/content-trip" },
       ],
     },
     {

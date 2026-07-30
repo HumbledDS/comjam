@@ -1,5 +1,7 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
-import { bootcamp } from "@/lib/copy";
+import { bootcamp, contentTrip } from "@/lib/copy";
 import { Reveal, RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
@@ -153,6 +155,71 @@ export default function BootcampPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ AUTRE ÉVÈNEMENT · CONTENT TRIP ============ */}
+      <section
+        className="bg-paper"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <div className="grid lg:grid-cols-2 items-stretch border border-beige-mid">
+          <Reveal className="relative aspect-[5/6] lg:aspect-auto lg:min-h-[560px] overflow-hidden">
+            <Image
+              src={contentTrip.villaImage}
+              alt="Villa du Com'Jam Content Trip à Lanzarote"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue/40 via-transparent to-transparent" />
+            <div className="absolute top-6 left-6 text-[10px] font-medium tracking-[3px] uppercase text-beige bg-blue/60 backdrop-blur-sm px-3 py-1.5">
+              Voyage créatif
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15} className="bg-blue p-10 lg:p-14 flex flex-col justify-between text-beige">
+            <div>
+              <Label light>Autre évènement</Label>
+              <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-light mt-5 mb-3">
+                {contentTrip.name}
+              </div>
+              <h2
+                className="display display-light mb-6"
+                style={{ fontSize: "clamp(36px, 4vw, 64px)" }}
+              >
+                Édition 02 · <em>Lanzarote.</em>
+              </h2>
+              <div className="text-[12px] font-medium tracking-[2px] uppercase text-blue-pale/90 mb-6">
+                {contentTrip.date} · 6 participantes
+              </div>
+              <p className="text-[15px] font-light leading-[1.8] text-blue-pale max-w-md">
+                {contentTrip.heroDesc}
+              </p>
+            </div>
+
+            <div className="flex items-end justify-between gap-4 mt-10 pt-8 border-t border-[rgba(200,220,234,0.2)]">
+              <div>
+                <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
+                  {contentTrip.pricing.label}
+                </div>
+                <div className="font-display text-[48px] font-light leading-none">
+                  {contentTrip.pricing.price}
+                  <span className="text-[15px] font-sans font-light text-blue-pale ml-2">
+                    {contentTrip.pricing.priceSuffix}
+                  </span>
+                </div>
+              </div>
+              <Link href="/content-trip" className="btn btn-light whitespace-nowrap">
+                Découvrir
+              </Link>
             </div>
           </Reveal>
         </div>
