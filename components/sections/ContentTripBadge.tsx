@@ -1,12 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import { contentTrip } from "@/lib/copy";
 
 /**
  * Floating glowing circular badge teasing the Content Trip, shown over the
- * home hero. The text ring spins slowly, the whole badge bobs and its beige
- * glow breathes. Links to /content-trip.
+ * home hero. The Lanzarote villa photo sits in the centre, the text ring
+ * spins slowly around it, the whole badge bobs and its beige glow breathes.
+ * Links to /content-trip.
  */
 export function ContentTripBadge() {
   const reduce = useReducedMotion();
@@ -17,7 +20,7 @@ export function ContentTripBadge() {
       initial={reduce ? false : { opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute right-[6%] bottom-[24%] sm:bottom-[20%] z-20"
+      className="absolute right-4 top-[14%] sm:top-auto sm:right-[6%] sm:bottom-[20%] z-20"
     >
       <motion.div
         animate={reduce ? undefined : { y: [0, -12, 0] }}
@@ -26,7 +29,7 @@ export function ContentTripBadge() {
         <Link
           href="/content-trip"
           aria-label="Découvrir le Com'Jam Content Trip, Édition 02 à Lanzarote"
-          className="group block relative w-[104px] h-[104px] sm:w-[128px] sm:h-[128px] rounded-full"
+          className="group block relative w-[112px] h-[112px] sm:w-[152px] sm:h-[152px] rounded-full"
         >
           {/* Breathing glow */}
           <motion.span
@@ -46,6 +49,19 @@ export function ContentTripBadge() {
             transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
           />
 
+          {/* Villa photo at the centre */}
+          <span className="absolute inset-[21px] sm:inset-[28px] rounded-full overflow-hidden">
+            <Image
+              src={contentTrip.villaImage}
+              alt=""
+              fill
+              sizes="152px"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            {/* Soft tint so the arrow stays readable */}
+            <span aria-hidden className="absolute inset-0 bg-blue/25 transition-colors duration-300 group-hover:bg-blue/10" />
+          </span>
+
           {/* Spinning text ring */}
           <motion.svg
             viewBox="0 0 120 120"
@@ -57,18 +73,18 @@ export function ContentTripBadge() {
             <defs>
               <path
                 id="trip-ring"
-                d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
+                d="M 60,60 m -50,0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0"
               />
             </defs>
-            <text className="fill-beige" style={{ fontSize: "10.5px", letterSpacing: "2.2px", fontWeight: 500 }}>
+            <text className="fill-beige" style={{ fontSize: "10px", letterSpacing: "2px", fontWeight: 500 }}>
               <textPath href="#trip-ring">{ringText}</textPath>
             </text>
           </motion.svg>
 
-          {/* Center arrow */}
+          {/* Center arrow over the photo */}
           <span
             aria-hidden
-            className="absolute inset-0 flex items-center justify-center text-beige text-[22px] sm:text-[26px] -rotate-45 transition-transform duration-300 group-hover:rotate-0 group-hover:scale-110"
+            className="absolute inset-0 flex items-center justify-center text-beige text-[22px] sm:text-[26px] -rotate-45 transition-transform duration-300 group-hover:rotate-0 group-hover:scale-110 drop-shadow-[0_1px_6px_rgba(13,32,53,0.6)]"
           >
             →
           </span>
