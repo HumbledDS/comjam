@@ -1,6 +1,6 @@
 "use client";
 
-import { Pack } from "@/lib/copy";
+import { Pack, promo } from "@/lib/copy";
 
 export function PackSelector({
   packs,
@@ -15,6 +15,7 @@ export function PackSelector({
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       {packs.map((p) => {
         const active = p.id === selected;
+        const onPromo = promo.active && !!p.promoPriceLabel;
         return (
           <button
             key={p.id}
@@ -32,11 +33,26 @@ export function PackSelector({
                 {p.topBadge}
               </div>
             )}
+            {onPromo && (
+              <div className="absolute -top-3 right-6 bg-blue text-beige border border-blue-light text-[10px] font-semibold tracking-[1.5px] uppercase px-3 py-1">
+                {promo.label}
+              </div>
+            )}
             <div className={`font-display text-2xl font-normal mb-2 ${active ? "text-beige" : "text-blue"}`}>
               {p.name}
             </div>
+            {onPromo && (
+              <div
+                className={`text-[14px] font-light line-through leading-none mb-1 ${
+                  active ? "text-blue-pale/80" : "text-text-light"
+                }`}
+              >
+                {p.priceLabel}
+                {p.unit && ` ${p.unit}`}
+              </div>
+            )}
             <div className={`font-display text-[36px] font-light leading-none mb-3 ${active ? "text-beige" : "text-blue"}`}>
-              {p.priceLabel}
+              {onPromo ? p.promoPriceLabel : p.priceLabel}
               {p.unit && (
                 <span className={`text-[14px] font-light ${active ? "text-blue-pale" : "text-text-light"}`}>
                   {" "}{p.unit}

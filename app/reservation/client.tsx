@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
-import { Pack } from "@/lib/copy";
+import { Pack, promo } from "@/lib/copy";
 import { PackSelector } from "@/components/booking/PackSelector";
 
 /**
@@ -32,9 +32,22 @@ export function ReservationClient({ packs }: { packs: readonly Pack[] }) {
       <div className="grid lg:grid-cols-[1fr_minmax(0,420px)] gap-8 mt-14">
         {/* Detail card */}
         <div className="bg-paper border border-beige-mid p-8 sm:p-10">
-          <div className="font-display text-3xl text-blue mb-2">{pack.name}</div>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="font-display text-3xl text-blue">{pack.name}</div>
+            {promo.active && pack.promoPriceLabel && (
+              <span className="bg-blue text-beige text-[10px] font-semibold tracking-[1.5px] uppercase px-3 py-1">
+                {promo.label} {promo.untilLabel}
+              </span>
+            )}
+          </div>
+          {promo.active && pack.promoPriceLabel && (
+            <div className="text-[16px] font-light text-text-light line-through leading-none mb-1">
+              {pack.priceLabel}
+              {pack.unit && ` ${pack.unit}`}
+            </div>
+          )}
           <div className="font-display text-[44px] font-light text-blue leading-none mb-6">
-            {pack.priceLabel}
+            {promo.active && pack.promoPriceLabel ? pack.promoPriceLabel : pack.priceLabel}
             {pack.unit && (
               <span className="text-[15px] font-light text-text-light">
                 {" "}{pack.unit}

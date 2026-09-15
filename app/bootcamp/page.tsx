@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { bootcamp, contentTrip } from "@/lib/copy";
+import { bootcamp, contentTrip, promo } from "@/lib/copy";
 import { Reveal, RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
@@ -124,14 +124,18 @@ export default function BootcampPage() {
 
           <Reveal delay={0.15}>
             <div className="bg-blue p-11 lg:sticky lg:top-[110px]">
-              <div className="inline-block bg-blue-light text-paper text-[9px] font-medium tracking-[2px] uppercase px-[14px] py-[5px] mb-6">
-                {bootcamp.price.label}
+              <div
+                className={`inline-block text-[9px] font-semibold tracking-[2px] uppercase px-[14px] py-[5px] mb-6 ${
+                  promo.active ? "bg-beige text-blue" : "bg-blue-light text-paper font-medium"
+                }`}
+              >
+                {promo.active ? `${promo.label} ${promo.untilLabel}` : bootcamp.price.label}
               </div>
               <div className="font-display text-[72px] font-light text-beige leading-none mb-1">
-                {bootcamp.price.current}€
+                {promo.active ? bootcamp.price.promoCurrent : bootcamp.price.current}€
               </div>
               <div className="text-[13px] font-light text-blue-pale line-through mb-2">
-                Tarif normal : {bootcamp.price.original}€
+                Tarif normal : {promo.active ? bootcamp.price.current : bootcamp.price.original}€
               </div>
               <div className="text-[12px] font-light text-blue-pale leading-[1.7] mb-6">
                 Pour les 20 premiers inscrits.

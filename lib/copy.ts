@@ -107,6 +107,18 @@ export const about = {
 };
 
 /* ============================================================
+   PROMO — offre -50% sur toutes les offres.
+   Passer active à false après le 8 novembre pour tout couper
+   d'un coup (badges, prix barrés, pastille nav).
+============================================================ */
+export const promo = {
+  active: true,
+  label: "-50%",
+  untilLabel: "jusqu'au 8 novembre",
+  untilShort: "jusqu'au 8 nov",
+};
+
+/* ============================================================
    SERVICES (4 services)
 ============================================================ */
 export type Service = {
@@ -118,6 +130,8 @@ export type Service = {
   bullets: string[];
   for?: string[];
   pricing?: string;
+  /** Prix promo affiché à la place de pricing quand promo.active. */
+  promoPricing?: string;
   ctaHref: string;
   ctaLabel: string;
 };
@@ -137,6 +151,7 @@ export const services: Service[] = [
     ],
     for: ["Particuliers", "Créateurs", "Entrepreneurs", "Marques"],
     pricing: "Dès 95€",
+    promoPricing: "Dès 47,50€",
     ctaHref: "/reservation",
     ctaLabel: "Réserver une séance",
   },
@@ -200,6 +215,8 @@ export type Pack = {
   name: string;
   price: number;
   priceLabel: string;
+  /** Prix promo affiché (prix barré = priceLabel) quand promo.active. */
+  promoPriceLabel?: string;
   unit?: string;
   featured?: boolean;
   topBadge?: string;
@@ -217,6 +234,7 @@ export const packs: Pack[] = [
     name: "Flash",
     price: 95,
     priceLabel: "95€",
+    promoPriceLabel: "47,50€",
     unit: "/heure",
     description: "Pour un shooting rapide et efficace.",
     features: [
@@ -233,6 +251,7 @@ export const packs: Pack[] = [
     name: "Signature",
     price: 320,
     priceLabel: "320€",
+    promoPriceLabel: "160€",
     featured: true,
     topBadge: "Le plus complet",
     description: "Le pack signature pour un shooting éditorial complet.",
@@ -258,6 +277,7 @@ export const packs: Pack[] = [
     name: "Duo",
     price: 290,
     priceLabel: "290€",
+    promoPriceLabel: "145€",
     description: "Pour deux personnes, même énergie, même résultat éditorial.",
     features: [
       "3h de shooting à deux personnes",
@@ -280,6 +300,7 @@ export const packs: Pack[] = [
     name: "Réel+",
     price: 555,
     priceLabel: "555€",
+    promoPriceLabel: "277,50€",
     description: "Tournage vidéo professionnel pour vos réseaux.",
     features: [
       "4h de shooting vidéo",
@@ -348,7 +369,8 @@ export const bootcamp = {
     { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam »" },
     { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner" },
   ],
-  price: { current: 200, original: 250, label: "Early Bird · 20 places" },
+  /** promoCurrent est affiché (current barré) quand promo.active. */
+  price: { current: 200, original: 250, promoCurrent: 100, label: "Early Bird · 20 places" },
   reassurance: [
     "Paiement sécurisé",
     "Formation en ligne",

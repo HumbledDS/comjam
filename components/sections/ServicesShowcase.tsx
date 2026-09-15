@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
-import { services, type Service } from "@/lib/copy";
+import { promo, services, type Service } from "@/lib/copy";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { Pattern } from "@/components/brand/Pattern";
@@ -158,12 +158,23 @@ export function ServicesShowcase() {
                         : "border-[rgba(200,220,234,0.18)]"
                     }`}
                   >
-                    <div
-                      className={`font-display text-[20px] font-light ${
-                        light ? "text-blue" : "text-beige"
-                      }`}
-                    >
-                      {s.pricing}
+                    <div>
+                      {promo.active && s.promoPricing && (
+                        <div
+                          className={`text-[12px] font-light line-through leading-none mb-1 ${
+                            light ? "text-text-light" : "text-blue-pale/70"
+                          }`}
+                        >
+                          {s.pricing}
+                        </div>
+                      )}
+                      <div
+                        className={`font-display text-[20px] font-light ${
+                          light ? "text-blue" : "text-beige"
+                        }`}
+                      >
+                        {promo.active && s.promoPricing ? s.promoPricing : s.pricing}
+                      </div>
                     </div>
                     <span
                       className={`inline-flex items-center gap-2 text-[10px] font-medium tracking-[2.5px] uppercase px-4 py-2 transition-all group-hover:translate-x-1 ${

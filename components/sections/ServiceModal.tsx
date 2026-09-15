@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
-import { Service } from "@/lib/copy";
+import { promo, Service } from "@/lib/copy";
 import { media } from "@/lib/media";
 
 /**
@@ -154,9 +154,19 @@ export function ServiceModal({
                 <div>
                   <div className="text-[10px] font-medium tracking-[2px] uppercase text-blue-light mb-1">
                     Tarif
+                    {promo.active && service.promoPricing && (
+                      <span className="ml-2 bg-blue text-beige text-[9px] font-semibold tracking-[1.5px] px-2 py-[3px]">
+                        {promo.label} {promo.untilLabel}
+                      </span>
+                    )}
                   </div>
+                  {promo.active && service.promoPricing && (
+                    <div className="text-[13px] font-light text-text-light line-through leading-none mb-1">
+                      {service.pricing}
+                    </div>
+                  )}
                   <div className="font-display text-[26px] font-light text-blue leading-none">
-                    {service.pricing}
+                    {promo.active && service.promoPricing ? service.promoPricing : service.pricing}
                   </div>
                 </div>
                 <Link

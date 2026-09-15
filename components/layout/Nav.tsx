@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav } from "@/lib/copy";
+import { nav, promo } from "@/lib/copy";
 import { Monogram } from "@/components/brand/Monogram";
 
 export function Nav() {
@@ -54,14 +54,33 @@ export function Nav() {
       >
         {/* Mobile: cream "C" monogram over transparent dark hero, blue otherwise.
             Desktop: always blue against the frosted backdrop. */}
-        <Link href="/" aria-label="Com'Jam, accueil" className="inline-flex items-center leading-none">
-          <span className="md:hidden">
-            <Monogram variant={mobileTransparent ? "cream" : "blue"} size={42} />
-          </span>
-          <span className="hidden md:inline-block">
-            <Monogram variant="blue" size={44} />
-          </span>
-        </Link>
+        <div className="flex items-center gap-4 sm:gap-5">
+          <Link href="/" aria-label="Com'Jam, accueil" className="inline-flex items-center leading-none">
+            <span className="md:hidden">
+              <Monogram variant={mobileTransparent ? "cream" : "blue"} size={42} />
+            </span>
+            <span className="hidden md:inline-block">
+              <Monogram variant="blue" size={44} />
+            </span>
+          </Link>
+
+          {/* Badge promo, visible sur toutes les pages */}
+          {promo.active && (
+            <Link
+              href="/reservation"
+              aria-label={`Offre ${promo.label} sur toutes les offres ${promo.untilLabel}`}
+              className="inline-flex items-center gap-2.5 rounded-full bg-blue px-4 py-2 sm:px-6 sm:py-3 text-[11px] sm:text-[12px] font-semibold tracking-[1.5px] uppercase whitespace-nowrap shadow-[0_6px_18px_-4px_rgba(13,32,53,0.5)] hover:bg-blue-mid transition-colors"
+              style={{ color: "var(--color-beige)" }}
+            >
+              <span
+                className="w-[7px] h-[7px] bg-beige rounded-full shrink-0"
+                style={{ animation: "pulse-dot 2s infinite" }}
+              />
+              <span className="sm:hidden">{promo.label} {promo.untilShort}</span>
+              <span className="hidden sm:inline">{promo.label} sur tout {promo.untilShort}</span>
+            </Link>
+          )}
+        </div>
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { type Pack } from "@/lib/copy";
+import { promo, type Pack } from "@/lib/copy";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 
@@ -61,11 +61,22 @@ export function PacksTeaser({ packs }: { packs: readonly Pack[] }) {
                   {p.topBadge}
                 </div>
               )}
+              {promo.active && p.promoPriceLabel && (
+                <div className="absolute -top-3 right-7 bg-blue text-beige text-[10px] font-semibold tracking-[1.5px] uppercase px-3 py-1">
+                  {promo.label}
+                </div>
+              )}
               <div className="font-display text-2xl font-normal text-blue mb-2">
                 {p.name}
               </div>
+              {promo.active && p.promoPriceLabel && (
+                <div className="text-[13px] font-light text-text-light line-through leading-none mb-1">
+                  {p.priceLabel}
+                  {p.unit && ` ${p.unit}`}
+                </div>
+              )}
               <div className="font-display text-[34px] font-light text-blue leading-none mb-4">
-                {p.priceLabel}
+                {promo.active && p.promoPriceLabel ? p.promoPriceLabel : p.priceLabel}
                 {p.unit && (
                   <span className="text-[13px] font-light text-text-light">
                     {" "}{p.unit}

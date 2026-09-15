@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { bootcamp } from "@/lib/copy";
+import { bootcamp, promo } from "@/lib/copy";
 import { media } from "@/lib/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
@@ -70,14 +70,20 @@ export function BootcampPanel() {
 
           <div className="flex items-end justify-between gap-4 mt-10 pt-8 border-t border-[rgba(200,220,234,0.2)]">
             <div>
-              <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                {bootcamp.price.label}
-              </div>
+              {promo.active ? (
+                <div className="inline-block bg-beige text-blue text-[10px] font-semibold tracking-[1.5px] uppercase px-3 py-1 mb-3">
+                  {promo.label} {promo.untilLabel}
+                </div>
+              ) : (
+                <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
+                  {bootcamp.price.label}
+                </div>
+              )}
               <div className="font-display text-[56px] font-light leading-none">
-                {bootcamp.price.current}€
+                {promo.active ? bootcamp.price.promoCurrent : bootcamp.price.current}€
               </div>
               <div className="text-[12px] text-blue-pale line-through mt-1">
-                Tarif normal {bootcamp.price.original}€
+                Tarif normal {promo.active ? bootcamp.price.current : bootcamp.price.original}€
               </div>
             </div>
             <Link

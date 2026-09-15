@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import { type Service } from "@/lib/copy";
+import { promo, type Service } from "@/lib/copy";
 import { RevealGroup, revealItem } from "@/components/ui/Reveal";
 import { Pattern } from "@/components/brand/Pattern";
 import { ServiceModal } from "@/components/sections/ServiceModal";
@@ -57,8 +57,15 @@ export function ServicesGrid({ services }: { services: readonly Service[] }) {
                 ))}
               </ul>
               <div className="pt-5 border-t border-[rgba(200,220,234,0.18)] flex items-end justify-between gap-3">
-                <div className="font-display text-[22px] font-light text-beige">
-                  {s.pricing}
+                <div>
+                  {promo.active && s.promoPricing && (
+                    <div className="text-[12px] font-light text-blue-pale/70 line-through leading-none mb-1">
+                      {s.pricing}
+                    </div>
+                  )}
+                  <div className="font-display text-[22px] font-light text-beige">
+                    {promo.active && s.promoPricing ? s.promoPricing : s.pricing}
+                  </div>
                 </div>
                 <span className="inline-flex items-center gap-2 text-[10px] font-medium tracking-[2.5px] uppercase px-4 py-2 bg-beige text-blue transition-all group-hover:bg-paper group-hover:translate-x-1">
                   Voir <span aria-hidden>→</span>
