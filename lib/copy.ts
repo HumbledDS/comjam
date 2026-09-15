@@ -15,12 +15,25 @@ export const brand = {
   tiktok: { handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", followers: "38 000" },
 };
 
-export type NavItem = { label: string; href: string; primary?: boolean };
+export type NavItem = {
+  label: string;
+  href: string;
+  primary?: boolean;
+  /** Sub-links rendered as a dropdown (desktop) / indented list (mobile). */
+  children?: { label: string; sub?: string; href: string }[];
+};
 
 export const nav: NavItem[] = [
   { label: "À propos", href: "/a-propos" },
   { label: "Services", href: "/services" },
-  { label: "Évènements", href: "/bootcamp" },
+  {
+    label: "Évènements",
+    href: "/bootcamp",
+    children: [
+      { label: "Content Trip", sub: "Édition 02 · Lanzarote", href: "/content-trip" },
+      { label: "Content Shift", sub: "14 et 15 Novembre 2026", href: "/bootcamp" },
+    ],
+  },
   { label: "Réservation", href: "/reservation" },
   { label: "Contact", href: "/contact", primary: true },
 ];
@@ -288,7 +301,7 @@ export const packs: Pack[] = [
 ============================================================ */
 export const bootcamp = {
   name: "Bootcamp by Com'Jam",
-  date: "26 et 27 Septembre 2026",
+  date: "14 et 15 Novembre 2026",
   schedule: "En ligne · 9h–18h",
   eyebrow: "Évènement",
   desc:
@@ -523,7 +536,7 @@ export const contact = {
     { kind: "em" as const, name: "Email", handle: "hello@comjam.fr", url: "mailto:hello@comjam.fr", icon: "@" },
   ],
   formSubjects: [
-    "Bootcamp by Com'Jam (26 et 27 Septembre 2026)",
+    "Bootcamp by Com'Jam (14 et 15 Novembre 2026)",
     "Content Trip by Com'Jam",
     "Shooting Photo · Pack Flash",
     "Shooting Photo · Pack Signature",

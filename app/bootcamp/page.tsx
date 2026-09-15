@@ -10,7 +10,7 @@ import { Pattern } from "@/components/brand/Pattern";
 import { Ornament } from "@/components/brand/Ornament";
 
 export const metadata: Metadata = {
-  title: "Bootcamp by Com'Jam · 26 et 27 Septembre 2026",
+  title: "Bootcamp by Com'Jam · 14 et 15 Novembre 2026",
   description: `${bootcamp.date} · En ligne. ${bootcamp.desc.slice(0, 140)}`,
 };
 
@@ -208,13 +208,10 @@ export default function BootcampPage() {
             <div className="flex items-end justify-between gap-4 mt-10 pt-8 border-t border-[rgba(200,220,234,0.2)]">
               <div>
                 <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                  {contentTrip.pricing.label}
+                  Sur candidature
                 </div>
-                <div className="font-display text-[48px] font-light leading-none">
-                  {contentTrip.pricing.price}
-                  <span className="text-[15px] font-sans font-light text-blue-pale ml-2">
-                    {contentTrip.pricing.priceSuffix}
-                  </span>
+                <div className="font-display text-[28px] font-light leading-tight text-beige">
+                  6 places seulement
                 </div>
               </div>
               <Link href="/content-trip" className="btn btn-light whitespace-nowrap">

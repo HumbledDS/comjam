@@ -65,7 +65,10 @@ export function Nav() {
 
         <ul className="hidden md:flex items-center gap-10">
           {nav.map((item) => (
-            <li key={item.href}>
+            <li
+              key={item.href}
+              className={item.children ? "relative group" : undefined}
+            >
               {item.primary ? (
                 <Link
                   href={item.href}
@@ -76,14 +79,48 @@ export function Nav() {
               ) : (
                 <Link
                   href={item.href}
-                  className={`relative text-[11px] font-semibold tracking-[2.5px] uppercase text-blue transition-colors hover:text-blue-mid ${
+                  aria-haspopup={item.children ? "menu" : undefined}
+                  className={`relative inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[2.5px] uppercase text-blue transition-colors hover:text-blue-mid ${
                     pathname === item.href ? "opacity-100" : "opacity-90"
                   } after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:bg-blue after:transition-all after:duration-300 ${
                     pathname === item.href ? "after:w-full" : "after:w-0 hover:after:w-full"
                   }`}
                 >
                   {item.label}
+                  {item.children && (
+                    <span
+                      aria-hidden
+                      className="text-[8px] transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180"
+                    >
+                      ▾
+                    </span>
+                  )}
                 </Link>
+              )}
+
+              {/* Dropdown (hover + keyboard focus) */}
+              {item.children && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200">
+                  <ul className="min-w-[240px] bg-paper border border-beige-mid shadow-[0_18px_40px_-12px_rgba(13,32,53,0.25)] py-2">
+                    {item.children.map((child) => (
+                      <li key={child.href + child.label}>
+                        <Link
+                          href={child.href}
+                          className="block px-5 py-3 border-l-2 border-transparent hover:border-blue-light hover:bg-beige transition-colors"
+                        >
+                          <span className="block text-[11px] font-semibold tracking-[2px] uppercase text-blue">
+                            {child.label}
+                          </span>
+                          {child.sub && (
+                            <span className="block text-[10.5px] font-light text-text-light mt-0.5">
+                              {child.sub}
+                            </span>
+                          )}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </li>
           ))}
@@ -118,15 +155,32 @@ export function Nav() {
           open ? "flex opacity-100" : "hidden opacity-0"
         }`}
       >
-        {nav.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="font-display text-[36px] font-light text-blue tracking-tight hover:text-blue-light transition-colors"
-          >
-            {item.label}
-          </Link>
-        ))}
+        {nav.map((item) =>
+          item.children ? (
+            <div key={item.href} className="flex flex-col items-center gap-3">
+              <span className="font-display text-[36px] font-light text-blue tracking-tight">
+                {item.label}
+              </span>
+              {item.children.map((child) => (
+                <Link
+                  key={child.href + child.label}
+                  href={child.href}
+                  className="text-[13px] font-medium tracking-[2px] uppercase text-blue-light hover:text-blue transition-colors"
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="font-display text-[36px] font-light text-blue tracking-tight hover:text-blue-light transition-colors"
+            >
+              {item.label}
+            </Link>
+          )
+        )}
       </div>
     </>
   );

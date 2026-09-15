@@ -81,13 +81,10 @@ export default function ReservationPage() {
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
                   <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                    {contentTrip.pricing.label}
+                    Sur candidature
                   </div>
-                  <div className="font-display text-[40px] font-light leading-none">
-                    {contentTrip.pricing.price}
-                    <span className="text-[14px] font-sans font-light text-blue-pale ml-2">
-                      {contentTrip.pricing.priceSuffix}
-                    </span>
+                  <div className="font-display text-[26px] font-light leading-tight text-beige">
+                    6 places seulement
                   </div>
                 </div>
                 <Link href="/content-trip" className="btn btn-light whitespace-nowrap">

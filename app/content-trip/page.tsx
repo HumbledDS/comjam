@@ -249,7 +249,7 @@ export default function ContentTripPage() {
           paddingBottom: "var(--gap)",
         }}
       >
-        <div className="grid lg:grid-cols-[1fr_1fr_360px] gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Inclus */}
           <Reveal>
             <Label>06 · Ce qui est inclus</Label>
@@ -304,42 +304,10 @@ export default function ContentTripPage() {
             </div>
           </Reveal>
 
-          {/* Tarifs */}
-          <Reveal delay={0.2}>
-            <div className="bg-blue p-9 lg:sticky lg:top-[110px]">
-              <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-5">
-                08 · {contentTrip.pricing.label}
-              </div>
-              <div className="font-display text-[58px] font-light text-beige leading-none">
-                {contentTrip.pricing.price}
-                <span className="text-[16px] font-sans font-light text-blue-pale ml-2">
-                  {contentTrip.pricing.priceSuffix}
-                </span>
-              </div>
-              <p className="text-[12px] font-light text-blue-pale leading-[1.7] mt-4 mb-6">
-                {contentTrip.pricing.desc}
-              </p>
-              <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
-              <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-light mb-3">
-                {contentTrip.pricing.paymentTitle}
-              </div>
-              <ul className="text-[12px] font-light text-blue-pale leading-[1.9] mb-7">
-                {contentTrip.pricing.paymentOptions.map((o) => (
-                  <li
-                    key={o}
-                    className="pl-4 relative before:content-['-'] before:absolute before:left-0 before:text-blue-light"
-                  >
-                    {o}
-                  </li>
-                ))}
-              </ul>
-              <ApplyButton className="btn btn-light w-full text-center block" />
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* ============ 09 · LES PLACES ============ */}
+      {/* ============ 08 · LES PLACES ============ */}
       <section
         className="bg-beige"
         style={{
@@ -351,7 +319,7 @@ export default function ContentTripPage() {
       >
         <div className="grid lg:grid-cols-12 gap-y-8 lg:gap-x-16 items-center">
           <Reveal className="lg:col-span-5">
-            <Label>09 · Les places</Label>
+            <Label>08 · Les places</Label>
             <div className="flex items-baseline gap-5 mt-5">
               <span
                 className="font-display font-light text-blue leading-none"
@@ -414,7 +382,7 @@ export default function ContentTripPage() {
         />
       </section>
 
-      {/* ============ 10 · FAQ ============ */}
+      {/* ============ 09 · FAQ ============ */}
       <section
         className="bg-beige"
         style={{
@@ -426,7 +394,7 @@ export default function ContentTripPage() {
       >
         <div className="grid lg:grid-cols-12 gap-y-10 lg:gap-x-16 items-start">
           <Reveal className="lg:col-span-4">
-            <Label>10 · FAQ</Label>
+            <Label>09 · FAQ</Label>
             <h2
               className="display mt-5"
               style={{ fontSize: "clamp(30px, 3.5vw, 48px)" }}
