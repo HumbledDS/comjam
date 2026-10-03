@@ -46,6 +46,16 @@ export function Footer() {
       <div className="flex justify-between items-center pt-10 flex-wrap gap-5">
         <div className="text-[13px] font-light text-[#FDF9F5]/85">
           © 2026 {brand.name} {brand.suffix} · {brand.city} · Tous droits réservés
+          <span className="mx-2 opacity-50">·</span>
+          Site créé par{" "}
+          <a
+            href="https://studiocarrel.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#FDF9F5] hover:underline underline-offset-[4px] decoration-[1px] transition-all"
+          >
+            Studio Carrel
+          </a>
         </div>
         <div className="flex gap-8">
           {footer.socials.map((s) => (
