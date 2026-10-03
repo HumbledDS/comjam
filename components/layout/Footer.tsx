@@ -47,14 +47,13 @@ export function Footer() {
         <div className="text-[13px] font-light text-[#FDF9F5]/85">
           © 2026 {brand.name} {brand.suffix} · {brand.city} · Tous droits réservés
           <span className="mx-2 opacity-50">·</span>
-          Site créé par{" "}
           <a
             href="https://studiocarrel.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#FDF9F5] hover:underline underline-offset-[4px] decoration-[1px] transition-all"
+            className="carrel-hop text-[14px] font-medium text-[#FDF9F5] underline underline-offset-[4px] decoration-[1.5px] decoration-blue-light hover:text-blue-pale hover:decoration-blue-pale transition-colors"
           >
-            Studio Carrel
+            Site créé par Studio Carrel
           </a>
         </div>
         <div className="flex gap-8">

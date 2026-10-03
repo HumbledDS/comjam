@@ -168,8 +168,25 @@ ul { list-style: none; padding-left: 0; }
   to   { transform: translate3d(-50%, 0, 0); }
 }
 
+/* Petit sautillement du credit Studio Carrel : deux rebonds vifs
+   (~0,8s, meme vitesse qu'un cycle court) puis un long repos,
+   le tout sur un cycle de 8 secondes. */
+@keyframes carrel-hop {
+  0%, 10.5%, 100% { transform: translateY(0); }
+  3%              { transform: translateY(-5px); }
+  6%              { transform: translateY(0); }
+  8.25%           { transform: translateY(-2px); }
+}
+.carrel-hop {
+  display: inline-block;
+  animation: carrel-hop 8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-marquee] {
+    animation: none !important;
+  }
+  .carrel-hop {
     animation: none !important;
   }
 }
