@@ -68,7 +68,7 @@ export function Nav() {
           {promo.active && (
             <Link
               href="/reservation"
-              aria-label={`Offre ${promo.label} sur toutes les offres ${promo.untilLabel}`}
+              aria-label={`Offre ${promo.label} sur les shootings ${promo.untilLabel}`}
               className="inline-flex items-center gap-2.5 rounded-full bg-blue px-4 py-2 sm:px-6 sm:py-3 text-[11px] sm:text-[12px] font-semibold tracking-[1.5px] uppercase whitespace-nowrap shadow-[0_6px_18px_-4px_rgba(13,32,53,0.5)] hover:bg-blue-mid transition-colors"
               style={{ color: "var(--color-beige)" }}
             >
@@ -77,7 +77,7 @@ export function Nav() {
                 style={{ animation: "pulse-dot 2s infinite" }}
               />
               <span className="sm:hidden">{promo.label} {promo.untilShort}</span>
-              <span className="hidden sm:inline">{promo.label} sur tout {promo.untilShort}</span>
+              <span className="hidden sm:inline">{promo.label} sur les shootings {promo.untilShort}</span>
             </Link>
           )}
         </div>

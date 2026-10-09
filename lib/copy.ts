@@ -369,8 +369,8 @@ export const bootcamp = {
     { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam »" },
     { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner" },
   ],
-  /** promoCurrent est affiché (current barré) quand promo.active. */
-  price: { current: 200, original: 250, promoCurrent: 100, label: "Early Bird · 20 places" },
+  /** Le bootcamp n'est pas concerné par la promo -50%. */
+  price: { current: 200, original: 250, label: "Early Bird · 20 places" },
   reassurance: [
     "Paiement sécurisé",
     "Formation en ligne",
