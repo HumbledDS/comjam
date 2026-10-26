@@ -4,6 +4,7 @@ import { EditorialIntro } from "@/components/sections/EditorialIntro";
 import { PortraitGallery } from "@/components/sections/PortraitGallery";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
 import { BootcampPanel } from "@/components/sections/BootcampPanel";
+import { ContentShiftSplash } from "@/components/sections/ContentShiftSplash";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Ornament } from "@/components/brand/Ornament";
@@ -20,6 +21,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <ContentShiftSplash />
       <HeroReel />
       <Marquee items={home.ticker} />
       <EditorialIntro />

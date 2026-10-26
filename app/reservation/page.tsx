@@ -54,16 +54,16 @@ export default function ReservationPage() {
                 alt="Villa du Com'Jam Content Trip à Lanzarote"
                 fill
                 sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover"
+                className={`object-cover ${contentTrip.editionOver ? "grayscale" : ""}`}
               />
               <div className="absolute top-5 left-5 text-[10px] font-medium tracking-[3px] uppercase text-beige bg-blue/60 backdrop-blur-sm px-3 py-1.5">
-                Voyage créatif
+                {contentTrip.editionOver ? contentTrip.editionOverLabel : "Voyage créatif"}
               </div>
             </div>
             <div className="p-9 lg:p-12 text-beige flex flex-col justify-between gap-8">
               <div>
                 <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-light mb-3">
-                  {contentTrip.name} · Sur candidature
+                  {contentTrip.name}{contentTrip.editionOver ? "" : " · Sur candidature"}
                 </div>
                 <h2
                   className="display display-light mb-4"
@@ -81,14 +81,19 @@ export default function ReservationPage() {
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
                   <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                    Sur candidature
+                    {contentTrip.editionOver ? contentTrip.editionOverLabel : "Sur candidature"}
                   </div>
-                  <div className="font-display text-[26px] font-light leading-tight text-beige">
+                  <div className={`font-display text-[26px] font-light leading-tight ${contentTrip.editionOver ? "text-blue-pale/70 line-through" : "text-beige"}`}>
                     6 places seulement
                   </div>
+                  {contentTrip.editionOver && (
+                    <div className="text-[12px] font-light text-blue-pale mt-2">
+                      {contentTrip.editionOverNote}
+                    </div>
+                  )}
                 </div>
                 <Link href="/content-trip" className="btn btn-light whitespace-nowrap">
-                  Découvrir
+                  {contentTrip.editionOver ? "Revoir l'édition" : "Découvrir"}
                 </Link>
               </div>
             </div>

@@ -56,7 +56,9 @@ export function ContentTripBadge() {
               alt=""
               fill
               sizes="152px"
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              className={`object-cover transition-transform duration-500 group-hover:scale-110 ${
+                contentTrip.editionOver ? "grayscale" : ""
+              }`}
             />
             {/* Soft tint so the arrow stays readable */}
             <span aria-hidden className="absolute inset-0 bg-blue/25 transition-colors duration-300 group-hover:bg-blue/10" />

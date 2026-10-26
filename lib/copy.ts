@@ -449,6 +449,10 @@ export const contentTrip = {
   edition: "Édition 02 · Lanzarote",
   date: "Du 7 au 11 octobre 2026",
   eyebrow: "Com'Jam Content Trip",
+  /** Édition passée : teasers grisés, candidatures closes. Photos et vidéos à venir. */
+  editionOver: true,
+  editionOverLabel: "Édition terminée",
+  editionOverNote: "Photos et vidéos de l'édition bientôt disponibles.",
   /** Candidature Google Form. */
   formUrl: "https://forms.gle/Q2uGpQfRzihw9Gwh8",
   /** Clôture des candidatures (fin de journée, heure de Paris). */

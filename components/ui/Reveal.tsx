@@ -71,3 +71,23 @@ export const revealItem = {
     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   },
 };
+
+/**
+ * Enfant direct d'un RevealGroup : apparaît en fondu + translation quand le
+ * groupe entre dans le viewport, décalé par le stagger du groupe. À utiliser
+ * depuis les composants serveur qui ne peuvent pas créer de motion.div.
+ */
+export function RevealItem({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div className={className} variants={reduce ? undefined : revealItem}>
+      {children}
+    </motion.div>
+  );
+}

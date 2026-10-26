@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { bootcamp, contentTrip } from "@/lib/copy";
-import { Reveal, RevealGroup } from "@/components/ui/Reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
 import { CTA } from "@/components/sections/CTA";
 import { Pattern } from "@/components/brand/Pattern";
@@ -121,7 +121,7 @@ export default function BootcampPage() {
         </Reveal>
         <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-[10px]" stagger={0.07}>
           {bootcamp.forYou.items.map((item) => (
-            <div
+            <RevealItem
               key={item}
               className="flex items-start gap-4 p-5 bg-paper border-l-2 border-transparent hover:border-blue-light transition-colors"
             >
@@ -131,7 +131,7 @@ export default function BootcampPage() {
               <span className="text-[14px] font-light text-blue leading-[1.6]">
                 {item}
               </span>
-            </div>
+            </RevealItem>
           ))}
         </RevealGroup>
         <Reveal delay={0.1}>
@@ -160,9 +160,9 @@ export default function BootcampPage() {
             Deux journées <em>complètes.</em>
           </h2>
         </Reveal>
-        <RevealGroup className="relative grid md:grid-cols-2 gap-5" stagger={0.1}>
+        <RevealGroup className="relative grid md:grid-cols-2 gap-5" stagger={0.15}>
           {bootcamp.days.map((day) => (
-            <div
+            <RevealItem
               key={day.num}
               className="bg-beige p-8 sm:p-11 border-t-2 border-transparent hover:border-blue-light transition-colors relative"
             >
@@ -178,18 +178,30 @@ export default function BootcampPage() {
               <h3 className="font-display text-2xl font-normal text-blue mb-6 leading-tight">
                 {day.title}
               </h3>
-              <div className="flex flex-col gap-[16px]">
+              <div className="flex flex-col gap-[6px]">
                 {day.modules.map((m) => (
-                  <div key={m.time} className="flex gap-4 items-start">
-                    <div className="text-[10px] font-medium text-blue-light tracking-wide whitespace-nowrap w-[108px] shrink-0 pt-[2px]">
-                      {m.time}
+                  <div
+                    key={m.time}
+                    className="group flex gap-4 items-start -mx-3 px-3 py-[6px] border-l-2 border-transparent hover:border-blue-light hover:bg-paper transition-all duration-300"
+                  >
+                    {/* L'heure bascule de sans-serif en Cormorant italic au survol */}
+                    <div className="relative w-[112px] h-[20px] shrink-0 pt-[2px]">
+                      <span className="absolute inset-0 text-[11px] font-medium text-blue-light tracking-wide whitespace-nowrap transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2">
+                        {m.time}
+                      </span>
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 font-display italic text-[16px] text-blue whitespace-nowrap leading-none opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+                      >
+                        {m.time}
+                      </span>
                     </div>
-                    <div>
-                      <div className="text-[12.5px] font-normal text-blue leading-[1.55]">
+                    <div className="transition-transform duration-300 group-hover:translate-x-1">
+                      <div className="text-[14px] font-normal text-blue leading-[1.55]">
                         {m.name}
                       </div>
                       {"benefit" in m && m.benefit && (
-                        <div className="text-[11.5px] font-light italic text-text-light leading-[1.6] mt-1">
+                        <div className="text-[12.5px] font-light italic text-text-light leading-[1.6] mt-1">
                           {m.benefit}
                         </div>
                       )}
@@ -197,7 +209,7 @@ export default function BootcampPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </RevealItem>
           ))}
         </RevealGroup>
       </section>
@@ -229,24 +241,35 @@ export default function BootcampPage() {
             </p>
           </div>
         </Reveal>
-        <RevealGroup className="relative grid grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.08}>
+        <RevealGroup className="relative grid grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.1}>
           {bootcamp.speakers.items.map((s, i) => (
-            <div
+            <RevealItem
               key={s.role + i}
-              className="bg-blue-deep border border-[rgba(200,220,234,0.14)] overflow-hidden"
+              className="group bg-blue-deep border border-[rgba(200,220,234,0.14)] overflow-hidden"
             >
-              <div className="aspect-square overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
                 <SpeakerSilhouette variant={s.silhouette} />
+                {/* Tampon SURPRISE façon encre rouge */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                  <span
+                    className="-rotate-12 border-[3px] border-[#B3261E] text-[#B3261E] rounded-[4px] px-3 py-1 sm:px-4 sm:py-1.5 text-[13px] sm:text-[16px] font-bold tracking-[3px] sm:tracking-[4px] uppercase opacity-85 mix-blend-multiply transition-transform duration-300 group-hover:rotate-[-6deg] group-hover:scale-105"
+                  >
+                    Surprise
+                  </span>
+                </div>
               </div>
               <div className="p-5">
-                <div className="text-[12px] font-medium text-beige mb-1">
+                <div className="text-[13px] font-medium text-beige mb-1">
                   {s.role}
                 </div>
-                <div className="text-[11px] font-light text-blue-pale leading-[1.6]">
+                <div className="text-[12px] font-light text-blue-pale leading-[1.6]">
                   {s.theme}
                 </div>
               </div>
-            </div>
+            </RevealItem>
           ))}
         </RevealGroup>
       </section>
@@ -382,11 +405,11 @@ export default function BootcampPage() {
               alt="Villa du Com'Jam Content Trip à Lanzarote"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className={`object-cover object-center ${contentTrip.editionOver ? "grayscale" : ""}`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-blue/40 via-transparent to-transparent" />
             <div className="absolute top-6 left-6 text-[10px] font-medium tracking-[3px] uppercase text-beige bg-blue/60 backdrop-blur-sm px-3 py-1.5">
-              Voyage créatif
+              {contentTrip.editionOver ? contentTrip.editionOverLabel : "Voyage créatif"}
             </div>
           </Reveal>
 
@@ -413,14 +436,19 @@ export default function BootcampPage() {
             <div className="flex items-end justify-between gap-4 mt-10 pt-8 border-t border-[rgba(200,220,234,0.2)]">
               <div>
                 <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                  Sur candidature
+                  {contentTrip.editionOver ? contentTrip.editionOverLabel : "Sur candidature"}
                 </div>
-                <div className="font-display text-[28px] font-light leading-tight text-beige">
+                <div className={`font-display text-[28px] font-light leading-tight ${contentTrip.editionOver ? "text-blue-pale/70 line-through" : "text-beige"}`}>
                   6 places seulement
                 </div>
+                {contentTrip.editionOver && (
+                  <div className="text-[12px] font-light text-blue-pale mt-2">
+                    {contentTrip.editionOverNote}
+                  </div>
+                )}
               </div>
               <Link href="/content-trip" className="btn btn-light whitespace-nowrap">
-                Découvrir
+                {contentTrip.editionOver ? "Revoir l'édition" : "Découvrir"}
               </Link>
             </div>
           </Reveal>

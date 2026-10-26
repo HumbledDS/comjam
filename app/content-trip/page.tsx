@@ -21,15 +21,35 @@ const ApplyButton = ({
 }: {
   className?: string;
   label?: string;
-}) => (
-  <a
-    href={contentTrip.formUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={className}
-  >
-    {label} →
-  </a>
+}) =>
+  contentTrip.editionOver ? (
+    <span
+      aria-disabled
+      className={`${className} opacity-50 cursor-default pointer-events-none select-none`}
+    >
+      <span className="line-through">{label}</span> · Candidatures closes
+    </span>
+  ) : (
+    <a
+      href={contentTrip.formUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+    >
+      {label} →
+    </a>
+  );
+
+/** Remplace le compte à rebours une fois l'édition passée. */
+const EditionOverNote = ({ light = false }: { light?: boolean }) => (
+  <div>
+    <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-light mb-2">
+      {contentTrip.editionOverLabel}
+    </div>
+    <p className={`text-[13px] font-light italic ${light ? "text-blue-pale" : "text-text-light"}`}>
+      {contentTrip.editionOverNote}
+    </p>
+  </div>
 );
 
 export default function ContentTripPage() {
@@ -78,10 +98,14 @@ export default function ContentTripPage() {
             </p>
             <div className="flex flex-wrap items-end gap-8">
               <ApplyButton />
-              <ContentTripCountdown
-                deadline={contentTrip.applicationDeadline}
-                deadlineLabel={contentTrip.applicationDeadlineLabel}
-              />
+              {contentTrip.editionOver ? (
+                <EditionOverNote />
+              ) : (
+                <ContentTripCountdown
+                  deadline={contentTrip.applicationDeadline}
+                  deadlineLabel={contentTrip.applicationDeadlineLabel}
+                />
+              )}
             </div>
           </Reveal>
 
@@ -433,18 +457,24 @@ export default function ContentTripPage() {
             </p>
             <div className="flex flex-wrap items-end gap-10">
               <ApplyButton className="btn btn-light" />
-              <ContentTripCountdown
-                deadline={contentTrip.applicationDeadline}
-                deadlineLabel={contentTrip.applicationDeadlineLabel}
-                light
-              />
+              {contentTrip.editionOver ? (
+                <EditionOverNote light />
+              ) : (
+                <ContentTripCountdown
+                  deadline={contentTrip.applicationDeadline}
+                  deadlineLabel={contentTrip.applicationDeadlineLabel}
+                  light
+                />
+              )}
             </div>
           </div>
         </Reveal>
       </section>
 
       {/* Mobile sticky apply bar */}
-      <StickyCta href={contentTrip.formUrl} label={contentTrip.ctaLabel} />
+      {!contentTrip.editionOver && (
+        <StickyCta href={contentTrip.formUrl} label={contentTrip.ctaLabel} />
+      )}
     </>
   );
 }
