@@ -20,7 +20,7 @@ export function ContentTripBadge() {
       initial={reduce ? false : { opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute right-4 top-[14%] sm:top-auto sm:right-[6%] sm:bottom-[20%] z-20"
+      className="absolute right-4 top-[30%] sm:top-auto sm:right-[6%] sm:bottom-[20%] z-20"
     >
       <motion.div
         animate={reduce ? undefined : { y: [0, -12, 0] }}

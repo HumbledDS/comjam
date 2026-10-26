@@ -18,7 +18,7 @@ export function ContentShiftBadge() {
       initial={reduce ? false : { opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute right-4 top-[31%] sm:top-auto sm:bottom-[20%] sm:right-[calc(6%+184px)] z-20"
+      className="absolute right-4 top-[13%] sm:top-auto sm:right-[6%] sm:bottom-[calc(20%+182px)] z-20"
     >
       <motion.div
         animate={reduce ? undefined : { y: [0, -12, 0] }}
@@ -37,24 +37,22 @@ export function ContentShiftBadge() {
               reduce
                 ? undefined
                 : {
-                    rotate: [-4, 4, -4],
                     filter: [
-                      "drop-shadow(0 0 10px rgba(255,201,60,0.35))",
-                      "drop-shadow(0 0 26px rgba(255,201,60,0.7))",
-                      "drop-shadow(0 0 10px rgba(255,201,60,0.35))",
+                      "drop-shadow(0 0 10px rgba(245,239,228,0.3))",
+                      "drop-shadow(0 0 24px rgba(245,239,228,0.55))",
+                      "drop-shadow(0 0 10px rgba(245,239,228,0.3))",
                     ],
                   }
             }
             transition={{
-              rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
               filter: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
             }}
             aria-hidden
           >
             <path
               d="M 52 16 Q 60 4 68 16 L 108 86 Q 114 98 100 98 L 20 98 Q 6 98 12 86 Z"
-              fill="#FFC93C"
-              stroke="rgba(13,32,53,0.3)"
+              fill="rgba(245,239,228,0.95)"
+              stroke="rgba(13,32,53,0.18)"
               strokeWidth="1"
             />
             {/* CONTENT le long du côté gauche, à l'intérieur */}
