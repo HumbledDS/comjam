@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { media } from "@/lib/media";
 import { ContentTripBadge } from "@/components/sections/ContentTripBadge";
+import { ContentShiftBadge } from "@/components/sections/ContentShiftBadge";
 
 /**
  * Full-bleed hero with the actual content reel. Video auto-plays muted +
@@ -44,8 +45,9 @@ export function HeroReel() {
       <div className="absolute inset-0 bg-blue/40 pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-blue via-blue/40 to-transparent pointer-events-none" />
 
-      {/* Floating Content Trip teaser badge */}
+      {/* Floating event badges: Content Trip (cercle) + Content Shift (triangle) */}
       <ContentTripBadge />
+      <ContentShiftBadge />
 
       {/* Foreground */}
       <div
