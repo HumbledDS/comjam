@@ -76,7 +76,7 @@ export function Nav() {
                 className="w-[7px] h-[7px] bg-beige rounded-full shrink-0"
                 style={{ animation: "pulse-dot 2s infinite" }}
               />
-              <span className="sm:hidden">{promo.label} {promo.untilShort}</span>
+              <span className="sm:hidden">{promo.label} shootings</span>
               <span className="hidden sm:inline">{promo.label} sur les shootings {promo.untilShort}</span>
             </Link>
           )}

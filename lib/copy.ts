@@ -323,10 +323,30 @@ export const packs: Pack[] = [
 export const bootcamp = {
   name: "Bootcamp by Com'Jam",
   date: "14 et 15 Novembre 2026",
-  schedule: "En ligne · 9h–18h",
+  schedule: "En ligne · 9h–18h chaque jour",
   eyebrow: "Évènement",
+  /** Accroche principale orientée résultats. */
+  tagline: "Deux jours pour faire évoluer ta façon de créer du contenu.",
+  /** Petite ligne affichée sous le titre Content Shift. */
+  subTagline: "Le changement, ça se prépare maintenant.",
   desc:
     "Deux jours pour apprendre les bonnes pratiques, les mettre en application et prendre du plaisir à créer. Un bootcamp complet sur la création de contenu, les réseaux sociaux, la photo et la vidéo.",
+  /** Paragraphes d'intro du hero de la page Content Shift. */
+  heroIntro: [
+    "Apprends à penser tes contenus, à mieux utiliser Instagram et TikTok, à créer des photos et vidéos plus abouties, à monter tes vidéos et à comprendre les opportunités de monétisation.",
+    "Deux journées de formation en ligne pour passer de l'idée à la création, et de la création à une stratégie plus réfléchie.",
+  ],
+  forYou: {
+    title: "Content Shift s'adresse à toi si :",
+    items: [
+      "Tu veux progresser dans la création de contenu.",
+      "Tu es entrepreneur, indépendant ou créateur de contenu et tu souhaites mieux communiquer sur les réseaux sociaux.",
+      "Tu veux améliorer tes compétences en photographie, vidéo et montage.",
+      "Tu souhaites comprendre comment développer ta présence en ligne et explorer les opportunités de collaboration et de monétisation.",
+    ],
+    outro:
+      "Que tu débutes ou que tu souhaites professionnaliser tes pratiques, ces deux jours sont pensés pour t'apporter des connaissances concrètes et directement utiles.",
+  },
   /** Google Calendar slot for bootcamp registration — bundles deposit payment. */
   calendarUrl: "https://calendar.app.google/hX5ERL7CvzveDcRw6",
   days: [
@@ -336,13 +356,13 @@ export const bootcamp = {
       title: "Comprendre, créer, photographier",
       modules: [
         { time: "9h00 – 9h20", name: "Accueil, objectifs du bootcamp" },
-        { time: "9h20 – 10h30", name: "Bloc 1 : Qu'est-ce que la création de contenu vraiment ?" },
-        { time: "10h30 – 12h00", name: "Bloc 2 : Comprendre Instagram et TikTok en profondeur" },
-        { time: "12h00 – 13h00", name: "Bloc 3 : Personal branding et marketing" },
+        { time: "9h20 – 10h30", name: "Bloc 1 : Qu'est-ce que la création de contenu vraiment ?", benefit: "Comprendre comment transformer une idée en contenu pertinent." },
+        { time: "10h30 – 12h00", name: "Bloc 2 : Comprendre Instagram et TikTok en profondeur", benefit: "Mieux comprendre les plateformes et développer une présence plus réfléchie." },
+        { time: "12h00 – 13h00", name: "Bloc 3 : Personal branding et marketing", benefit: "Clarifier son identité, son positionnement et son message." },
         { time: "13h00 – 14h00", name: "Pause déjeuner" },
         { time: "14h00 – 14h45", name: "Intervenante invitée, Créatrice de contenu : « Trouver sa niche et construire l'image que l'on reflète »" },
-        { time: "14h45 – 16h30", name: "Bloc 4 : La photo qui performe" },
-        { time: "16h30 – 17h30", name: "Bloc 5 : Les outils indispensables du créateur" },
+        { time: "14h45 – 16h30", name: "Bloc 4 : La photo qui performe", benefit: "Apprendre à mieux composer et réaliser ses photos." },
+        { time: "16h30 – 17h30", name: "Bloc 5 : Les outils indispensables du créateur", benefit: "Identifier les outils utiles à son processus de création." },
         { time: "17h30 – 18h00", name: "Récap Jour 1 + intégration au groupe privé" },
       ],
     },
@@ -353,15 +373,48 @@ export const bootcamp = {
       modules: [
         { time: "9h00 – 9h30", name: "Récap Jour 1" },
         { time: "9h30 – 10h15", name: "Intervenant invité, Boîte de production : « Les coulisses du contenu professionnel »" },
-        { time: "10h15 – 12h00", name: "Bloc 6 : La vidéo de A à Z" },
+        { time: "10h15 – 12h00", name: "Bloc 6 : La vidéo de A à Z", benefit: "Comprendre les différentes étapes de production d'une vidéo." },
         { time: "12h00 – 13h00", name: "Pause déjeuner" },
         { time: "13h00 – 13h45", name: "Intervenante invitée, Créatrice de contenu : « Performer et grandir sur les réseaux »" },
-        { time: "13h45 – 15h30", name: "Bloc 7 : Montage vidéo avec CapCut, démonstration complète" },
-        { time: "15h30 – 16h15", name: "Bloc 8 : Ads et publicité en 2026" },
-        { time: "16h15 – 17h00", name: "Bloc 9 : Monétisation et créateurs × marques" },
-        { time: "17h00 – 17h45", name: "Bloc 10 : E-réputation et gestion de crise en ligne" },
+        { time: "13h45 – 15h30", name: "Bloc 7 : Montage vidéo avec CapCut, démonstration complète", benefit: "Découvrir une méthode de montage étape par étape." },
+        { time: "15h30 – 16h15", name: "Bloc 8 : Ads et publicité en 2026", benefit: "Comprendre les principes de la publicité sur les réseaux sociaux." },
+        { time: "16h15 – 17h00", name: "Bloc 9 : Monétisation et créateurs × marques", benefit: "Découvrir les modèles de collaboration et les bases de la valorisation de son travail." },
+        { time: "17h00 – 17h45", name: "Bloc 10 : E-réputation et gestion de crise en ligne", benefit: "Comprendre comment préserver son image et gérer une situation délicate en ligne." },
         { time: "17h45 – 18h00", name: "Grand final : Tirage au sort Osmo Pocket 4 et clôture" },
       ],
+    },
+  ],
+  /** Intervenants : silhouettes tant que les noms ne sont pas confirmés. */
+  speakers: {
+    title: "Les intervenants",
+    note: "Les noms des intervenants seront annoncés très prochainement.",
+    items: [
+      { silhouette: "f1" as const, role: "Créatrice de contenu", theme: "Trouver sa niche et construire l'image que l'on reflète" },
+      { silhouette: "m" as const, role: "Boîte de production", theme: "Les coulisses du contenu professionnel" },
+      { silhouette: "f2" as const, role: "Créatrice de contenu", theme: "Performer et grandir sur les réseaux" },
+      { silhouette: "f3" as const, role: "Invitée surprise", theme: "Annonce très bientôt" },
+    ],
+  },
+  faq: [
+    {
+      q: "À qui s'adresse Content Shift ?",
+      a: "Aux entrepreneurs, indépendants et créateurs de contenu qui veulent progresser dans la création de contenu, mieux communiquer sur les réseaux sociaux, améliorer leurs compétences en photo, vidéo et montage, et explorer les opportunités de collaboration et de monétisation.",
+    },
+    {
+      q: "Faut-il déjà avoir de l'expérience en création de contenu ?",
+      a: "Non, la formation est ouverte à tous les niveaux.",
+    },
+    {
+      q: "Peut-on participer uniquement avec un smartphone ?",
+      a: "Oui, bien sûr.",
+    },
+    {
+      q: "Comment accéder à la formation en ligne ?",
+      a: "Un lien vous sera envoyé par e-mail suite à votre inscription.",
+    },
+    {
+      q: "Le replay sera-t-il disponible ?",
+      a: "Non, malheureusement il n'y aura pas de replay.",
     },
   ],
   includes: [
@@ -369,8 +422,18 @@ export const bootcamp = {
     { name: "Intégration dans un groupe privé", sub: "« Le Club by Com'Jam »" },
     { name: "Tirage au sort", sub: "Osmo Pocket 4 à gagner" },
   ],
-  /** Le bootcamp n'est pas concerné par la promo -50%. */
-  price: { current: 200, original: 250, label: "Early Bird · 20 places" },
+  /**
+   * Le bootcamp n'est pas concerné par la promo -50%.
+   * earlyBirdActive : passer à false une fois les 20 premières places
+   * vendues; le site n'affiche alors plus que le tarif normal de 250€.
+   */
+  price: {
+    current: 200,
+    original: 250,
+    label: "Tarif Early Bird",
+    earlyBirdNote: "200€ pour les 20 premières places",
+    earlyBirdActive: true,
+  },
   reassurance: [
     "Paiement sécurisé",
     "Formation en ligne",

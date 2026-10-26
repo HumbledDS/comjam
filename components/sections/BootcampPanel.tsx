@@ -25,7 +25,7 @@ export function BootcampPanel() {
         paddingBottom: "var(--gap)",
       }}
     >
-      <div className="grid lg:grid-cols-2 items-stretch border border-beige-mid">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch border border-beige-mid">
         {/* Portrait */}
         <Reveal className="relative aspect-[5/6] lg:aspect-auto lg:min-h-[720px] overflow-hidden">
           <motion.div
@@ -70,15 +70,28 @@ export function BootcampPanel() {
 
           <div className="flex items-end justify-between gap-4 mt-10 pt-8 border-t border-[rgba(200,220,234,0.2)]">
             <div>
-              <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
-                {bootcamp.price.label}
-              </div>
-              <div className="font-display text-[56px] font-light leading-none">
-                {bootcamp.price.current}€
-              </div>
-              <div className="text-[12px] text-blue-pale line-through mt-1">
-                Tarif normal {bootcamp.price.original}€
-              </div>
+              {bootcamp.price.earlyBirdActive ? (
+                <>
+                  <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
+                    {bootcamp.price.label} · 20 premières places
+                  </div>
+                  <div className="font-display text-[56px] font-light leading-none">
+                    {bootcamp.price.current}€
+                  </div>
+                  <div className="text-[12px] text-blue-pale line-through mt-1">
+                    Tarif normal {bootcamp.price.original}€
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-[10px] font-medium tracking-[2.5px] uppercase text-blue-pale mb-2">
+                    Inscription
+                  </div>
+                  <div className="font-display text-[56px] font-light leading-none">
+                    {bootcamp.price.original}€
+                  </div>
+                </>
+              )}
             </div>
             <Link
               href="/bootcamp"

@@ -47,7 +47,7 @@ export default function ReservationPage() {
 
         {/* Content Trip — candidature, pas de créneau calendrier */}
         <Reveal className="mt-16">
-          <div className="grid lg:grid-cols-[minmax(0,420px)_1fr] items-stretch bg-blue overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,420px)_1fr] items-stretch bg-blue overflow-hidden">
             <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[300px]">
               <Image
                 src={contentTrip.villaImage}

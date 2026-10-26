@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
 /**
- * FAQ in accordion mode (per Jamila's reference): one question open at a
- * time, chevron rotates, answer slides open.
+ * FAQ en accordéon : une question ouverte à la fois, chevron qui pivote,
+ * réponse qui se déplie. Utilisé sur Content Trip et Content Shift.
  */
-export function ContentTripFaq({
+export function FaqAccordion({
   items,
 }: {
   items: readonly { q: string; a: string }[];

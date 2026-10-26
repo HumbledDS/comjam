@@ -6,9 +6,9 @@ import { Label } from "@/components/ui/Label";
 import { Pattern } from "@/components/brand/Pattern";
 import { Ornament } from "@/components/brand/Ornament";
 import { ContentTripCountdown } from "@/components/sections/ContentTripCountdown";
-import { ContentTripFaq } from "@/components/sections/ContentTripFaq";
 import { ContentTripGallery } from "@/components/sections/ContentTripGallery";
-import { ContentTripSticky } from "@/components/sections/ContentTripSticky";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
+import { StickyCta } from "@/components/sections/StickyCta";
 
 export const metadata: Metadata = {
   title: "Com'Jam Content Trip · Édition 02 Lanzarote",
@@ -403,7 +403,7 @@ export default function ContentTripPage() {
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="lg:col-span-8">
-            <ContentTripFaq items={contentTrip.faq} />
+            <FaqAccordion items={contentTrip.faq} />
           </Reveal>
         </div>
       </section>
@@ -444,7 +444,7 @@ export default function ContentTripPage() {
       </section>
 
       {/* Mobile sticky apply bar */}
-      <ContentTripSticky formUrl={contentTrip.formUrl} />
+      <StickyCta href={contentTrip.formUrl} label={contentTrip.ctaLabel} />
     </>
   );
 }

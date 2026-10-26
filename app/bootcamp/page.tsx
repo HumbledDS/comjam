@@ -2,21 +2,36 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { bootcamp, contentTrip } from "@/lib/copy";
-import { Reveal, RevealGroup, revealItem } from "@/components/ui/Reveal";
+import { Reveal, RevealGroup } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
-import { Button } from "@/components/ui/Button";
 import { CTA } from "@/components/sections/CTA";
 import { Pattern } from "@/components/brand/Pattern";
 import { Ornament } from "@/components/brand/Ornament";
+import { SpeakerSilhouette } from "@/components/brand/SpeakerSilhouette";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
+import { StickyCta } from "@/components/sections/StickyCta";
 
 export const metadata: Metadata = {
-  title: "Bootcamp by Com'Jam · 14 et 15 Novembre 2026",
-  description: `${bootcamp.date} · En ligne. ${bootcamp.desc.slice(0, 140)}`,
+  title: "Content Shift · Bootcamp by Com'Jam · 14 et 15 Novembre 2026",
+  description: `${bootcamp.date} · En ligne · 9h-18h. ${bootcamp.tagline}`,
 };
 
+const ReserveButton = ({ className = "btn btn-primary" }: { className?: string }) => (
+  <a
+    href={bootcamp.calendarUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={className}
+  >
+    Réserver ma place
+  </a>
+);
+
 export default function BootcampPage() {
+  const { price } = bootcamp;
   return (
     <>
+      {/* ============ HERO ============ */}
       <section
         className="bg-paper relative overflow-hidden pt-[160px]"
         style={{
@@ -42,16 +57,19 @@ export default function BootcampPage() {
           drift
         />
 
-        <div className="relative grid lg:grid-cols-2 gap-12 items-end mb-14">
+        <div className="relative grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
             <Label>{bootcamp.eyebrow}</Label>
             <h1
-              className="display mt-5 mb-6"
+              className="display mt-5 mb-3"
               style={{ fontSize: "clamp(48px, 6vw, 96px)" }}
             >
               Content <em>Shift</em>
             </h1>
-            <div className="inline-flex items-center gap-3 bg-beige border border-beige-mid px-5 py-[10px] text-[11px] font-normal tracking-[2px] text-blue mt-6">
+            <p className="font-display italic text-[16px] text-blue-light mb-6">
+              {bootcamp.subTagline}
+            </p>
+            <div className="inline-flex items-center gap-3 bg-beige border border-beige-mid px-5 py-[10px] text-[11px] font-normal tracking-[2px] text-blue">
               <span
                 className="w-[6px] h-[6px] bg-blue-light rounded-full"
                 style={{ animation: "pulse-dot 2s infinite" }}
@@ -61,17 +79,92 @@ export default function BootcampPage() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <p className="text-[15px] font-light leading-[1.85] text-text-light">
-              {bootcamp.desc}
+            <p
+              className="font-display italic text-blue leading-[1.4] mb-6"
+              style={{ fontSize: "clamp(22px, 2.4vw, 32px)" }}
+            >
+              {bootcamp.tagline}
             </p>
+            {bootcamp.heroIntro.map((p) => (
+              <p
+                key={p.slice(0, 24)}
+                className="text-[14.5px] font-light leading-[1.85] text-blue-mid mb-4 max-w-xl"
+              >
+                {p}
+              </p>
+            ))}
+            <div className="mt-6">
+              <ReserveButton />
+            </div>
           </Reveal>
         </div>
+      </section>
 
-        <RevealGroup className="relative grid md:grid-cols-2 gap-5 mb-12" stagger={0.1}>
+      {/* ============ À QUI S'ADRESSE CONTENT SHIFT ============ */}
+      <section
+        className="bg-beige"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <Reveal>
+          <Label>À qui s&apos;adresse Content Shift ?</Label>
+          <h2
+            className="display mt-5 mb-12"
+            style={{ fontSize: "clamp(28px, 3.5vw, 52px)" }}
+          >
+            {bootcamp.forYou.title}
+          </h2>
+        </Reveal>
+        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-[10px]" stagger={0.07}>
+          {bootcamp.forYou.items.map((item) => (
+            <div
+              key={item}
+              className="flex items-start gap-4 p-5 bg-paper border-l-2 border-transparent hover:border-blue-light transition-colors"
+            >
+              <span className="shrink-0 w-6 h-6 rounded-full bg-blue text-beige text-[11px] flex items-center justify-center mt-px">
+                ✓
+              </span>
+              <span className="text-[14px] font-light text-blue leading-[1.6]">
+                {item}
+              </span>
+            </div>
+          ))}
+        </RevealGroup>
+        <Reveal delay={0.1}>
+          <p className="font-display italic text-[18px] lg:text-[20px] text-blue leading-[1.5] pl-5 border-l-2 border-blue-light mt-10 max-w-2xl">
+            {bootcamp.forYou.outro}
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ============ LE PROGRAMME ============ */}
+      <section
+        className="bg-paper relative overflow-hidden"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <Reveal>
+          <Label>Le programme</Label>
+          <h2
+            className="display mt-5 mb-12"
+            style={{ fontSize: "clamp(28px, 3.5vw, 52px)" }}
+          >
+            Deux journées <em>complètes.</em>
+          </h2>
+        </Reveal>
+        <RevealGroup className="relative grid md:grid-cols-2 gap-5" stagger={0.1}>
           {bootcamp.days.map((day) => (
             <div
               key={day.num}
-              className="bg-beige p-11 border-t-2 border-transparent hover:border-blue-light transition-colors relative"
+              className="bg-beige p-8 sm:p-11 border-t-2 border-transparent hover:border-blue-light transition-colors relative"
             >
               <div
                 aria-hidden
@@ -85,14 +178,21 @@ export default function BootcampPage() {
               <h3 className="font-display text-2xl font-normal text-blue mb-6 leading-tight">
                 {day.title}
               </h3>
-              <div className="flex flex-col gap-[14px]">
+              <div className="flex flex-col gap-[16px]">
                 {day.modules.map((m) => (
                   <div key={m.time} className="flex gap-4 items-start">
                     <div className="text-[10px] font-medium text-blue-light tracking-wide whitespace-nowrap w-[108px] shrink-0 pt-[2px]">
                       {m.time}
                     </div>
-                    <div className="text-[12.5px] font-normal text-blue leading-[1.55]">
-                      {m.name}
+                    <div>
+                      <div className="text-[12.5px] font-normal text-blue leading-[1.55]">
+                        {m.name}
+                      </div>
+                      {"benefit" in m && m.benefit && (
+                        <div className="text-[11.5px] font-light italic text-text-light leading-[1.6] mt-1">
+                          {m.benefit}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -100,22 +200,92 @@ export default function BootcampPage() {
             </div>
           ))}
         </RevealGroup>
+      </section>
 
-        <div className="relative grid lg:grid-cols-[1fr_360px] gap-12 items-start">
-          <Reveal>
-            <div className="text-[10px] font-medium tracking-[3px] uppercase text-blue-light mb-6">
-              Ce qui est inclus dans votre inscription
+      {/* ============ LES INTERVENANTS ============ */}
+      <section
+        className="bg-blue text-beige relative overflow-hidden"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <Pattern variant="cream" opacity={0.04} />
+        <Reveal>
+          <div className="relative flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
+            <div>
+              <Label light>{bootcamp.speakers.title}</Label>
+              <h2
+                className="display display-light mt-5"
+                style={{ fontSize: "clamp(28px, 3.5vw, 52px)" }}
+              >
+                Ils vous <em>accompagnent.</em>
+              </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px]">
-              {bootcamp.includes.map((inc) => (
+            <p className="max-w-[320px] text-[13px] font-light leading-[1.7] text-blue-pale md:text-right">
+              {bootcamp.speakers.note}
+            </p>
+          </div>
+        </Reveal>
+        <RevealGroup className="relative grid grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.08}>
+          {bootcamp.speakers.items.map((s, i) => (
+            <div
+              key={s.role + i}
+              className="bg-blue-deep border border-[rgba(200,220,234,0.14)] overflow-hidden"
+            >
+              <div className="aspect-square overflow-hidden">
+                <SpeakerSilhouette variant={s.silhouette} />
+              </div>
+              <div className="p-5">
+                <div className="text-[12px] font-medium text-beige mb-1">
+                  {s.role}
+                </div>
+                <div className="text-[11px] font-light text-blue-pale leading-[1.6]">
+                  {s.theme}
+                </div>
+              </div>
+            </div>
+          ))}
+        </RevealGroup>
+      </section>
+
+      {/* ============ INCLUS + TARIFS ============ */}
+      <section
+        className="bg-paper"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <div className="relative grid lg:grid-cols-[1fr_380px] gap-12 items-start">
+          <Reveal>
+            <Label>Inclus dans votre inscription</Label>
+            <h2
+              className="display mt-5 mb-10"
+              style={{ fontSize: "clamp(26px, 3vw, 44px)" }}
+            >
+              Bien plus que <em>deux journées.</em>
+            </h2>
+            <div className="flex flex-col gap-4">
+              {bootcamp.includes.map((inc, i) => (
                 <div
                   key={inc.name}
-                  className="flex items-start gap-[14px] p-4 bg-beige border-l-2 border-transparent hover:border-blue-light transition-colors"
+                  className="flex items-start gap-5 p-6 sm:p-7 bg-beige border-l-[3px] border-blue-light"
                 >
-                  <div className="w-[14px] text-blue-light text-[11px] shrink-0 mt-px">-</div>
+                  <div className="font-display text-[32px] font-light text-blue-light leading-none shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
                   <div>
-                    <div className="text-[12px] font-medium text-blue mb-px">{inc.name}</div>
-                    <div className="text-[11px] font-light text-text-light">{inc.sub}</div>
+                    <div className="font-display text-[20px] font-normal text-blue mb-1 leading-tight">
+                      {inc.name}
+                    </div>
+                    <div className="text-[13px] font-light text-text-light leading-[1.6]">
+                      {inc.sub}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -123,30 +293,39 @@ export default function BootcampPage() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="bg-blue p-11 lg:sticky lg:top-[110px]">
-              <div className="inline-block bg-blue-light text-paper text-[9px] font-medium tracking-[2px] uppercase px-[14px] py-[5px] mb-6">
-                {bootcamp.price.label}
-              </div>
-              <div className="font-display text-[72px] font-light text-beige leading-none mb-1">
-                {bootcamp.price.current}€
-              </div>
-              <div className="text-[13px] font-light text-blue-pale line-through mb-2">
-                Tarif normal : {bootcamp.price.original}€
-              </div>
+            <div className="bg-blue p-9 sm:p-11 lg:sticky lg:top-[110px]">
+              {price.earlyBirdActive ? (
+                <>
+                  <div className="inline-block bg-beige text-blue text-[10px] font-semibold tracking-[2px] uppercase px-[14px] py-[6px] mb-6">
+                    {price.label}
+                  </div>
+                  <div className="font-display text-[72px] font-light text-beige leading-none mb-2">
+                    {price.current}€
+                  </div>
+                  <div className="text-[13px] font-normal text-beige mb-1">
+                    {price.earlyBirdNote}
+                  </div>
+                  <div className="text-[13px] font-light text-blue-pale line-through mb-4">
+                    Tarif normal : {price.original}€
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="inline-block bg-blue-light text-paper text-[10px] font-medium tracking-[2px] uppercase px-[14px] py-[6px] mb-6">
+                    Inscription
+                  </div>
+                  <div className="font-display text-[72px] font-light text-beige leading-none mb-4">
+                    {price.original}€
+                  </div>
+                </>
+              )}
               <div className="text-[12px] font-light text-blue-pale leading-[1.7] mb-6">
-                Pour les 20 premiers inscrits.
+                {bootcamp.date}
                 <br />
-                {bootcamp.date} · {bootcamp.schedule}.
+                {bootcamp.schedule}.
               </div>
               <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
-              <a
-                href={bootcamp.calendarUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-light w-full text-center block"
-              >
-                Réserver ma place
-              </a>
+              <ReserveButton className="btn btn-light w-full text-center block" />
               <div className="h-px bg-[rgba(200,220,234,0.12)] my-5" />
               <ul className="text-[11px] font-light text-blue-pale leading-[2]">
                 {bootcamp.reassurance.map((r) => (
@@ -156,6 +335,32 @@ export default function BootcampPage() {
                 ))}
               </ul>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section
+        className="bg-beige"
+        style={{
+          paddingLeft: "var(--pad)",
+          paddingRight: "var(--pad)",
+          paddingTop: "var(--gap)",
+          paddingBottom: "var(--gap)",
+        }}
+      >
+        <div className="grid lg:grid-cols-12 gap-y-10 lg:gap-x-16 items-start">
+          <Reveal className="lg:col-span-4">
+            <Label>FAQ</Label>
+            <h2
+              className="display mt-5"
+              style={{ fontSize: "clamp(30px, 3.5vw, 48px)" }}
+            >
+              Vos <em>questions.</em>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.15} className="lg:col-span-8">
+            <FaqAccordion items={bootcamp.faq} />
           </Reveal>
         </div>
       </section>
@@ -170,7 +375,7 @@ export default function BootcampPage() {
           paddingBottom: "var(--gap)",
         }}
       >
-        <div className="grid lg:grid-cols-2 items-stretch border border-beige-mid">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch border border-beige-mid">
           <Reveal className="relative aspect-[5/6] lg:aspect-auto lg:min-h-[560px] overflow-hidden">
             <Image
               src={contentTrip.villaImage}
@@ -229,6 +434,9 @@ export default function BootcampPage() {
         primary={{ href: "/contact?subject=bootcamp", label: "Poser une question" }}
         secondary={{ href: "/a-propos", label: "En savoir plus sur Com'Jam" }}
       />
+
+      {/* Barre CTA sticky mobile */}
+      <StickyCta href={bootcamp.calendarUrl} label="Réserver ma place" />
     </>
   );
 }

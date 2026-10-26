@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 /**
- * Mobile-only sticky "Je candidate" bar. Slides up from the bottom once the
- * visitor scrolls past the hero so the CTA stays reachable all the way down
- * the page. Hidden on desktop (the inline CTAs are enough there).
+ * Barre CTA sticky mobile. Remonte du bas une fois le hero dépassé pour que
+ * l'action principale reste accessible tout au long de la page. Cachée sur
+ * desktop (les CTAs inline suffisent).
  */
-export function ContentTripSticky({ formUrl }: { formUrl: string }) {
+export function StickyCta({ href, label }: { href: string; label: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,12 +29,12 @@ export function ContentTripSticky({ formUrl }: { formUrl: string }) {
           className="fixed bottom-0 inset-x-0 z-[900] md:hidden bg-[rgba(245,239,228,0.96)] backdrop-blur-md border-t border-beige-mid px-5 py-3 pb-[max(12px,env(safe-area-inset-bottom))]"
         >
           <a
-            href={formUrl}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary w-full text-center block"
           >
-            Je candidate →
+            {label} →
           </a>
         </motion.div>
       )}
