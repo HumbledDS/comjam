@@ -5,13 +5,13 @@ import { motion, useReducedMotion } from "motion/react";
 
 /**
  * Badge triangulaire flottant pour Content Shift, affiché sur le hero de
- * l'accueil à côté du cercle Content Trip. Le triangle tourne lentement
- * (sens inverse du cercle), flotte, et son halo beige respire. Lien vers
- * /bootcamp.
+ * l'accueil à côté du cercle Content Trip. Jaune vif sur la vidéo bleue,
+ * avec « CONTENT » le long du côté gauche, « SHIFT » le long du côté droit
+ * et « EN LIGNE » sous la base. Oscille, flotte et son halo doré respire.
+ * Lien vers /bootcamp.
  */
 export function ContentShiftBadge() {
   const reduce = useReducedMotion();
-  const ringText = "CONTENT SHIFT · 14 & 15 NOVEMBRE · EN LIGNE · ";
 
   return (
     <motion.div
@@ -29,7 +29,7 @@ export function ContentShiftBadge() {
           aria-label="Découvrir Content Shift, le bootcamp en ligne des 14 et 15 novembre 2026"
           className="group block relative w-[112px] h-[112px] sm:w-[152px] sm:h-[152px]"
         >
-          {/* Triangle tournant : contour, fond translucide et texte sur le périmètre */}
+          {/* Triangle jaune vif : oscillation douce + halo doré qui respire */}
           <motion.svg
             viewBox="0 0 120 120"
             className="absolute inset-0 w-full h-full"
@@ -37,44 +37,73 @@ export function ContentShiftBadge() {
               reduce
                 ? undefined
                 : {
-                    rotate: -360,
+                    rotate: [-4, 4, -4],
                     filter: [
-                      "drop-shadow(0 0 10px rgba(245,239,228,0.25))",
-                      "drop-shadow(0 0 24px rgba(245,239,228,0.55))",
-                      "drop-shadow(0 0 10px rgba(245,239,228,0.25))",
+                      "drop-shadow(0 0 10px rgba(255,201,60,0.35))",
+                      "drop-shadow(0 0 26px rgba(255,201,60,0.7))",
+                      "drop-shadow(0 0 10px rgba(255,201,60,0.35))",
                     ],
                   }
             }
             transition={{
-              rotate: { duration: 26, repeat: Infinity, ease: "linear" },
+              rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
               filter: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
             }}
             aria-hidden
           >
-            <defs>
-              <path
-                id="shift-triangle"
-                d="M 52 16 Q 60 4 68 16 L 108 86 Q 114 98 100 98 L 20 98 Q 6 98 12 86 Z"
-              />
-            </defs>
-            <use
-              href="#shift-triangle"
-              fill="rgba(245,239,228,0.1)"
-              stroke="rgba(245,239,228,0.45)"
+            <path
+              d="M 52 16 Q 60 4 68 16 L 108 86 Q 114 98 100 98 L 20 98 Q 6 98 12 86 Z"
+              fill="#FFC93C"
+              stroke="rgba(13,32,53,0.3)"
               strokeWidth="1"
             />
+            {/* CONTENT le long du côté gauche, à l'intérieur */}
             <text
-              className="fill-beige"
-              style={{ fontSize: "9.5px", letterSpacing: "1.8px", fontWeight: 500 }}
+              x="42"
+              y="60"
+              textAnchor="middle"
+              transform="rotate(-61 42 60)"
+              fill="#0d2035"
+              style={{ fontSize: "10.5px", letterSpacing: "1.6px", fontWeight: 700 }}
             >
-              <textPath href="#shift-triangle">{ringText}</textPath>
+              CONTENT
+            </text>
+            {/* SHIFT le long du côté droit, à l'intérieur */}
+            <text
+              x="78"
+              y="60"
+              textAnchor="middle"
+              transform="rotate(61 78 60)"
+              fill="#0d2035"
+              style={{ fontSize: "10.5px", letterSpacing: "1.6px", fontWeight: 700 }}
+            >
+              SHIFT
+            </text>
+            {/* Date puis EN LIGNE au-dessus de la base */}
+            <text
+              x="60"
+              y="81"
+              textAnchor="middle"
+              fill="#0d2035"
+              style={{ fontSize: "7px", letterSpacing: "1.2px", fontWeight: 600 }}
+            >
+              14 &amp; 15 NOV
+            </text>
+            <text
+              x="60"
+              y="92"
+              textAnchor="middle"
+              fill="#0d2035"
+              style={{ fontSize: "8px", letterSpacing: "2.2px", fontWeight: 700 }}
+            >
+              EN LIGNE
             </text>
           </motion.svg>
 
-          {/* Flèche au centre (légèrement sous le centre optique du triangle) */}
+          {/* Flèche au centre optique du triangle */}
           <span
             aria-hidden
-            className="absolute inset-0 flex items-center justify-center pt-[14%] text-beige text-[20px] sm:text-[24px] -rotate-45 transition-transform duration-300 group-hover:rotate-0 group-hover:scale-110 drop-shadow-[0_1px_6px_rgba(13,32,53,0.6)]"
+            className="absolute inset-0 flex items-center justify-center pb-[4%] text-[#0d2035] text-[17px] sm:text-[20px] -rotate-45 transition-transform duration-300 group-hover:rotate-0 group-hover:scale-110"
           >
             →
           </span>
