@@ -147,7 +147,7 @@ const inputBase =
 
 function FormInner({ subjects }: { subjects: readonly string[] }) {
   const params = useSearchParams();
-  const initialSubject = params.get("subject") === "bootcamp" ? subjects[0] : "";
+  const initialSubject = params.get("subject") === "content-trip" ? subjects[0] : "";
 
   const [state, setState] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");

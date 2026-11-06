@@ -26,14 +26,9 @@ export type NavItem = {
 export const nav: NavItem[] = [
   { label: "À propos", href: "/a-propos" },
   { label: "Services", href: "/services" },
-  {
-    label: "Évènements",
-    href: "/bootcamp",
-    children: [
-      { label: "Content Trip", sub: "Édition 02 · Lanzarote", href: "/content-trip" },
-      { label: "Content Shift", sub: "14 et 15 Novembre 2026", href: "/bootcamp" },
-    ],
-  },
+  // Content Shift annulé : lien direct vers le Content Trip. Remettre le
+  // menu déroulant (children) quand un deuxième évènement sera de retour.
+  { label: "Évènements", href: "/content-trip" },
   { label: "Réservation", href: "/reservation" },
   { label: "Contact", href: "/contact", primary: true },
 ];
@@ -69,7 +64,6 @@ export const home = {
     "Production",
     "Consulting 1-to-1",
     "Content Trip",
-    "Bootcamp by Com'Jam",
   ],
 };
 
@@ -321,6 +315,12 @@ export const packs: Pack[] = [
    BOOTCAMP — Content Shift / Bootcamp by Com'Jam
 ============================================================ */
 export const bootcamp = {
+  /**
+   * Évènement annulé : la page /bootcamp redirige vers l'accueil et plus
+   * rien ne l'affiche sur le site (nav, accueil, footer, contact).
+   * Repasser à false pour tout réactiver.
+   */
+  cancelled: true,
   name: "Bootcamp by Com'Jam",
   date: "14 et 15 Novembre 2026",
   schedule: "En ligne · 9h–18h chaque jour",
@@ -618,14 +618,13 @@ export const contact = {
   title: ["Parlons de", "votre projet"] as const,
   emphasizedLine: 1,
   desc:
-    "Vous avez un projet, une question, vous souhaitez réserver une séance ou une place au Bootcamp by Com'Jam ? Envoyez-nous un message, nous répondons sous 48h.",
+    "Vous avez un projet, une question, vous souhaitez réserver une séance ? Envoyez-nous un message, nous répondons sous 48h.",
   channels: [
     { kind: "ig" as const, name: "Instagram", handle: "@comjamagency", url: "https://www.instagram.com/comjamagency", icon: "IG" },
     { kind: "tt" as const, name: "TikTok", handle: "@comjamagency", url: "https://www.tiktok.com/@comjamagency", icon: "TK" },
     { kind: "em" as const, name: "Email", handle: "hello@comjam.fr", url: "mailto:hello@comjam.fr", icon: "@" },
   ],
   formSubjects: [
-    "Bootcamp by Com'Jam (14 et 15 Novembre 2026)",
     "Content Trip by Com'Jam",
     "Shooting Photo · Pack Flash",
     "Shooting Photo · Pack Signature",
@@ -655,7 +654,6 @@ export const footer = {
     {
       title: "Évènements",
       links: [
-        { label: "Bootcamp by Com'Jam", href: "/bootcamp" },
         { label: "Content Trip by Com'Jam", href: "/content-trip" },
       ],
     },

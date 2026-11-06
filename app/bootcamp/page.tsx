@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { bootcamp, contentTrip } from "@/lib/copy";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Label } from "@/components/ui/Label";
@@ -28,6 +29,9 @@ const ReserveButton = ({ className = "btn btn-primary" }: { className?: string }
 );
 
 export default function BootcampPage() {
+  // Évènement annulé : la page n'est plus accessible.
+  if (bootcamp.cancelled) redirect("/");
+
   const { price } = bootcamp;
   return (
     <>

@@ -15,6 +15,9 @@ import { Label } from "@/components/ui/Label";
 export function BootcampPanel() {
   const reduce = useReducedMotion();
 
+  // Évènement annulé : le panneau disparaît de l'accueil.
+  if (bootcamp.cancelled) return null;
+
   return (
     <section
       className="bg-paper"
